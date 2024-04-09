@@ -2,16 +2,17 @@ package net.jayugg.leanclass.modules;
 
 import net.jayugg.leanclass.component.ModComponents;
 import net.jayugg.leanclass.component.PlayerClassComponent;
+import net.jayugg.leanclass.registry.PlayerClassRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 
 public class PlayerClassManager {
-    public static boolean setPlayerClass(PlayerEntity player, String className) {
+    public static boolean setPlayerClass(PlayerEntity player, String classId) {
         // Check if the class is registered
-        PlayerClass playerClass = PlayerClassRegistry.getClassByName(className);
+        PlayerClass playerClass = PlayerClassRegistry.getPlayerClass(classId);
         if (playerClass == null) {
             // The class is not registered, handle accordingly
-            System.out.println("Class " + className + " is not registered.");
+            System.out.println("Class " + classId + " is not registered.");
             return false;
         }
 
@@ -21,8 +22,8 @@ public class PlayerClassManager {
     }
 
     private static void applyClassToPlayer(PlayerEntity player, PlayerClass playerClass) {
-        PlayerClassComponent classComponent = ModComponents.CLASS_COMPONENT.get(player);
-        classComponent.setClass(playerClass.getId());
+        PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
+        playerClassComponent.setClass(playerClass.getId());
         player.sendMessage(Text.literal("Your class has been set to " + playerClass.getId()), false);
     }
 
@@ -49,5 +50,10 @@ public class PlayerClassManager {
     public static boolean hasAscendedPerk(PlayerEntity player, PerkSlot slot) {
         PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
         return slot.getValue() == playerClassComponent.getAscendedPerk();
+    }
+
+    public static boolean hasClass(PlayerEntity player, PlayerClass playerClass) {
+        PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
+        return playerClassComponent.getId().equals(playerClass.getId());
     }
 }

@@ -1,5 +1,7 @@
 package net.jayugg.leanclass.mixin;
 
+import net.jayugg.leanclass.modules.PerkSlot;
+import net.jayugg.leanclass.modules.PlayerClassManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.event.GameEvent;
@@ -9,7 +11,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static net.jayugg.leanclass.leanrogue.LeanRogue.ROGUE_CLASS;
+import static net.jayugg.leanclass.leanrogue.addons.CustomAbilities.MUFFLED_STEPS_PERK;
+import static net.jayugg.leanclass.leanrogue.addons.ModClasses.ROGUE_CLASS;
 
 @Mixin({VibrationListener.Callback.class})
 public interface VibrationAcceptorMixin {
@@ -19,9 +22,10 @@ public interface VibrationAcceptorMixin {
             cancellable = true
     )
     default void canAccept(GameEvent event, GameEvent.Emitter emitter, CallbackInfoReturnable<Boolean> cir) {
+        PerkSlot perkSlot = ROGUE_CLASS.getPerkSlot(MUFFLED_STEPS_PERK);
         Entity entity = emitter.sourceEntity();
         if (entity instanceof PlayerEntity player) {
-            if (ROGUE_CLASS.hasOmega(player)) {
+            if (PlayerClassManager.hasAscendedPerk(player, perkSlot)) {
                 if (event.equals(GameEvent.STEP)) {
                     cir.setReturnValue(false);
                 }

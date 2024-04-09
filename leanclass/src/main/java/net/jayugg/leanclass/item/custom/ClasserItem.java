@@ -19,7 +19,7 @@ public class ClasserItem extends Item {
         ItemStack itemStack = user.getStackInHand(hand);
 
         if (!world.isClient) {
-            boolean setClass = PlayerClassManager.setPlayerClass(user, "Rogue");
+            boolean setClass = PlayerClassManager.setPlayerClass(user, "base");
             if (setClass) {
                 return TypedActionResult.success(itemStack);
             }

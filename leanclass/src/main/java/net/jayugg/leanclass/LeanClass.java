@@ -6,7 +6,6 @@ import net.jayugg.leanclass.item.ModItemGroup;
 import net.jayugg.leanclass.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
-import net.jayugg.leanclass.implement.BaseClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,20 +1,15 @@
 package net.jayugg.leanclass.modules;
 
-import net.jayugg.leanclass.component.ModComponents;
-import net.jayugg.leanclass.component.PlayerClassComponent;
-import net.minecraft.entity.player.PlayerEntity;
-
 import java.util.Collections;
 import java.util.Map;
 
-import static net.jayugg.leanclass.LeanClass.MOD_ID;
-
-public abstract class PlayerClass extends PlayerAddon {
+public abstract class PlayerClass {
+    protected final String id;
     private final Map<SkillSlot, PlayerSkill> skills;
     private final Map<PerkSlot, PlayerPerk> perks;
 
     public PlayerClass(String id, Map<SkillSlot, PlayerSkill> skills, Map<PerkSlot, PlayerPerk> perks) {
-        super(id);
+        this.id = id;
 
         // Verify the correct number of skills and perks are provided
         if (skills.size() != SkillSlot.values().length || perks.size() != PerkSlot.values().length) {
@@ -29,20 +24,21 @@ public abstract class PlayerClass extends PlayerAddon {
     public Map<SkillSlot, PlayerSkill> getSkills() {
         return Collections.unmodifiableMap(skills);
     }
-
     public Map<PerkSlot, PlayerPerk> getPerks() {
         return Collections.unmodifiableMap(perks);
     }
-    @Override
-    public String getLocalizationKey() {
-        return String.format("class.%s.%s", MOD_ID, id);
+    public PerkSlot getPerkSlot(PlayerPerk perk) {
+        for (Map.Entry<PerkSlot, PlayerPerk> entry : perks.entrySet()) {
+            if (entry.getValue().equals(perk)) {
+                return entry.getKey();
+            }
+        }
+        throw new IllegalArgumentException("Perk not found in class.");
     }
 
-    public boolean hasClass(PlayerEntity player) {
-        PlayerClassComponent classComponent = ModComponents.CLASS_COMPONENT.get(player);
-        return classComponent.getId().equals(this.getId());
+    public String getId() {
+        return id;
     }
-
 }
 
 

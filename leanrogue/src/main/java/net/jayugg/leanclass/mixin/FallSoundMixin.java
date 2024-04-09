@@ -1,5 +1,7 @@
 package net.jayugg.leanclass.mixin;
 
+import net.jayugg.leanclass.modules.PerkSlot;
+import net.jayugg.leanclass.modules.PlayerClassManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,22 +12,21 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static net.jayugg.leanclass.leanrogue.LeanRogue.ROGUE_CLASS;
+import static net.jayugg.leanclass.leanrogue.addons.CustomAbilities.MUFFLED_STEPS_PERK;
+import static net.jayugg.leanclass.leanrogue.addons.ModClasses.ROGUE_CLASS;
 
 @Mixin({LivingEntity.class})
 public class FallSoundMixin {
-
-    public FallSoundMixin() { }
-
     @Inject(
             at = {@At("HEAD")},
             method = {"getFallSound"},
             cancellable = true
     )
     protected void getFallSound(int distance, CallbackInfoReturnable<SoundEvent> cir) {
+        PerkSlot perkSlot = ROGUE_CLASS.getPerkSlot(MUFFLED_STEPS_PERK);
         if ((Entity) (Object) this instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) (Object) this;
-            if (ROGUE_CLASS.hasOmega(player)) {
+            if (PlayerClassManager.hasAscendedPerk(player, perkSlot)) {
                 cir.setReturnValue(SoundEvents.BLOCK_WOOL_HIT);
             }
         }

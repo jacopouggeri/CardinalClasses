@@ -1,5 +1,7 @@
 package net.jayugg.leanclass.mixin;
 
+import net.jayugg.leanclass.modules.PerkSlot;
+import net.jayugg.leanclass.modules.PlayerClassManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -9,22 +11,23 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static net.jayugg.leanclass.leanrogue.LeanRogue.ROGUE_CLASS;
+import static net.jayugg.leanclass.leanrogue.addons.CustomAbilities.MUFFLED_STEPS_PERK;
+import static net.jayugg.leanclass.leanrogue.addons.ModClasses.ROGUE_CLASS;
 
 @Mixin({Block.class})
 public class BlockStepMixin {
+    @Unique
     private Entity entity = null;
+    @Unique
     private BlockSoundGroup blockSoundGroup = null;
 
-    public BlockStepMixin() {
-    }
-
-    @Inject(at = {@At("HEAD")}, method = {"onSteppedOn"}, cancellable = true)
+    @Inject(at = {@At("HEAD")}, method = {"onSteppedOn"})
     protected void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity, CallbackInfo cir) {
         this.entity = entity;
         this.blockSoundGroup = state.getSoundGroup();
@@ -32,12 +35,12 @@ public class BlockStepMixin {
 
     @Inject(at = {@At("HEAD")}, method = {"getSoundGroup"}, cancellable = true)
     protected void getSoundGroup(BlockState state, CallbackInfoReturnable<BlockSoundGroup> cir) {
+        PerkSlot perkSlot = ROGUE_CLASS.getPerkSlot(MUFFLED_STEPS_PERK);
         BlockSoundGroup defaultSoundGroup = this.blockSoundGroup;
-        if (this.entity != null && this.entity instanceof PlayerEntity) {
-            PlayerEntity player = (PlayerEntity) this.entity;
+        if (this.entity != null && this.entity instanceof PlayerEntity player) {
             if (defaultSoundGroup != null) {
                 BlockSoundGroup muffledBlockSoundGroup = new BlockSoundGroup(1.0F, 1.0F, defaultSoundGroup.getBreakSound(), SoundEvents.BLOCK_WOOL_STEP, defaultSoundGroup.getPlaceSound(), defaultSoundGroup.getHitSound(), SoundEvents.BLOCK_WOOL_FALL);
-                if (ROGUE_CLASS.hasOmega(player)) {
+                if (PlayerClassManager.hasAscendedPerk(player, perkSlot)) {
                     cir.setReturnValue(muffledBlockSoundGroup);
                 }
             }

@@ -1,5 +1,7 @@
 package net.jayugg.leanclass.mixin;
 
+import net.jayugg.leanclass.modules.PerkSlot;
+import net.jayugg.leanclass.modules.PlayerClassManager;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SculkShriekerBlock;
 import net.minecraft.entity.Entity;
@@ -11,10 +13,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static net.jayugg.leanclass.leanrogue.LeanRogue.ROGUE_CLASS;
+import static net.jayugg.leanclass.leanrogue.addons.CustomAbilities.MUFFLED_STEPS_PERK;
+import static net.jayugg.leanclass.leanrogue.addons.ModClasses.ROGUE_CLASS;
 
 @Mixin({SculkShriekerBlock.class})
 public class SculkShriekerMixin {
+
     public SculkShriekerMixin() {
     }
 
@@ -24,8 +28,9 @@ public class SculkShriekerMixin {
             cancellable = true
     )
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity, CallbackInfo cir) {
+        PerkSlot perkSlot = ROGUE_CLASS.getPerkSlot(MUFFLED_STEPS_PERK);
         if (entity instanceof PlayerEntity player) {
-            if (ROGUE_CLASS.hasOmega(player)) {
+            if (PlayerClassManager.hasAscendedPerk(player, perkSlot)) {
                 cir.cancel();
             }
         }
