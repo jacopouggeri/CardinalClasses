@@ -1,18 +1,13 @@
 package net.jayugg.leanclass.leanrogue.addons;
 
-import net.jayugg.leanclass.modules.AbilityRegistry;
 import net.jayugg.leanclass.modules.PlayerPerk;
+import net.jayugg.leanclass.registry.AbilityRegistry;
 
 public class CustomAbilities {
-    public static final PlayerPerk POISON_HAND_PERK;
-    public static final PlayerPerk MUFFLED_STEPS_PERK;
+    public static final PlayerPerk POISON_HAND_PERK = AbilityRegistry.registerPerk(new PlayerPerk("poison_hand"));
+    public static final PlayerPerk MUFFLED_STEPS_PERK = AbilityRegistry.registerPerk(new PlayerPerk("muffled_steps"));
 
-    static {
-        POISON_HAND_PERK = new PlayerPerk("poison_hand");
-        MUFFLED_STEPS_PERK = new PlayerPerk("muffled_steps");
-    }
     public static void registerAbilities() {
-        AbilityRegistry.registerAbility(POISON_HAND_PERK);
-        AbilityRegistry.registerAbility(MUFFLED_STEPS_PERK);
+        // This method does nothing but ensures that the static initializer block is executed
     }
 }
