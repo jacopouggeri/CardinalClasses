@@ -40,7 +40,8 @@
 	"custom": {
 		"cardinal-components": [
 			"leanclass:player_skills",
-			"leanclass:player_perks"
+			"leanclass:player_perks",
+			"leanclass:player_class"
 		]
 	}
 }

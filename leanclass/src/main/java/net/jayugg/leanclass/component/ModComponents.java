@@ -10,12 +10,9 @@ import net.minecraft.util.Identifier;
 import static net.jayugg.leanclass.LeanClass.MOD_ID;
 
 public class ModComponents implements EntityComponentInitializer {
-    public static final ComponentKey<PlayerSkillComponent> SKILL_COMPONENT = ComponentRegistry.getOrCreate(new Identifier(MOD_ID, "player_skills"), PlayerSkillComponent.class);
-    public static final ComponentKey<PlayerPerkComponent> PERK_COMPONENT = ComponentRegistry.getOrCreate(new Identifier(MOD_ID, "player_perks"), PlayerPerkComponent.class);
-
+    public static final ComponentKey<PlayerClassComponent> CLASS_COMPONENT = ComponentRegistry.getOrCreate(new Identifier(MOD_ID, "player_class"), PlayerClassComponent.class);
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
-        registry.registerForPlayers(SKILL_COMPONENT, player -> new PlayerSkillComponent(), RespawnCopyStrategy.ALWAYS_COPY);
-        registry.registerForPlayers(PERK_COMPONENT, player -> new PlayerPerkComponent(), RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(CLASS_COMPONENT, player -> new PlayerClassComponent(), RespawnCopyStrategy.ALWAYS_COPY);
     }
 }

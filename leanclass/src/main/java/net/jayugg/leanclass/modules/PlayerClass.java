@@ -1,16 +1,48 @@
 package net.jayugg.leanclass.modules;
 
-import net.jayugg.leanclass.Utils.PerkSlot;
 import net.jayugg.leanclass.component.ModComponents;
-import net.jayugg.leanclass.component.PlayerPerkComponent;
+import net.jayugg.leanclass.component.PlayerClassComponent;
 import net.minecraft.entity.player.PlayerEntity;
 
-public interface PlayerClass {
-    String getName();
-    default PerkSlot getAscendedSlotFrom(PlayerEntity player) {
-        PlayerPerkComponent perkComponent = ModComponents.PERK_COMPONENT.get(player);
-        return perkComponent.getAscendedSlot();
+import java.util.Collections;
+import java.util.Map;
+
+import static net.jayugg.leanclass.LeanClass.MOD_ID;
+
+public abstract class PlayerClass extends PlayerAddon {
+    private final Map<SkillSlot, PlayerSkill> skills;
+    private final Map<PerkSlot, PlayerPerk> perks;
+
+    public PlayerClass(String id, Map<SkillSlot, PlayerSkill> skills, Map<PerkSlot, PlayerPerk> perks) {
+        super(id);
+
+        // Verify the correct number of skills and perks are provided
+        if (skills.size() != SkillSlot.values().length || perks.size() != PerkSlot.values().length) {
+            throw new IllegalArgumentException("Incorrect number of skills or perks provided.");
+        }
+
+        this.skills = skills;
+
+        this.perks = perks;
     }
+
+    public Map<SkillSlot, PlayerSkill> getSkills() {
+        return Collections.unmodifiableMap(skills);
+    }
+
+    public Map<PerkSlot, PlayerPerk> getPerks() {
+        return Collections.unmodifiableMap(perks);
+    }
+    @Override
+    public String getLocalizationKey() {
+        return String.format("class.%s.%s", MOD_ID, id);
+    }
+
+    public boolean hasClass(PlayerEntity player) {
+        PlayerClassComponent classComponent = ModComponents.CLASS_COMPONENT.get(player);
+        return classComponent.getId().equals(this.getId());
+    }
+
 }
 
 

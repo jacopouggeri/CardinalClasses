@@ -3,7 +3,12 @@
 	"package": "net.jayugg.leanclass.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"PlayerAttackMixin"
+		"BlockStepMixin",
+		"FallSoundMixin",
+		"PlayerAttackMixin",
+		"SculkSensorMixin",
+		"SculkShriekerMixin",
+		"VibrationAcceptorMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

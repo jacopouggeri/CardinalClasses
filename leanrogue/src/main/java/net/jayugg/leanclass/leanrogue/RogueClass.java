@@ -1,9 +1,7 @@
 package net.jayugg.leanclass.leanrogue;
 
-import net.jayugg.leanclass.Utils.PerkSlot;
-import net.jayugg.leanclass.component.ModComponents;
-import net.jayugg.leanclass.component.PlayerPerkComponent;
 import net.jayugg.leanclass.modules.PlayerClass;
+import net.jayugg.leanclass.modules.PlayerSkill;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
@@ -11,8 +9,35 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 
-public class RogueClass implements PlayerClass {
-    private final String name = "Rogue";
+import java.util.Map;
+
+import static net.jayugg.leanclass.leanrogue.LeanRogue.ROGUE_CLASS;
+
+public class RogueClass extends PlayerClass {
+    private static Map<SkillSlot, PlayerSkill> createSkills() {
+        return Map.of(
+                SkillSlot.PASSIVE1, ModAbilities.BASE_PASSIVE_SKILL,
+                SkillSlot.PASSIVE2, ModAbilities.BASE_PASSIVE_SKILL,
+                SkillSlot.PASSIVE3, ModAbilities.BASE_PASSIVE_SKILL,
+                SkillSlot.PASSIVE4, ModAbilities.BASE_PASSIVE_SKILL,
+                SkillSlot.ACTIVE1, ModAbilities.BASE_ACTIVE_SKILL,
+                SkillSlot.ACTIVE2, ModAbilities.BASE_ACTIVE_SKILL,
+                SkillSlot.ACTIVE3, ModAbilities.BASE_ACTIVE_SKILL,
+                SkillSlot.ACTIVE4, ModAbilities.BASE_ACTIVE_SKILL
+        );
+    }
+
+    private static Map<PerkSlot, PlayerPerk> createPerks() {
+        return Map.of(
+                PerkSlot.ALPHA, ModAbilities.BASE_PERK,
+                PerkSlot.OMEGA, ModAbilities.BASE_PERK
+        );
+    }
+
+    public RogueClass() {
+        super("rogue", createSkills(), createPerks());
+    }
+
     @Override
     public String getName() {
         return name;
@@ -21,20 +46,14 @@ public class RogueClass implements PlayerClass {
     public static void applyPerkEffects(PlayerEntity player, Entity target) {
         if (!(target instanceof LivingEntity livingTarget)) return;
 
-        PlayerPerkComponent perkComponent = ModComponents.PERK_COMPONENT.get(player);
-
         // Check if player perk is ascended
-        StatusEffect effectToApply = determineEffect(perkComponent);
+        StatusEffect effectToApply = ROGUE_CLASS.hasAlpha(player) ? StatusEffects.WITHER : StatusEffects.POISON;
         applyEffectToTarget(effectToApply, livingTarget);
-    }
-
-    private static StatusEffect determineEffect(PlayerPerkComponent perkComponent) {
-        return perkComponent.isSlotAscended(PerkSlot.ALPHA) ? StatusEffects.WITHER : StatusEffects.POISON;
     }
 
     private static void applyEffectToTarget(StatusEffect effect, LivingEntity target) {
         final int DEFAULT_DURATION = 20;
-        final int MAX_DURATION = 200; // 200 ticks = 10 seconds
+        final int MAX_DURATION = 800; // 200 ticks = 10 seconds
         StatusEffectInstance currentEffect = target.getStatusEffect(effect);
 
         int newDuration = DEFAULT_DURATION;

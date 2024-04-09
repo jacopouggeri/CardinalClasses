@@ -2,6 +2,7 @@ package net.jayugg.leanclass.item;
 
 import net.jayugg.leanclass.LeanClass;
 import net.jayugg.leanclass.item.custom.AscenderItem;
+import net.jayugg.leanclass.item.custom.ClasserItem;
 import net.jayugg.leanclass.item.custom.SkillDownItem;
 import net.jayugg.leanclass.item.custom.SkillShardItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -23,6 +24,8 @@ public class ModItems {
 
     public static final Item ASCENDER = registerItem("ascender",
             new AscenderItem(new FabricItemSettings()));
+    public static final Item CLASSER = registerItem("classer",
+            new ClasserItem(new FabricItemSettings()));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(LeanClass.MOD_ID, name), item);
@@ -32,6 +35,7 @@ public class ModItems {
         addToItemGroup(SIMPLE_GROUP, SKILL_SHARD);
         addToItemGroup(SIMPLE_GROUP, SKILL_DOWN);
         addToItemGroup(SIMPLE_GROUP, ASCENDER);
+        addToItemGroup(SIMPLE_GROUP, CLASSER);
     }
 
     public static void addToItemGroup(ItemGroup group, Item item) {
@@ -40,7 +44,6 @@ public class ModItems {
 
     public static void registerModItems() {
         LeanClass.LOGGER.debug("Registering Mod Items for " + LeanClass.MOD_ID);
-
         addItemsToItemGroups();
     }
 }

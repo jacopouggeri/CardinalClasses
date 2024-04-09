@@ -1,7 +1,7 @@
 package net.jayugg.leanclass.item.custom;
 
-import net.jayugg.leanclass.component.ModComponents;
-import net.jayugg.leanclass.component.PlayerPerkComponent;
+import net.jayugg.leanclass.modules.PerkSlot;
+import net.jayugg.leanclass.modules.PlayerClassManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -21,16 +21,16 @@ public class AscenderItem extends Item {
         ItemStack itemStack = user.getStackInHand(hand);
 
         if (!world.isClient) {
-            PlayerPerkComponent perk = ModComponents.PERK_COMPONENT.get(user);
-            boolean ascend = perk.ascend(1); // Use one skill point to unlock
+            PerkSlot perkSlot = PerkSlot.ALPHA;
+            boolean ascend = PlayerClassManager.ascendPerk(user, PerkSlot.ALPHA);
             if (ascend) {
-                Text message = Text.literal("You have ascended the " + perk.getCurrentSlotName() + " perk.");
-                user.sendMessage(message, false); // false means it's not a system message
+                Text message = Text.literal("You have ascended the " + perkSlot.name() + " perk.");
+                user.sendMessage(message, false);
                 return TypedActionResult.consume(itemStack);
             }
-            Text message = Text.literal("You already have " + perk.getCurrentSlotName() + " perk ascended.");
+            Text message = Text.literal("You already have " + perkSlot.name() + " perk ascended.");
             user.sendMessage(message, false);
         }
-        return TypedActionResult.pass(user.getStackInHand(hand));
+        return TypedActionResult.pass(itemStack);
     }
 }

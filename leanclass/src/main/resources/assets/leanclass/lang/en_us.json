@@ -1,5 +1,9 @@
 {
   "item.leanclass.skill_shard": "Skill Shard",
   "item.leanclass.skill_down": "Skill Down",
-  "item.leanclass.ascender": "Ascender"
+  "item.leanclass.ascender": "Ascender",
+  "class.leanclass.base": "Base class description",
+  "perk.leanclass.base_perk": "Base perk description",
+  "skill.leanclass.base_active": "Base active skill description",
+  "skill.leanclass.base_passive": "Base passive skill description"
 }
