@@ -28,7 +28,7 @@ public class AscenderItem extends Item {
                 user.sendMessage(message, false);
                 return TypedActionResult.consume(itemStack);
             }
-            Text message = Text.literal("You already have " + perkSlot.name() + " perk ascended.");
+            Text message = Text.literal("You already have " + PlayerClassManager.getAscendedPerk(user) + " perk ascended.");
             user.sendMessage(message, false);
         }
         return TypedActionResult.pass(itemStack);

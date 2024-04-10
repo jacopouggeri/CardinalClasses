@@ -17,7 +17,6 @@ public abstract class PlayerClass {
         }
 
         this.skills = skills;
-
         this.perks = perks;
     }
 
@@ -33,9 +32,7 @@ public abstract class PlayerClass {
                 return entry.getKey();
             }
         }
-        System.err.println("Perk not found in class: " + perk);
-        System.err.println("Returning ALPHA slot as default. This usually happens when the game is loading and the perk is not yet registered.");
-        return PerkSlot.ALPHA;
+        throw new IllegalArgumentException("Perk not found in class: " + perk);
     }
 
     public String getId() {

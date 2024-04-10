@@ -1,8 +1,7 @@
 package net.jayugg.leanclass.item.custom;
 
-import net.jayugg.leanclass.implement.ModAbilities;
 import net.jayugg.leanclass.modules.PlayerClassManager;
-import net.jayugg.leanclass.modules.PlayerSkill;
+import net.jayugg.leanclass.modules.SkillSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -20,15 +19,15 @@ public class SkillShardItem extends Item {
         ItemStack itemStack = user.getStackInHand(hand);
 
         if (!world.isClient) {
-            PlayerSkill skill = ModAbilities.BASE_PASSIVE_SKILL;
-            boolean skillUp = PlayerClassManager.skillUp(user, skill); // Use one skill point to unlock
+            SkillSlot skillSlot = SkillSlot.PASSIVE1;
+            boolean skillUp = PlayerClassManager.skillUp(user, skillSlot); // Use one skill point to unlock
 
             if (skillUp) {
 
                 Text message = Text.literal("You have increased a skill point! You now have "
-                        + PlayerClassManager.getSkillLevel(user, skill)
+                        + PlayerClassManager.getSkillLevel(user, skillSlot)
                         + " points in "
-                        + skill.getId()
+                        + PlayerClassManager.getSkillInSlot(user, skillSlot).getId()
                         + ".");
 
                 user.sendMessage(message, false); // false means it's not a system message
@@ -36,9 +35,9 @@ public class SkillShardItem extends Item {
             }
 
             Text message = Text.literal("You already have "
-                    + PlayerClassManager.getSkillLevel(user, skill)
+                    + PlayerClassManager.getSkillLevel(user, skillSlot)
                     + " points in "
-                    + skill.getId()
+                    + PlayerClassManager.getSkillInSlot(user, skillSlot).getId()
                     + ".");
             user.sendMessage(message, false);
         }

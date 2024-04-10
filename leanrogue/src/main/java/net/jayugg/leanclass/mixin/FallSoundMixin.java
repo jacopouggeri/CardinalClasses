@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import static net.jayugg.leanclass.MixinManager.canLoadMixins;
 import static net.jayugg.leanclass.leanrogue.addons.CustomAbilities.MUFFLED_STEPS_PERK;
 import static net.jayugg.leanclass.leanrogue.addons.ModClasses.ROGUE_CLASS;
 
@@ -23,13 +24,14 @@ public class FallSoundMixin {
             cancellable = true
     )
     protected void getFallSound(int distance, CallbackInfoReturnable<SoundEvent> cir) {
-        PerkSlot perkSlot = ROGUE_CLASS.getPerkSlot(MUFFLED_STEPS_PERK);
-        if ((Entity) (Object) this instanceof PlayerEntity) {
-            PlayerEntity player = (PlayerEntity) (Object) this;
-            if (PlayerClassManager.hasAscendedPerk(player, perkSlot)) {
-                cir.setReturnValue(SoundEvents.BLOCK_WOOL_HIT);
+        if (canLoadMixins()) {
+            PerkSlot perkSlot = ROGUE_CLASS.getPerkSlot(MUFFLED_STEPS_PERK);
+            if ((Entity) (Object) this instanceof PlayerEntity) {
+                PlayerEntity player = (PlayerEntity) (Object) this;
+                if (PlayerClassManager.hasAscendedPerk(player, perkSlot)) {
+                    cir.setReturnValue(SoundEvents.BLOCK_WOOL_HIT);
+                }
             }
         }
-
     }
 }

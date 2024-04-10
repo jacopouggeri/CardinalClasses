@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import static net.jayugg.leanclass.MixinManager.canLoadMixins;
 import static net.jayugg.leanclass.leanrogue.addons.CustomAbilities.MUFFLED_STEPS_PERK;
 import static net.jayugg.leanclass.leanrogue.addons.ModClasses.ROGUE_CLASS;
 
@@ -35,16 +36,14 @@ public class BlockStepMixin {
 
     @Inject(at = {@At("HEAD")}, method = {"getSoundGroup"}, cancellable = true)
     protected void getSoundGroup(BlockState state, CallbackInfoReturnable<BlockSoundGroup> cir) {
-        PerkSlot perkSlot = ROGUE_CLASS.getPerkSlot(MUFFLED_STEPS_PERK);
-        BlockSoundGroup defaultSoundGroup = this.blockSoundGroup;
-        if (this.entity != null && this.entity instanceof PlayerEntity player) {
-            if (defaultSoundGroup != null) {
-                BlockSoundGroup muffledBlockSoundGroup = new BlockSoundGroup(1.0F, 1.0F, defaultSoundGroup.getBreakSound(), SoundEvents.BLOCK_WOOL_STEP, defaultSoundGroup.getPlaceSound(), defaultSoundGroup.getHitSound(), SoundEvents.BLOCK_WOOL_FALL);
+        if (canLoadMixins()) {
+            PerkSlot perkSlot = ROGUE_CLASS.getPerkSlot(MUFFLED_STEPS_PERK);
+            if (this.entity instanceof PlayerEntity player && this.blockSoundGroup != null) {
+                BlockSoundGroup muffledBlockSoundGroup = new BlockSoundGroup(1.0F, 1.0F, this.blockSoundGroup.getBreakSound(), SoundEvents.BLOCK_WOOL_STEP, this.blockSoundGroup.getPlaceSound(), this.blockSoundGroup.getHitSound(), SoundEvents.BLOCK_WOOL_FALL);
                 if (PlayerClassManager.hasAscendedPerk(player, perkSlot)) {
                     cir.setReturnValue(muffledBlockSoundGroup);
                 }
             }
         }
-
     }
 }

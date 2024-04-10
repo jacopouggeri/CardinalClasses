@@ -6,6 +6,11 @@ import net.jayugg.leanclass.registry.PlayerClassRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 
+import java.util.Optional;
+import java.util.OptionalInt;
+
+import static net.jayugg.leanclass.implement.ModAbilities.BASE_PASSIVE_BLUE;
+
 public class PlayerClassManager {
     public static boolean setPlayerClass(PlayerEntity player, String classId) {
         // Check if the class is registered
@@ -27,19 +32,33 @@ public class PlayerClassManager {
         player.sendMessage(Text.literal("Your class has been set to " + playerClass.getId()), false);
     }
 
-    public static boolean skillUp(PlayerEntity player, PlayerSkill playerSkill) {
+    public static boolean skillUp(PlayerEntity player, SkillSlot skillSlot) {
         PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
-        return playerClassComponent.skillUp(playerSkill.getId());
+        return playerClassComponent.skillUp(skillSlot);
     }
 
-    public static boolean skillDown(PlayerEntity player, PlayerSkill playerSkill) {
+    public static boolean skillDown(PlayerEntity player, SkillSlot skillSlot) {
         PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
-        return playerClassComponent.skillDown(playerSkill.getId());
+        return playerClassComponent.skillDown(skillSlot);
     }
 
-    public static int getSkillLevel(PlayerEntity player, PlayerSkill playerSkill) {
+    public static int getSkillLevel(PlayerEntity player, SkillSlot skillSlot) {
         PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
-        return playerClassComponent.getSkillLevel(playerSkill.getId());
+        return playerClassComponent.getSkillLevel(skillSlot);
+    }
+
+    public static OptionalInt getSkillLevel(PlayerEntity player, PlayerSkill skill) {
+        for (SkillSlot skillSlot : SkillSlot.values()) {
+            if (getClass(player).getSkills().get(skillSlot).equals(skill)) {
+                return OptionalInt.of(getSkillLevel(player, skillSlot));
+            }
+        }
+        return OptionalInt.empty();
+    }
+
+    public static boolean hasSkill(PlayerEntity player, PlayerSkill skill) {
+        OptionalInt skillLevel = PlayerClassManager.getSkillLevel(player, skill);
+        return (skillLevel.isPresent() && skillLevel.getAsInt() > 0);
     }
 
     public static boolean ascendPerk(PlayerEntity player, PerkSlot slot) {
@@ -49,11 +68,26 @@ public class PlayerClassManager {
 
     public static boolean hasAscendedPerk(PlayerEntity player, PerkSlot slot) {
         PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
-        return slot.getValue() == playerClassComponent.getAscendedPerk();
+        Optional<PerkSlot> ascendedPerk = playerClassComponent.getAscendedPerk();
+        return ascendedPerk.isPresent() && ascendedPerk.get().equals(slot);
+    }
+
+    public static Optional<PerkSlot> getAscendedPerk(PlayerEntity player) {
+        PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
+        return playerClassComponent.getAscendedPerk();
+    }
+
+    public static PlayerClass getClass(PlayerEntity player) {
+        PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
+        return PlayerClassRegistry.getPlayerClass(playerClassComponent.getId());
     }
 
     public static boolean hasClass(PlayerEntity player, PlayerClass playerClass) {
         PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
         return playerClassComponent.getId().equals(playerClass.getId());
+    }
+
+    public static PlayerSkill getSkillInSlot(PlayerEntity player, SkillSlot skillSlot) {
+        return getClass(player).getSkills().get(skillSlot);
     }
 }

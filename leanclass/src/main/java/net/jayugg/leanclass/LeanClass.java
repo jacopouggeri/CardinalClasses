@@ -1,5 +1,6 @@
 package net.jayugg.leanclass;
 
+import net.jayugg.leanclass.command.ModCommands;
 import net.jayugg.leanclass.implement.ModAbilities;
 import net.jayugg.leanclass.implement.ModClasses;
 import net.jayugg.leanclass.item.ModItemGroup;
@@ -20,5 +21,6 @@ public class LeanClass implements ModInitializer {
 		ModItems.registerModItems();
 		ModAbilities.registerAbilities();
 		ModClasses.registerClasses();
+		ModCommands.register();
 	}
 }

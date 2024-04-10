@@ -7,14 +7,14 @@ import net.minecraft.nbt.NbtCompound;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static net.jayugg.leanclass.modules.PlayerSkill.SKILL_MAX_LEVEL;
 
 public class PlayerClassComponent implements ComponentV3 {
     private String classId = "base";
-    private Map<String, Integer> skillLevels = new HashMap<>();
-    private Map<SkillSlot, String> skillSlots = new HashMap<>();
-    private int ascendedPerkId = 0;
+    private final Map<SkillSlot, Integer> skillLevels = new HashMap<>();
+    private PerkSlot ascendedPerkSlot = null;
 
     public boolean setClass(String newId) {
         if (this.classId.equals("Base")) {
@@ -25,44 +25,48 @@ public class PlayerClassComponent implements ComponentV3 {
     }
 
     public boolean setAscendedPerk(PerkSlot slot) {
-        if (ascendedPerkId == 0) {
-            ascendedPerkId = slot.getValue();
+        if (ascendedPerkSlot == null) {
+            ascendedPerkSlot = slot;
             return true;
         }
         return false;
     }
 
-    public int getAscendedPerk() {
-        return ascendedPerkId;
+    public void setAscendedPerkCreative(PerkSlot slot) {
+        ascendedPerkSlot = slot;
+    }
+
+    public Optional<PerkSlot> getAscendedPerk() {
+        return Optional.ofNullable(ascendedPerkSlot);
     }
 
     public String getId() {
         return classId;
     }
 
-    public boolean setSkillLevel(String skillId, int level) {
+    public boolean setSkillLevel(SkillSlot skillSlot, int level) {
         if (0 <= level && level <= SKILL_MAX_LEVEL) {
-            skillLevels.put(skillId, level);
+            skillLevels.put(skillSlot, level);
             return true;
         }
         return false;
     }
 
-    public int getSkillLevel(String skillId) {
-        return skillLevels.getOrDefault(skillId, 0);
+    public int getSkillLevel(SkillSlot skillSlot) {
+        return skillLevels.getOrDefault(skillSlot, 0);
     }
 
-    public boolean skillUp(String skillId) {
-        int level = getSkillLevel(skillId);
-        return setSkillLevel(skillId, level + 1);
+    public boolean skillUp(SkillSlot skillSlot) {
+        int level = getSkillLevel(skillSlot);
+        return setSkillLevel(skillSlot, level + 1);
     }
 
-    public boolean skillDown(String skillId) {
-        int level = getSkillLevel(skillId);
-        return setSkillLevel(skillId, level - 1);
+    public boolean skillDown(SkillSlot skillSlot) {
+        int level = getSkillLevel(skillSlot);
+        return setSkillLevel(skillSlot, level - 1);
     }
 
-    public Map<String, Integer> getSkillLevels() { return skillLevels; }
+    public Map<SkillSlot, Integer> getSkillLevels() { return skillLevels; }
 
     @Override
     public void readFromNbt(NbtCompound tag) {
@@ -70,7 +74,7 @@ public class PlayerClassComponent implements ComponentV3 {
         NbtCompound skillLevelsTag = tag.getCompound("SkillLevels");
         for (String key : skillLevelsTag.getKeys()) {
             int level = skillLevelsTag.getInt(key);
-            skillLevels.put(key, level);
+            skillLevels.put(SkillSlot.valueOf(key), level);
         }
     }
 
@@ -78,8 +82,8 @@ public class PlayerClassComponent implements ComponentV3 {
     public void writeToNbt(NbtCompound tag) {
         tag.putString("ClassId", classId);
         NbtCompound skillLevelsTag = new NbtCompound();
-        for (Map.Entry<String, Integer> entry : skillLevels.entrySet()) {
-            skillLevelsTag.putInt(entry.getKey(), entry.getValue());
+        for (Map.Entry<SkillSlot, Integer> entry : skillLevels.entrySet()) {
+            skillLevelsTag.putInt(entry.getKey().toString(), entry.getValue());
         }
         tag.put("SkillLevels", skillLevelsTag);
     }

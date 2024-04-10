@@ -10,4 +10,4 @@ pluginManagement {
 }
 rootProject.name = "lean_classes_dev"
 include "leanclass"
-include "leanrogue"
+//include "leanrogue"

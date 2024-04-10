@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import static net.jayugg.leanclass.MixinManager.canLoadMixins;
 import static net.jayugg.leanclass.leanrogue.addons.CustomAbilities.MUFFLED_STEPS_PERK;
 import static net.jayugg.leanclass.leanrogue.addons.ModClasses.ROGUE_CLASS;
 
@@ -28,12 +29,13 @@ public class SculkSensorMixin {
             cancellable = true
     )
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity, CallbackInfo cir) {
-        PerkSlot perkSlot = ROGUE_CLASS.getPerkSlot(MUFFLED_STEPS_PERK);
-        if (entity instanceof PlayerEntity player) {
-            if (PlayerClassManager.hasAscendedPerk(player, perkSlot)) {
-                cir.cancel();
+        if (canLoadMixins()) {
+            PerkSlot perkSlot = ROGUE_CLASS.getPerkSlot(MUFFLED_STEPS_PERK);
+            if (entity instanceof PlayerEntity player) {
+                if (PlayerClassManager.hasAscendedPerk(player, perkSlot)) {
+                    cir.cancel();
+                }
             }
         }
-
     }
 }

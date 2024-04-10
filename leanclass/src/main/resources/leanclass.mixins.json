@@ -3,6 +3,8 @@
   "package": "net.jayugg.leanclass.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "PlayerAttackMixin",
+    "PlayerEffectMixin"
   ],
   "client": [],
   "server": [],
