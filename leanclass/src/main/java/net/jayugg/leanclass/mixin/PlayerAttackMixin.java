@@ -22,7 +22,7 @@ public class PlayerAttackMixin {
             if (source.getAttacker() instanceof PlayerEntity player) {
                 if (!player.world.isClient) {
                     LivingEntity target = (LivingEntity) (Object) this; // This mixin is applied to LivingEntity, so 'this' is the target
-                    PlayerSkill[] skills = {BASE_PASSIVE_RED, BASE_PASSIVE_YELLOW, BASE_PASSIVE_GREEN, BASE_PASSIVE_BLUE};
+                    PlayerSkill[] skills = {TEST_PASSIVE_RED, TEST_PASSIVE_YELLOW, TEST_PASSIVE_GREEN, TEST_PASSIVE_BLUE};
                     for (PlayerSkill skill : skills) {
                         if (PlayerClassManager.hasSkill(player, skill)) {
                             ((ExampleAttackSkill) skill).activateEffect(target, player);

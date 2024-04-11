@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "shard_slot=empty": { "model": "leanclass:block/skill_altar" },
+    "shard_slot=south": { "model": "leanclass:block/skill_altar_shard" },
+    "shard_slot=west":  { "model": "leanclass:block/skill_altar_shard", "y": 90 },
+    "shard_slot=north": { "model": "leanclass:block/skill_altar_shard", "y": 180 },
+    "shard_slot=east":  { "model": "leanclass:block/skill_altar_shard", "y": 270 }
+  }
+}

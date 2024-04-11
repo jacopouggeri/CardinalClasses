@@ -1,5 +1,7 @@
 package net.jayugg.leanclass;
 
+import net.jayugg.leanclass.advancement.ModCriteria;
+import net.jayugg.leanclass.block.ModBlocks;
 import net.jayugg.leanclass.command.ModCommands;
 import net.jayugg.leanclass.implement.ModAbilities;
 import net.jayugg.leanclass.implement.ModClasses;
@@ -18,9 +20,11 @@ public class LeanClass implements ModInitializer {
 	public void onInitialize() {
 		LOGGER.info("Starting LeanClasses");
 		ModItemGroup.registerItemGroup();
+		ModBlocks.registerModBlocks();
 		ModItems.registerModItems();
 		ModAbilities.registerAbilities();
 		ModClasses.registerClasses();
+		ModCriteria.registerCriteria();
 		ModCommands.register();
 	}
 }

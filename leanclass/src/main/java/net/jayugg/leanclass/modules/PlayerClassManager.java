@@ -1,15 +1,15 @@
 package net.jayugg.leanclass.modules;
 
+import net.jayugg.leanclass.advancement.ModCriteria;
 import net.jayugg.leanclass.component.ModComponents;
 import net.jayugg.leanclass.component.PlayerClassComponent;
 import net.jayugg.leanclass.registry.PlayerClassRegistry;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 
 import java.util.Optional;
 import java.util.OptionalInt;
-
-import static net.jayugg.leanclass.implement.ModAbilities.BASE_PASSIVE_BLUE;
 
 public class PlayerClassManager {
     public static boolean setPlayerClass(PlayerEntity player, String classId) {
@@ -17,19 +17,20 @@ public class PlayerClassManager {
         PlayerClass playerClass = PlayerClassRegistry.getPlayerClass(classId);
         if (playerClass == null) {
             // The class is not registered, handle accordingly
-            System.out.println("Class " + classId + " is not registered.");
-            return false;
+            throw new IllegalArgumentException("Class with name " + classId + " is not registered!");
         }
-
         applyClassToPlayer(player, playerClass);
-
         return true;
     }
 
     private static void applyClassToPlayer(PlayerEntity player, PlayerClass playerClass) {
+        if (player.getWorld().isClient) {
+            return;
+        }
         PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
         playerClassComponent.setClass(playerClass.getId());
         player.sendMessage(Text.literal("Your class has been set to " + playerClass.getId()), false);
+        ModCriteria.OBTAIN_CLASS.trigger((ServerPlayerEntity) player, playerClass);
     }
 
     public static boolean skillUp(PlayerEntity player, SkillSlot skillSlot) {

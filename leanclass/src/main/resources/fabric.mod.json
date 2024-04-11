@@ -23,6 +23,9 @@
 		],
 		"cardinal-components-entity": [
 			"net.jayugg.leanclass.component.ModComponents"
+		],
+		"fabric-datagen": [
+			"net.jayugg.leanclass.datagen.ModDataGen"
 		]
 	},
 	"mixins": [
@@ -39,8 +42,6 @@
 	},
 	"custom": {
 		"cardinal-components": [
-			"leanclass:player_skills",
-			"leanclass:player_perks",
 			"leanclass:player_class"
 		]
 	}

@@ -17,7 +17,7 @@ public class PlayerClassComponent implements ComponentV3 {
     private PerkSlot ascendedPerkSlot = null;
 
     public boolean setClass(String newId) {
-        if (this.classId.equals("Base")) {
+        if (this.classId.equals("base")) {
             this.classId = newId;
             return true;
         }

@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static net.jayugg.leanclass.implement.ModClasses.BASE_CLASS;
+import static net.jayugg.leanclass.implement.ModClasses.TEST_CLASS;
 
 @Mixin(PlayerEntity.class)
 public class PlayerEffectMixin {
@@ -19,7 +19,7 @@ public class PlayerEffectMixin {
         PlayerEntity player = (PlayerEntity) (Object) this;
         if (!player.world.isClient) {
             StatusEffect effect = StatusEffects.HEALTH_BOOST;
-            if (PlayerClassManager.hasClass(player, BASE_CLASS) && !player.hasStatusEffect(effect)) {
+            if (PlayerClassManager.hasClass(player, TEST_CLASS) && !player.hasStatusEffect(effect)) {
                 StatusEffectInstance newEffect = new StatusEffectInstance(effect, StatusEffectInstance.INFINITE, 1);
                 player.addStatusEffect(newEffect);
             }

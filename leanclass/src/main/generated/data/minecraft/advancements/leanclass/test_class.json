@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:leanclass/root",
+  "criteria": {
+    "test_class": {
+      "conditions": {
+        "player_class": "test"
+      },
+      "trigger": "leanclass:obtain_class"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": {
+      "text": "A test class"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:command_block"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Test Class"
+    }
+  },
+  "requirements": [
+    [
+      "test_class"
+    ]
+  ]
+}

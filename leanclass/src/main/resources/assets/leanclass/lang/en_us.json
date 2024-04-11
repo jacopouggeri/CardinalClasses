@@ -2,8 +2,12 @@
   "item.leanclass.skill_shard": "Skill Shard",
   "item.leanclass.skill_down": "Skill Down",
   "item.leanclass.ascender": "Ascender",
+  "block.leanclass.skill_altar": "Skill Altar",
   "class.leanclass.base": "Base class description",
   "perk.leanclass.base_perk": "Base perk description",
   "skill.leanclass.base_active": "Base active skill description",
-  "skill.leanclass.base_passive": "Base passive skill description"
+  "skill.leanclass.base_passive": "Base passive skill description",
+
+  "key.category.leanclass": "Lean Class Keys",
+  "key.leanclass.class_menu": "Open Class Menu"
 }
