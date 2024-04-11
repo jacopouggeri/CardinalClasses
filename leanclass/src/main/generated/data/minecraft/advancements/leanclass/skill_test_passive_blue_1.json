@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:leanclass/test_class",
+  "criteria": {
+    "skill_test_passive_blue_1": {
+      "conditions": {
+        "level": 1,
+        "player_skill": "test_passive_blue"
+      },
+      "trigger": "leanclass:obtain_skill"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "A test skill"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:diamond_sword",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Skill: test_passive_blue Level 1"
+    }
+  },
+  "requirements": [
+    [
+      "skill_test_passive_blue_1"
+    ]
+  ]
+}

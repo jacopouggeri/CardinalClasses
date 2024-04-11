@@ -1,7 +1,8 @@
 {
   "criteria": {
     "classer": {
-      "trigger": "minecraft:impossible"
+      "conditions": {},
+      "trigger": "leanclass:obtain_class"
     }
   },
   "display": {

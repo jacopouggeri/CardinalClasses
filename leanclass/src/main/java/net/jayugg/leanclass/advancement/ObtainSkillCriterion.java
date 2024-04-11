@@ -2,6 +2,8 @@ package net.jayugg.leanclass.advancement;
 
 import com.google.gson.JsonObject;
 import net.jayugg.leanclass.modules.PlayerClass;
+import net.jayugg.leanclass.modules.PlayerSkill;
+import net.jayugg.leanclass.registry.AbilityRegistry;
 import net.jayugg.leanclass.registry.PlayerClassRegistry;
 import net.minecraft.advancement.criterion.AbstractCriterion;
 import net.minecraft.advancement.criterion.AbstractCriterionConditions;
@@ -14,16 +16,16 @@ import org.jetbrains.annotations.Nullable;
 
 import static net.jayugg.leanclass.LeanClass.MOD_ID;
 
-public class ObtainClassCriterion extends AbstractCriterion<ObtainClassCriterion.Conditions> {
-    static final Identifier ID = new Identifier(MOD_ID, "obtain_class");
+public class ObtainSkillCriterion extends AbstractCriterion<ObtainSkillCriterion.Conditions> {
+    static final Identifier ID = new Identifier(MOD_ID, "obtain_skill");
 
     @Override
     protected Conditions conditionsFromJson(JsonObject json,
                                             EntityPredicate.Extended playerPredicate,
                                             AdvancementEntityPredicateDeserializer predicateDeserializer) {
-        if (!json.has("player_class")) return new Conditions(playerPredicate, null);
-        String playerClassId = json.get("player_class").getAsString();
-        return new Conditions(playerPredicate, PlayerClassRegistry.getPlayerClass(playerClassId));
+        String playerSkillId = json.get("player_skill").getAsString();
+        int level = json.get("level").getAsInt();
+        return new Conditions(playerPredicate, AbilityRegistry.getSkill(playerSkillId), level);
     }
 
     @Override
@@ -36,22 +38,23 @@ public class ObtainClassCriterion extends AbstractCriterion<ObtainClassCriterion
     }
 
     public static class Conditions extends AbstractCriterionConditions {
-        PlayerClass playerClass;
-        public Conditions(EntityPredicate.Extended extended, @Nullable PlayerClass playerClass) {
+        PlayerSkill playerSkill;
+        int level;
+        public Conditions(EntityPredicate.Extended extended, PlayerSkill playerSkill, int level) {
             super(ID, extended);
-            this.playerClass = playerClass;
+            this.playerSkill = playerSkill;
+            this.level = level;
         }
 
         boolean requirementsMet(String playerClassId) {
-            if (playerClass == null) return true;
-            return playerClass.getId().equals(playerClassId);
+            return playerSkill.getId().equals(playerClassId) && level >= 0;
         }
 
         @Override
         public JsonObject toJson(AdvancementEntityPredicateSerializer predicateSerializer) {
             JsonObject json = super.toJson(predicateSerializer);
-            if (playerClass == null) return json;
-            json.addProperty("player_class", playerClass.getId());
+            json.addProperty("player_skill", playerSkill.getId());
+            json.addProperty("level", level);
             return json;
         }
     }

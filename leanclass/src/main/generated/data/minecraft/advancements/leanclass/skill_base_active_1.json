@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:leanclass/test_class",
+  "criteria": {
+    "skill_base_active_1": {
+      "conditions": {
+        "level": 1,
+        "player_skill": "base_active"
+      },
+      "trigger": "leanclass:obtain_skill"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "A test skill"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:diamond_sword",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Skill: base_active Level 1"
+    }
+  },
+  "requirements": [
+    [
+      "skill_base_active_1"
+    ]
+  ]
+}

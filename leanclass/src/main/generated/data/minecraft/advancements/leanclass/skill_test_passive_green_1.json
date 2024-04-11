@@ -1,8 +1,12 @@
 {
   "parent": "minecraft:leanclass/test_class",
   "criteria": {
-    "skill_test_passive_green": {
-      "trigger": "minecraft:impossible"
+    "skill_test_passive_green_1": {
+      "conditions": {
+        "level": 1,
+        "player_skill": "test_passive_green"
+      },
+      "trigger": "leanclass:obtain_skill"
     }
   },
   "display": {
@@ -18,12 +22,12 @@
     },
     "show_toast": true,
     "title": {
-      "text": "Skill: test_passive_green"
+      "text": "Skill: test_passive_green Level 1"
     }
   },
   "requirements": [
     [
-      "skill_test_passive_green"
+      "skill_test_passive_green_1"
     ]
   ]
 }

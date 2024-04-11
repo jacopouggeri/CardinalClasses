@@ -5,11 +5,11 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.jayugg.leanclass.advancement.ObtainClassCriterion;
-import net.jayugg.leanclass.implement.ModClasses;
+import net.jayugg.leanclass.advancement.ObtainSkillCriterion;
+import net.jayugg.leanclass.modules.SkillSlot;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.AdvancementFrame;
 import net.minecraft.advancement.AdvancementRewards;
-import net.minecraft.advancement.criterion.ImpossibleCriterion;
 import net.minecraft.item.Items;
 import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.text.Text;
@@ -18,6 +18,7 @@ import net.minecraft.util.Identifier;
 import java.util.function.Consumer;
 
 import static net.jayugg.leanclass.LeanClass.MOD_ID;
+import static net.jayugg.leanclass.implement.ModClasses.TEST_CLASS;
 import static net.jayugg.leanclass.registry.AbilityRegistry.SKILLS;
 
 public class ModDataGen implements DataGeneratorEntrypoint {
@@ -48,7 +49,7 @@ public class ModDataGen implements DataGeneratorEntrypoint {
                     )
                     .rewards(AdvancementRewards.Builder.experience(1000))
                     // The first string used in criterion is the name referenced by other advancements when they want to have 'requirements'
-                    .criterion("classer", new ImpossibleCriterion.Conditions())
+                    .criterion("classer",  new ObtainClassCriterion.Conditions(EntityPredicate.Extended.EMPTY, null))
                     .build(consumer, MOD_ID + "/root");
 
             Advancement testClassAdvancement = Advancement.Builder.create().parent(rootAdvancement)
@@ -63,25 +64,28 @@ public class ModDataGen implements DataGeneratorEntrypoint {
                             false // Hidden in the advancement tab
                     )
                     // The first string used in criterion is the name referenced by other advancements when they want to have 'requirements'
-                    .criterion("test_class", new ObtainClassCriterion.Conditions(EntityPredicate.Extended.EMPTY, ModClasses.TEST_CLASS))
+                    .criterion("test_class", new ObtainClassCriterion.Conditions(EntityPredicate.Extended.EMPTY, TEST_CLASS))
                     .build(consumer, MOD_ID + "/test_class");
 
             // loop through AbilityRegistry.SKILLS registry and create advancements for each skill
-            for (String skillId : SKILLS.getRegistry().keySet()) {
-                Advancement.Builder builder = Advancement.Builder.create().parent(testClassAdvancement)
-                        .display(
-                                Items.DIAMOND_SWORD,
-                                Text.literal("Skill: " + skillId),
-                                Text.literal("A test skill"),
-                                null, // children to parent advancements don't need a background set
-                                AdvancementFrame.TASK,
-                                true,
-                                true,
-                                false
-                        )
-                        .criterion("skill_" + skillId, new ImpossibleCriterion.Conditions());
-
-                consumer.accept(builder.build(consumer, MOD_ID + "/skill_" + skillId));
+            for (SkillSlot skillSlot : TEST_CLASS.getSkills().keySet()) {
+                String skillId = TEST_CLASS.getSkills().get(skillSlot).getId();
+                for (int i = 1; i < 4; i++) {
+                    Advancement.Builder builder = Advancement.Builder.create().parent(testClassAdvancement)
+                            .display(
+                                    Items.DIAMOND_SWORD,
+                                    Text.literal("Skill: " + skillId + " Level " + i),
+                                    Text.literal("A test skill"),
+                                    null, // children to parent advancements don't need a background set
+                                    AdvancementFrame.TASK,
+                                    true,
+                                    true,
+                                    false
+                            )
+                            .criterion(String.format("skill_%s_%d", skillId, i),
+                                    new ObtainSkillCriterion.Conditions(EntityPredicate.Extended.EMPTY, SKILLS.get(skillId), i));
+                    consumer.accept(builder.build(consumer, MOD_ID + String.format("/skill_%s_%d", skillId, i)));
+                }
             }
         }
     }
