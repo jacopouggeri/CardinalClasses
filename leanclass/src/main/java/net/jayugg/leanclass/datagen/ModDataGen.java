@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
+import net.jayugg.leanclass.Utils;
 import net.jayugg.leanclass.advancement.ObtainClassCriterion;
 import net.jayugg.leanclass.advancement.ObtainSkillCriterion;
 import net.jayugg.leanclass.modules.SkillSlot;
@@ -12,6 +13,7 @@ import net.minecraft.advancement.AdvancementFrame;
 import net.minecraft.advancement.AdvancementRewards;
 import net.minecraft.item.Items;
 import net.minecraft.predicate.entity.EntityPredicate;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -67,15 +69,19 @@ public class ModDataGen implements DataGeneratorEntrypoint {
                     .criterion("test_class", new ObtainClassCriterion.Conditions(EntityPredicate.Extended.EMPTY, TEST_CLASS))
                     .build(consumer, MOD_ID + "/test_class");
 
-            // loop through AbilityRegistry.SKILLS registry and create advancements for each skill
+            // loop through skills and create advancements for each skill
             for (SkillSlot skillSlot : TEST_CLASS.getSkills().keySet()) {
                 String skillId = TEST_CLASS.getSkills().get(skillSlot).getId();
+                MutableText skillName = TEST_CLASS.getSkills().get(skillSlot).getName();
+                MutableText skillDesc = TEST_CLASS.getSkills().get(skillSlot).getDescription();
+                Advancement parentAdvancement = testClassAdvancement;
                 for (int i = 1; i < 4; i++) {
-                    Advancement.Builder builder = Advancement.Builder.create().parent(testClassAdvancement)
+                    MutableText skillTitle = Text.literal("").append(skillName).append(" ").append(Utils.toRomanNumerals(i));
+                    Advancement.Builder builder = Advancement.Builder.create().parent(parentAdvancement)
                             .display(
                                     Items.DIAMOND_SWORD,
-                                    Text.literal("Skill: " + skillId + " Level " + i),
-                                    Text.literal("A test skill"),
+                                    skillTitle,
+                                    skillDesc,
                                     null, // children to parent advancements don't need a background set
                                     AdvancementFrame.TASK,
                                     true,
@@ -84,7 +90,9 @@ public class ModDataGen implements DataGeneratorEntrypoint {
                             )
                             .criterion(String.format("skill_%s_%d", skillId, i),
                                     new ObtainSkillCriterion.Conditions(EntityPredicate.Extended.EMPTY, SKILLS.get(skillId), i));
-                    consumer.accept(builder.build(consumer, MOD_ID + String.format("/skill_%s_%d", skillId, i)));
+                    Advancement newAdvancement = builder.build(consumer, MOD_ID + String.format("/skill_%s_%d", skillId, i));
+                    consumer.accept(newAdvancement);
+                    parentAdvancement = newAdvancement;
                 }
             }
         }

@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:leanclass/test_class",
+  "parent": "minecraft:leanclass/skill_base_active_1",
   "criteria": {
     "skill_base_active_2": {
       "conditions": {
@@ -12,7 +12,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "text": "A test skill"
+      "translate": "skill.leanclass.base_active.desc"
     },
     "frame": "task",
     "hidden": false,
@@ -22,7 +22,18 @@
     },
     "show_toast": true,
     "title": {
-      "text": "Skill: base_active Level 2"
+      "extra": [
+        {
+          "translate": "skill.leanclass.base_active"
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "II"
+        }
+      ],
+      "text": ""
     }
   },
   "requirements": [

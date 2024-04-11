@@ -3,10 +3,25 @@
   "item.leanclass.skill_down": "Skill Down",
   "item.leanclass.ascender": "Ascender",
   "block.leanclass.skill_altar": "Skill Altar",
+
   "class.leanclass.base": "Base class description",
-  "perk.leanclass.base_perk": "Base perk description",
-  "skill.leanclass.base_active": "Base active skill description",
-  "skill.leanclass.base_passive": "Base passive skill description",
+  "class.leanclass.test": "Test class description",
+
+  "perk.leanclass.base_perk.desc": "Base perk description",
+
+  "skill.leanclass.base_active.desc": "Base active skill description",
+  "skill.leanclass.base_passive.desc": "Base passive skill description",
+  "skill.leanclass.test_passive_yellow.desc": "Test passive skill description (yellow)",
+  "skill.leanclass.test_passive_blue.desc": "Test passive skill description (blue)",
+  "skill.leanclass.test_passive_red.desc": "Test passive skill description (red)",
+  "skill.leanclass.test_passive_green.desc": "Test passive skill description (green)",
+
+  "skill.leanclass.base_active": "Base Active Skill",
+  "skill.leanclass.base_passive": "Base Passive Skill",
+  "skill.leanclass.test_passive_yellow": "Test Yellow",
+  "skill.leanclass.test_passive_blue": "Test Blue",
+  "skill.leanclass.test_passive_red": "Test Red",
+  "skill.leanclass.test_passive_green": "Test Green",
 
   "key.category.leanclass": "Lean Class Keys",
   "key.leanclass.class_menu": "Open Class Menu"

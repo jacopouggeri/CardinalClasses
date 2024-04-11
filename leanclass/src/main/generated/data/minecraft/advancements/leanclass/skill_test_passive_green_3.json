@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:leanclass/test_class",
+  "parent": "minecraft:leanclass/skill_test_passive_green_2",
   "criteria": {
     "skill_test_passive_green_3": {
       "conditions": {
@@ -12,7 +12,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "text": "A test skill"
+      "translate": "skill.leanclass.test_passive_green.desc"
     },
     "frame": "task",
     "hidden": false,
@@ -22,7 +22,18 @@
     },
     "show_toast": true,
     "title": {
-      "text": "Skill: test_passive_green Level 3"
+      "extra": [
+        {
+          "translate": "skill.leanclass.test_passive_green"
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "III"
+        }
+      ],
+      "text": ""
     }
   },
   "requirements": [

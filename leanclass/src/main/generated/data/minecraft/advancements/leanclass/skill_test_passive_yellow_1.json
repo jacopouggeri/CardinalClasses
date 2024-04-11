@@ -12,7 +12,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "text": "A test skill"
+      "translate": "skill.leanclass.test_passive_yellow.desc"
     },
     "frame": "task",
     "hidden": false,
@@ -22,7 +22,18 @@
     },
     "show_toast": true,
     "title": {
-      "text": "Skill: test_passive_yellow Level 1"
+      "extra": [
+        {
+          "translate": "skill.leanclass.test_passive_yellow"
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "I"
+        }
+      ],
+      "text": ""
     }
   },
   "requirements": [

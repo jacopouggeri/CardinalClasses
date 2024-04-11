@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import net.jayugg.leanclass.modules.PlayerClass;
 import net.jayugg.leanclass.modules.PlayerSkill;
 import net.jayugg.leanclass.registry.AbilityRegistry;
-import net.jayugg.leanclass.registry.PlayerClassRegistry;
 import net.minecraft.advancement.criterion.AbstractCriterion;
 import net.minecraft.advancement.criterion.AbstractCriterionConditions;
 import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer;
@@ -12,7 +11,6 @@ import net.minecraft.predicate.entity.AdvancementEntityPredicateSerializer;
 import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
 
 import static net.jayugg.leanclass.LeanClass.MOD_ID;
 
