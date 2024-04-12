@@ -1,7 +1,7 @@
 package net.jayugg.leanclass.advancement;
 
 import com.google.gson.JsonObject;
-import net.jayugg.leanclass.modules.PlayerSkill;
+import net.jayugg.leanclass.modules.PlayerPerk;
 import net.jayugg.leanclass.registry.AbilityRegistry;
 import net.minecraft.advancement.criterion.AbstractCriterion;
 import net.minecraft.advancement.criterion.AbstractCriterionConditions;
@@ -13,16 +13,15 @@ import net.minecraft.util.Identifier;
 
 import static net.jayugg.leanclass.LeanClass.MOD_ID;
 
-public class ObtainSkillCriterion extends AbstractCriterion<ObtainSkillCriterion.Conditions> {
-    static final Identifier ID = new Identifier(MOD_ID, "obtain_skill");
+public class AscendPerkCriterion extends AbstractCriterion<AscendPerkCriterion.Conditions> {
+    static final Identifier ID = new Identifier(MOD_ID, "ascend_perk");
 
     @Override
     protected Conditions conditionsFromJson(JsonObject json,
                                             EntityPredicate.Extended playerPredicate,
                                             AdvancementEntityPredicateDeserializer predicateDeserializer) {
-        String playerSkillId = json.get("player_skill").getAsString();
-        int level = json.get("level").getAsInt();
-        return new Conditions(playerPredicate, AbilityRegistry.getSkill(playerSkillId), level);
+        String playerPerkId = json.get("player_perk").getAsString();
+        return new Conditions(playerPredicate, AbilityRegistry.getPerk(playerPerkId));
     }
 
     @Override
@@ -30,28 +29,25 @@ public class ObtainSkillCriterion extends AbstractCriterion<ObtainSkillCriterion
         return ID;
     }
 
-    public void trigger(ServerPlayerEntity player, PlayerSkill playerSkill, int skillLevel) {
-        trigger(player, conditions -> conditions.requirementsMet(playerSkill.getId(), skillLevel));
+    public void trigger(ServerPlayerEntity player, PlayerPerk playerPerk, boolean ascended) {
+        trigger(player, conditions -> conditions.requirementsMet(playerPerk.getId(), ascended));
     }
 
     public static class Conditions extends AbstractCriterionConditions {
-        PlayerSkill playerSkill;
-        int level;
-        public Conditions(EntityPredicate.Extended extended, PlayerSkill playerSkill, int level) {
+        PlayerPerk playerPerk;
+        public Conditions(EntityPredicate.Extended extended, PlayerPerk playerPerk) {
             super(ID, extended);
-            this.playerSkill = playerSkill;
-            this.level = level;
+            this.playerPerk = playerPerk;
         }
 
-        boolean requirementsMet(String playerClassId, int skillLevel) {
-            return playerSkill.getId().equals(playerClassId) && skillLevel == level;
+        boolean requirementsMet(String playerClassId, boolean ascended) {
+            return playerPerk.getId().equals(playerClassId) && ascended;
         }
 
         @Override
         public JsonObject toJson(AdvancementEntityPredicateSerializer predicateSerializer) {
             JsonObject json = super.toJson(predicateSerializer);
-            json.addProperty("player_skill", playerSkill.getId());
-            json.addProperty("level", level);
+            json.addProperty("player_perk", playerPerk.getId());
             return json;
         }
     }

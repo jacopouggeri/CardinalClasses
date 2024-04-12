@@ -1,9 +1,9 @@
 {
   "parent": "minecraft:leanclass/root",
   "criteria": {
-    "test_class": {
+    "class_base": {
       "conditions": {
-        "player_class": "test"
+        "player_class": "base"
       },
       "trigger": "leanclass:obtain_class"
     }
@@ -12,21 +12,21 @@
     "announce_to_chat": true,
     "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
     "description": {
-      "text": "A test class"
+      "translate": "class.leanclass.base.desc"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "minecraft:command_block"
+      "item": "minecraft:dirt"
     },
     "show_toast": true,
     "title": {
-      "text": "Test Class"
+      "translate": "class.leanclass.base"
     }
   },
   "requirements": [
     [
-      "test_class"
+      "class_base"
     ]
   ]
 }

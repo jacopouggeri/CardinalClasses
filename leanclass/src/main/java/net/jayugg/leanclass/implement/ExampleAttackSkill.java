@@ -4,6 +4,7 @@ import net.jayugg.leanclass.modules.PlayerClassManager;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireworkRocketEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -12,8 +13,8 @@ import net.minecraft.server.world.ServerWorld;
 
 public class ExampleAttackSkill extends AttackEffectSkill {
     private final int fireworkColor;
-    public ExampleAttackSkill(String id, int color) {
-        super(id);
+    public ExampleAttackSkill(String id, int color, Item icon) {
+        super(id, icon);
         fireworkColor = color;
     }
     public void activateEffect(LivingEntity target, PlayerEntity player) {

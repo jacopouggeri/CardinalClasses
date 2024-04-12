@@ -1,15 +1,20 @@
 package net.jayugg.leanclass.modules;
 
+import net.minecraft.item.Item;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
+
 import static net.jayugg.leanclass.LeanClass.MOD_ID;
 
 public class PlayerSkill extends PlayerAbility {
     public static final int SKILL_MAX_LEVEL = 3;
-    public PlayerSkill(String id, AbilityType type) {
-        super(id, 0, SKILL_MAX_LEVEL, type);
+    public PlayerSkill(String id, AbilityType type, Item icon) {
+        super(id, 0, SKILL_MAX_LEVEL, type, icon);
     }
 
     @Override
-    String getTranslationKey() {
+    public String getTranslationKey() {
         return String.format("skill.%s.%s", MOD_ID, id);
 }
+
 }

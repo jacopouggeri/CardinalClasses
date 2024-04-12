@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:leanclass/test_class",
+  "parent": "minecraft:leanclass/class_test",
   "criteria": {
     "skill_test_passive_green_1": {
       "conditions": {
@@ -17,8 +17,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "minecraft:diamond_sword",
-      "nbt": "{Damage:0}"
+      "item": "minecraft:green_dye"
     },
     "show_toast": true,
     "title": {

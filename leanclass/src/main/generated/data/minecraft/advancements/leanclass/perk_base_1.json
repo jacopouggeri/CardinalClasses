@@ -1,0 +1,39 @@
+{
+  "parent": "minecraft:leanclass/class_test",
+  "criteria": {
+    "perk_base_1": {
+      "conditions": {
+        "player_class": "test"
+      },
+      "trigger": "leanclass:obtain_class"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "perk.leanclass.base.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:beacon"
+    },
+    "show_toast": false,
+    "title": {
+      "extra": [
+        {
+          "translate": "perk.leanclass.base"
+        },
+        {
+          "text": ""
+        }
+      ],
+      "text": ""
+    }
+  },
+  "requirements": [
+    [
+      "perk_base_1"
+    ]
+  ]
+}

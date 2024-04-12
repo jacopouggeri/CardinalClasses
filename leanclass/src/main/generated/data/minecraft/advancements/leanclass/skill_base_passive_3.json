@@ -1,10 +1,10 @@
 {
-  "parent": "minecraft:leanclass/skill_test_passive_yellow_2",
+  "parent": "minecraft:leanclass/skill_base_passive_2",
   "criteria": {
-    "skill_test_passive_yellow_3": {
+    "skill_base_passive_3": {
       "conditions": {
         "level": 3,
-        "player_skill": "test_passive_yellow"
+        "player_skill": "base_passive"
       },
       "trigger": "leanclass:obtain_skill"
     }
@@ -12,18 +12,19 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "skill.leanclass.test_passive_yellow_3.desc"
+      "translate": "skill.leanclass.base_passive_3.desc"
     },
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "minecraft:yellow_dye"
+      "item": "minecraft:chainmail_chestplate",
+      "nbt": "{Damage:0}"
     },
     "show_toast": true,
     "title": {
       "extra": [
         {
-          "translate": "skill.leanclass.test_passive_yellow"
+          "translate": "skill.leanclass.base_passive"
         },
         {
           "text": " "
@@ -37,7 +38,7 @@
   },
   "requirements": [
     [
-      "skill_test_passive_yellow_3"
+      "skill_base_passive_3"
     ]
   ]
 }

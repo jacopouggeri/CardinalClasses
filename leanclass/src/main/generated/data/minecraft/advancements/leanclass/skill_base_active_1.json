@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:leanclass/test_class",
+  "parent": "minecraft:leanclass/class_test",
   "criteria": {
     "skill_base_active_1": {
       "conditions": {
@@ -17,7 +17,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "minecraft:diamond_sword",
+      "item": "minecraft:wooden_sword",
       "nbt": "{Damage:0}"
     },
     "show_toast": true,

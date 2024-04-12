@@ -4,8 +4,8 @@ import net.jayugg.leanclass.modules.PlayerPerk;
 import net.jayugg.leanclass.modules.PlayerSkill;
 
 public class AbilityRegistry {
-    public static final Registry<PlayerSkill> SKILLS = new Registry<>();
-    public static final Registry<PlayerPerk> PERKS = new Registry<>();
+    public static final ModRegistry<PlayerSkill> SKILLS = new ModRegistry<>();
+    public static final ModRegistry<PlayerPerk> PERKS = new ModRegistry<>();
     public static PlayerSkill registerSkill(PlayerSkill playerSkill) {
         if (SKILLS.get(playerSkill.getId()) != null) {
             throw new IllegalArgumentException("Skill already registered: " + playerSkill.getId());

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import static net.jayugg.leanclass.LeanClass.LOGGER;
 import static net.jayugg.leanclass.modules.PlayerSkill.SKILL_MAX_LEVEL;
 
 public class PlayerClassComponent implements ComponentV3 {
@@ -58,12 +59,17 @@ public class PlayerClassComponent implements ComponentV3 {
 
     public boolean skillUp(SkillSlot skillSlot) {
         int level = getSkillLevel(skillSlot);
+        LOGGER.warn("Skill level: " + level);
         return setSkillLevel(skillSlot, level + 1);
     }
 
     public boolean skillDown(SkillSlot skillSlot) {
         int level = getSkillLevel(skillSlot);
         return setSkillLevel(skillSlot, level - 1);
+    }
+
+    public void resetSkills() {
+        skillLevels.clear();
     }
 
     public Map<SkillSlot, Integer> getSkillLevels() { return skillLevels; }

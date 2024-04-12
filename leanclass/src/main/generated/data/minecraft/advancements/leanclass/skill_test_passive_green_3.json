@@ -12,13 +12,12 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "skill.leanclass.test_passive_green.desc"
+      "translate": "skill.leanclass.test_passive_green_3.desc"
     },
-    "frame": "task",
+    "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "minecraft:diamond_sword",
-      "nbt": "{Damage:0}"
+      "item": "minecraft:green_dye"
     },
     "show_toast": true,
     "title": {

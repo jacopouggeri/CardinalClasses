@@ -1,15 +1,18 @@
 package net.jayugg.leanclass.modules;
 
+import net.minecraft.item.Item;
+
 import java.util.Collections;
 import java.util.Map;
 
-public abstract class PlayerClass {
-    protected final String id;
+import static net.jayugg.leanclass.LeanClass.MOD_ID;
+
+public abstract class PlayerClass extends PlayerAddon {
     private final Map<SkillSlot, PlayerSkill> skills;
     private final Map<PerkSlot, PlayerPerk> perks;
 
-    public PlayerClass(String id, Map<SkillSlot, PlayerSkill> skills, Map<PerkSlot, PlayerPerk> perks) {
-        this.id = id;
+    public PlayerClass(String id, Map<SkillSlot, PlayerSkill> skills, Map<PerkSlot, PlayerPerk> perks, Item icon) {
+        super(id, icon);
 
         // Verify the correct number of skills and perks are provided
         if (skills.size() != SkillSlot.values().length || perks.size() != PerkSlot.values().length) {
@@ -35,9 +38,11 @@ public abstract class PlayerClass {
         throw new IllegalArgumentException("Perk not found in class: " + perk);
     }
 
-    public String getId() {
-        return id;
+    @Override
+    public String getTranslationKey() {
+        return String.format("class.%s.%s", MOD_ID, id);
     }
+
 }
 
 

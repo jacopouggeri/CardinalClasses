@@ -1,0 +1,39 @@
+{
+  "parent": "minecraft:leanclass/perk_base_1",
+  "criteria": {
+    "perk_base_2": {
+      "conditions": {
+        "player_perk": "base"
+      },
+      "trigger": "leanclass:ascend_perk"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "perk.leanclass.base_2.desc"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:beacon"
+    },
+    "show_toast": true,
+    "title": {
+      "extra": [
+        {
+          "translate": "perk.leanclass.base"
+        },
+        {
+          "text": " *"
+        }
+      ],
+      "text": ""
+    }
+  },
+  "requirements": [
+    [
+      "perk_base_2"
+    ]
+  ]
+}

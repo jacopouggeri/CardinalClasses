@@ -1,6 +1,7 @@
 package net.jayugg.leanclass.implement;
 
 import net.jayugg.leanclass.modules.*;
+import net.minecraft.item.Items;
 
 import java.util.Map;
 
@@ -26,6 +27,6 @@ public class TestClass extends PlayerClass {
     }
 
     public TestClass() {
-        super("test", createSkills(), createPerks());
+        super("test", createSkills(), createPerks(), Items.COMMAND_BLOCK);
     }
 }
