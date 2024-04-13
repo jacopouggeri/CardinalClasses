@@ -8,6 +8,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.EnchantingTableBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageSources;
+import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -56,7 +60,7 @@ public class SkillAltarBlock extends Block {
     private static void updateShardSlot(@Nullable Entity charger, World world, BlockPos pos, BlockState blockState) {
         world.setBlockState(pos, blockState, Block.NOTIFY_ALL);
         world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(charger, blockState));
-        world.playSound(null, (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, SoundEvents.BLOCK_CHAIN_PLACE, SoundCategory.BLOCKS, 1.0f, 0.75f);
+        world.playSound(null, (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, SoundEvents.BLOCK_AMETHYST_CLUSTER_PLACE, SoundCategory.BLOCKS, 1.5f, 0.5f);
     }
 
     public static boolean canLoadShard(BlockState state) {
@@ -128,19 +132,29 @@ public class SkillAltarBlock extends Block {
     public void onEntityLand(BlockView world, Entity entity) {
         if (entity.bypassesLandingEffects() || isShardSlotEmpty(world, entity)) {
             super.onEntityLand(world, entity);
-        } else if (entity instanceof PlayerEntity) {
-            bounce(entity);
-            if (useShard((PlayerEntity) entity, (World) world)) {
-                successEffects((World) world, (PlayerEntity) entity);
+        } else if (entity instanceof PlayerEntity player) {
+            bounce(player);
+            if (useShard(player, (World) world)) {
+                successEffects((World) world, player);
+            } else {
+                failBehaviour((World) world, player);
             }
         }
+    }
+
+    private static void failBehaviour(World world, PlayerEntity player) {
+        player.damage(world.getDamageSources().magic(), 4.0f);
+        unloadShard(player, world, player.getBlockPos(), world.getBlockState(player.getBlockPos()));
+        ItemStack stack = new ItemStack(ModItems.SKILL_SHARD, 1);
+        world.spawnEntity(new ItemEntity(world, player.getX(), player.getY(), player.getZ(), stack));
+        world.playSound(null, player.getBlockPos(), SoundEvents.BLOCK_CONDUIT_DEACTIVATE, SoundCategory.BLOCKS, 1.2f, 0.75f);
     }
 
     private void successEffects(World world, PlayerEntity player) {
         player.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 20, 1));
         player.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 30, 1));
         player.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 30, 1));
-        world.playSound(null, player.getBlockPos(), SoundEvents.BLOCK_CONDUIT_ACTIVATE, SoundCategory.BLOCKS, 1.2f, 1.0f);
+        world.playSound(null, player.getBlockPos(), SoundEvents.BLOCK_CONDUIT_ACTIVATE, SoundCategory.BLOCKS, 1.2f, 1.25f);
     }
 
     private boolean isShardSlotEmpty(BlockView world, Entity entity) {

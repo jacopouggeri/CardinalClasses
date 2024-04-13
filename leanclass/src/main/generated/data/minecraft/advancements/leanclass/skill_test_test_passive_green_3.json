@@ -1,7 +1,7 @@
 {
-  "parent": "minecraft:leanclass/skill_test_passive_green_2",
+  "parent": "minecraft:leanclass/skill_test_test_passive_green_2",
   "criteria": {
-    "skill_test_passive_green_3": {
+    "skill_test_test_passive_green_3": {
       "conditions": {
         "level": 3,
         "player_skill": "test_passive_green"
@@ -14,7 +14,7 @@
     "description": {
       "translate": "skill.leanclass.test_passive_green_3.desc"
     },
-    "frame": "goal",
+    "frame": "challenge",
     "hidden": false,
     "icon": {
       "item": "minecraft:green_dye"
@@ -32,12 +32,12 @@
           "text": "III"
         }
       ],
-      "text": ""
+      "text": "South: "
     }
   },
   "requirements": [
     [
-      "skill_test_passive_green_3"
+      "skill_test_test_passive_green_3"
     ]
   ]
 }

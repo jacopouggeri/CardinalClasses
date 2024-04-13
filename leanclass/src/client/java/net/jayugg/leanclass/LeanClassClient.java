@@ -2,6 +2,7 @@ package net.jayugg.leanclass;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.jayugg.leanclass.event.KeyInputHandler;
+import net.jayugg.leanclass.networking.ModMessages;
 
 public class LeanClassClient implements ClientModInitializer {
 	@Override

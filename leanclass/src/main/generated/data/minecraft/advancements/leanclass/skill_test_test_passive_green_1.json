@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:leanclass/class_test_passives",
+  "criteria": {
+    "skill_test_test_passive_green_1": {
+      "conditions": {
+        "level": 1,
+        "player_skill": "test_passive_green"
+      },
+      "trigger": "leanclass:obtain_skill"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "skill.leanclass.test_passive_green.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:green_dye"
+    },
+    "show_toast": true,
+    "title": {
+      "extra": [
+        {
+          "translate": "skill.leanclass.test_passive_green"
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "I"
+        }
+      ],
+      "text": "South: "
+    }
+  },
+  "requirements": [
+    [
+      "skill_test_test_passive_green_1"
+    ]
+  ]
+}

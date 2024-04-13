@@ -1,9 +1,23 @@
 {
-  "variants": {
-    "shard_slot=empty": { "model": "leanclass:block/skill_altar" },
-    "shard_slot=south": { "model": "leanclass:block/skill_altar_shard" },
-    "shard_slot=west":  { "model": "leanclass:block/skill_altar_shard", "y": 90 },
-    "shard_slot=north": { "model": "leanclass:block/skill_altar_shard", "y": 180 },
-    "shard_slot=east":  { "model": "leanclass:block/skill_altar_shard", "y": 270 }
-  }
+  "multipart": [
+    {
+      "apply": { "model": "leanclass:block/skill_altar" }
+    },
+    {
+      "when": { "shard_slot": "south" },
+      "apply": { "model": "leanclass:block/shard_south" }
+    },
+    {
+      "when": { "shard_slot": "west" },
+      "apply": { "model": "leanclass:block/shard_south", "y": 90 }
+    },
+    {
+      "when": { "shard_slot": "north" },
+      "apply": { "model": "leanclass:block/shard_south", "y": 180 }
+    },
+    {
+      "when": { "shard_slot": "east" },
+      "apply": { "model": "leanclass:block/shard_south", "y": 270 }
+    }
+  ]
 }

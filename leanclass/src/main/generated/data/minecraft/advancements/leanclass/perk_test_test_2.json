@@ -1,7 +1,7 @@
 {
-  "parent": "minecraft:leanclass/perk_test_1",
+  "parent": "minecraft:leanclass/perk_test_test_1",
   "criteria": {
-    "perk_test_2": {
+    "perk_test_test_2": {
       "conditions": {
         "player_perk": "test"
       },
@@ -13,7 +13,7 @@
     "description": {
       "translate": "perk.leanclass.test_2.desc"
     },
-    "frame": "goal",
+    "frame": "challenge",
     "hidden": false,
     "icon": {
       "item": "minecraft:potion"
@@ -25,15 +25,15 @@
           "translate": "perk.leanclass.test"
         },
         {
-          "text": " *"
+          "text": " ★"
         }
       ],
-      "text": ""
+      "text": "Perk: "
     }
   },
   "requirements": [
     [
-      "perk_test_2"
+      "perk_test_test_2"
     ]
   ]
 }

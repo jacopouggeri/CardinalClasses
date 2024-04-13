@@ -35,11 +35,16 @@ dependencies {
 	// Cardinal Components API
 	// Replace modImplementation with modApi if you expose components in your own API
 	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
+	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}"
 	// Includes Cardinal Components API as a Jar-in-Jar dependency (optional but recommended)
+	include "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}"
 	include "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
 
 	// Jade for debug
 	modImplementation "maven.modrinth:jade:10.4.0-fabric,1.19.4"
+
+	// Better Advancements (suggested)
+	modImplementation "maven.modrinth:Q2OqKxDG:0.3.1.158-fabric,1.19.4"
 }
 
 processResources {

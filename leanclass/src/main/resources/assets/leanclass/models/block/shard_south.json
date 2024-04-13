@@ -1,0 +1,69 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"0": "leanclass:block/skill_altar_shard",
+		"particle": "leanclass:block/skill_altar_shard"
+	},
+	"elements": [
+		{
+			"from": [7, 6, 16],
+			"to": [9, 8, 17],
+			"faces": {
+				"south": {"uv": [7, 8, 9, 10], "texture": "#0"},
+				"west": {"uv": [0, 0, 1, 2], "texture": "#missing"},
+				"down": {"uv": [0, 0, 2, 1], "rotation": 180, "texture": "#missing"}
+			}
+		},
+		{
+			"from": [9, 6, 16],
+			"to": [10, 8, 17],
+			"faces": {
+				"east": {"uv": [9, 8, 10, 10], "texture": "#0"},
+				"south": {"uv": [9, 8, 10, 10], "texture": "#0"},
+				"up": {"uv": [9, 8, 10, 9], "rotation": 180, "texture": "#0"},
+				"down": {"uv": [9, 9, 10, 10], "rotation": 180, "texture": "#0"}
+			}
+		},
+		{
+			"from": [6, 6, 16],
+			"to": [7, 8, 17],
+			"faces": {
+				"south": {"uv": [6, 8, 7, 10], "texture": "#0"},
+				"west": {"uv": [6, 8, 7, 10], "texture": "#0"},
+				"up": {"uv": [7, 7, 8, 8], "rotation": 180, "texture": "#0"},
+				"down": {"uv": [6, 9, 7, 10], "rotation": 180, "texture": "#0"}
+			}
+		},
+		{
+			"from": [7, 8, 16],
+			"to": [9, 9, 17],
+			"faces": {
+				"east": {"uv": [8, 7, 9, 8], "rotation": 270, "texture": "#0"},
+				"south": {"uv": [6, 10, 7, 8], "rotation": 90, "texture": "#0"},
+				"west": {"uv": [7, 7, 8, 8], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [6, 10, 7, 8], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [0, 0, 1, 2], "rotation": 90, "texture": "#0"}
+			}
+		},
+		{
+			"from": [7, 5, 16],
+			"to": [9, 6, 17],
+			"faces": {
+				"east": {"uv": [9, 9, 10, 10], "rotation": 270, "texture": "#0"},
+				"south": {"uv": [9, 8, 10, 10], "rotation": 90, "texture": "#0"},
+				"west": {"uv": [7, 10, 8, 11], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [9, 8, 10, 10], "rotation": 90, "texture": "#0"}
+			}
+		}
+	],
+	"display": {},
+	"groups": [
+		{
+			"name": "shard_south",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"children": [0, 1, 2, 3, 4]
+		}
+	]
+}

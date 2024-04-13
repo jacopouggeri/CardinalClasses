@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:leanclass/class_base",
+  "criteria": {
+    "class_base_passives": {
+      "conditions": {
+        "player_class": "base"
+      },
+      "trigger": "leanclass:obtain_class"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "text": "An overall improvement"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:player_head",
+      "nbt": "{SkullOwner:{Name:\"MHF_Pig\"}}"
+    },
+    "show_toast": false,
+    "title": {
+      "text": "Passive Skills"
+    }
+  },
+  "requirements": [
+    [
+      "class_base_passives"
+    ]
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "parent": "minecraft:leanclass/class_test",
+  "criteria": {
+    "class_test_perks": {
+      "conditions": {
+        "player_class": "test"
+      },
+      "trigger": "leanclass:obtain_class"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "text": "Nice bonus!"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:nether_star"
+    },
+    "show_toast": false,
+    "title": {
+      "text": "Class Perks"
+    }
+  },
+  "requirements": [
+    [
+      "class_test_perks"
+    ]
+  ]
+}

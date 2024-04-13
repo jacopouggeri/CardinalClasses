@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:leanclass/class_test",
   "criteria": {
-    "perk_base_1": {
+    "class_test_actives": {
       "conditions": {
         "player_class": "test"
       },
@@ -11,29 +11,21 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "perk.leanclass.base.desc"
+      "text": "Smash 'em!"
     },
-    "frame": "task",
+    "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "minecraft:beacon"
+      "item": "minecraft:skeleton_skull"
     },
     "show_toast": false,
     "title": {
-      "extra": [
-        {
-          "translate": "perk.leanclass.base"
-        },
-        {
-          "text": ""
-        }
-      ],
-      "text": ""
+      "text": "Active Skills"
     }
   },
   "requirements": [
     [
-      "perk_base_1"
+      "class_test_actives"
     ]
   ]
 }

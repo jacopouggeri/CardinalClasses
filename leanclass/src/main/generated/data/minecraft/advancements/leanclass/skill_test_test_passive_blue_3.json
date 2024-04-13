@@ -1,10 +1,10 @@
 {
-  "parent": "minecraft:leanclass/skill_base_active_2",
+  "parent": "minecraft:leanclass/skill_test_test_passive_blue_2",
   "criteria": {
-    "skill_base_active_3": {
+    "skill_test_test_passive_blue_3": {
       "conditions": {
         "level": 3,
-        "player_skill": "base_active"
+        "player_skill": "test_passive_blue"
       },
       "trigger": "leanclass:obtain_skill"
     }
@@ -12,19 +12,18 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "skill.leanclass.base_active_3.desc"
+      "translate": "skill.leanclass.test_passive_blue_3.desc"
     },
-    "frame": "goal",
+    "frame": "challenge",
     "hidden": false,
     "icon": {
-      "item": "minecraft:wooden_sword",
-      "nbt": "{Damage:0}"
+      "item": "minecraft:blue_dye"
     },
     "show_toast": true,
     "title": {
       "extra": [
         {
-          "translate": "skill.leanclass.base_active"
+          "translate": "skill.leanclass.test_passive_blue"
         },
         {
           "text": " "
@@ -33,12 +32,12 @@
           "text": "III"
         }
       ],
-      "text": ""
+      "text": "East: "
     }
   },
   "requirements": [
     [
-      "skill_base_active_3"
+      "skill_test_test_passive_blue_3"
     ]
   ]
 }

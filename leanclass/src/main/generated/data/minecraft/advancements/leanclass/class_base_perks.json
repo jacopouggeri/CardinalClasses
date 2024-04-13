@@ -1,7 +1,7 @@
 {
-  "parent": "minecraft:leanclass/root",
+  "parent": "minecraft:leanclass/class_base",
   "criteria": {
-    "class_base": {
+    "class_base_perks": {
       "conditions": {
         "player_class": "base"
       },
@@ -9,23 +9,23 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
+    "announce_to_chat": false,
     "description": {
-      "translate": "class.leanclass.base.desc"
+      "text": "Nice bonus!"
     },
-    "frame": "task",
+    "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "minecraft:dirt"
+      "item": "minecraft:nether_star"
     },
-    "show_toast": true,
+    "show_toast": false,
     "title": {
-      "translate": "class.leanclass.base"
+      "text": "Class Perks"
     }
   },
   "requirements": [
     [
-      "class_base"
+      "class_base_perks"
     ]
   ]
 }

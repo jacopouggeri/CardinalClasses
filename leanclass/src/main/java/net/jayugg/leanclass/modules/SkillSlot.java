@@ -1,19 +1,21 @@
 package net.jayugg.leanclass.modules;
 
 public enum SkillSlot {
-    PASSIVE1(1),
-    PASSIVE2(2),
-    PASSIVE3(3),
-    PASSIVE4(4),
-    ACTIVE1(5),
-    ACTIVE2(6),
-    ACTIVE3(7),
-    ACTIVE4(8);
+    PASSIVE1(1, "North"),
+    PASSIVE2(2, "East"),
+    PASSIVE3(3, "South"),
+    PASSIVE4(4, "West"),
+    ACTIVE1(5, "North"),
+    ACTIVE2(6, "East"),
+    ACTIVE3(7, "South"),
+    ACTIVE4(8, "West");
 
     private final int value;
+    private final String name;
 
-    SkillSlot(int value) {
+    SkillSlot(int value, String name) {
         this.value = value;
+        this.name = name;
     }
 
     public int getValue() {
@@ -27,5 +29,9 @@ public enum SkillSlot {
             }
         }
         throw new IllegalArgumentException("Unexpected value: " + value);
+    }
+
+    public String getName() {
+        return this.name;
     }
 }

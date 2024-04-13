@@ -1,10 +1,10 @@
 {
-  "parent": "minecraft:leanclass/skill_test_passive_red_2",
+  "parent": "minecraft:leanclass/skill_test_test_passive_yellow_2",
   "criteria": {
-    "skill_test_passive_red_3": {
+    "skill_test_test_passive_yellow_3": {
       "conditions": {
         "level": 3,
-        "player_skill": "test_passive_red"
+        "player_skill": "test_passive_yellow"
       },
       "trigger": "leanclass:obtain_skill"
     }
@@ -12,18 +12,18 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "skill.leanclass.test_passive_red_3.desc"
+      "translate": "skill.leanclass.test_passive_yellow_3.desc"
     },
-    "frame": "goal",
+    "frame": "challenge",
     "hidden": false,
     "icon": {
-      "item": "minecraft:red_dye"
+      "item": "minecraft:yellow_dye"
     },
     "show_toast": true,
     "title": {
       "extra": [
         {
-          "translate": "skill.leanclass.test_passive_red"
+          "translate": "skill.leanclass.test_passive_yellow"
         },
         {
           "text": " "
@@ -32,12 +32,12 @@
           "text": "III"
         }
       ],
-      "text": ""
+      "text": "West: "
     }
   },
   "requirements": [
     [
-      "skill_test_passive_red_3"
+      "skill_test_test_passive_yellow_3"
     ]
   ]
 }

@@ -5,6 +5,7 @@ import net.jayugg.leanclass.item.ModItemGroup;
 import net.jayugg.leanclass.item.ModItems;
 import net.jayugg.leanclass.item.custom.ClassPotionItem;
 import net.jayugg.leanclass.modules.PlayerClass;
+import net.jayugg.leanclass.potion.ModPotions;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -30,9 +31,10 @@ public class PlayerClassRegistry {
     }
 
     private static Item registerClassPotion(PlayerClass playerClass) {
-        Item potionItem = new ClassPotionItem(new FabricItemSettings(), playerClass);
+        Item potionItem = Registry.register(Registries.ITEM, new Identifier(MOD_ID, playerClass.getId() + "_potion"), new ClassPotionItem(new FabricItemSettings(), playerClass));
         CLASS_POTIONS.register(playerClass.getId(), potionItem);
-        return Registry.register(Registries.ITEM, new Identifier(MOD_ID, playerClass.getId() + "_potion"), potionItem);
+        ModPotions.registerClassPotionRecipe(playerClass, potionItem);
+        return potionItem;
     }
 
     public static PlayerClass getPlayerClass(String id) {

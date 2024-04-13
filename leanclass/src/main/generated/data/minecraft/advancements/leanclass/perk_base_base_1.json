@@ -1,9 +1,9 @@
 {
-  "parent": "minecraft:leanclass/class_test",
+  "parent": "minecraft:leanclass/class_base_perks",
   "criteria": {
-    "perk_test_1": {
+    "perk_base_base_1": {
       "conditions": {
-        "player_class": "test"
+        "player_class": "base"
       },
       "trigger": "leanclass:obtain_class"
     }
@@ -11,29 +11,29 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "perk.leanclass.test.desc"
+      "translate": "perk.leanclass.base.desc"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "minecraft:potion"
+      "item": "minecraft:beacon"
     },
     "show_toast": false,
     "title": {
       "extra": [
         {
-          "translate": "perk.leanclass.test"
+          "translate": "perk.leanclass.base"
         },
         {
           "text": ""
         }
       ],
-      "text": ""
+      "text": "Perk: "
     }
   },
   "requirements": [
     [
-      "perk_test_1"
+      "perk_base_base_1"
     ]
   ]
 }

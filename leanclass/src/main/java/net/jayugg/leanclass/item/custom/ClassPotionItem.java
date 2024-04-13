@@ -9,7 +9,6 @@ import net.minecraft.item.*;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -19,7 +18,7 @@ import net.minecraft.world.event.GameEvent;
 
 import static net.jayugg.leanclass.LeanClass.MOD_ID;
 
-public class ClassPotionItem extends Item {
+public class ClassPotionItem extends PotionItem {
     private static final int MAX_USE_TIME = 40;
     private final PlayerClass playerClass;
 

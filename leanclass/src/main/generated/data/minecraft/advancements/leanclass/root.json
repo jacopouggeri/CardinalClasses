@@ -11,10 +11,10 @@
     "description": {
       "text": "Obtain a Class"
     },
-    "frame": "task",
+    "frame": "challenge",
     "hidden": false,
     "icon": {
-      "item": "minecraft:conduit"
+      "item": "leanclass:skill_shard"
     },
     "show_toast": false,
     "title": {

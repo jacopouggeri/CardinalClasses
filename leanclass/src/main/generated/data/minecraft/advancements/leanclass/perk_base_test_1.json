@@ -1,0 +1,39 @@
+{
+  "parent": "minecraft:leanclass/class_base_perks",
+  "criteria": {
+    "perk_base_test_1": {
+      "conditions": {
+        "player_class": "base"
+      },
+      "trigger": "leanclass:obtain_class"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "perk.leanclass.test.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:potion"
+    },
+    "show_toast": false,
+    "title": {
+      "extra": [
+        {
+          "translate": "perk.leanclass.test"
+        },
+        {
+          "text": ""
+        }
+      ],
+      "text": "Perk: "
+    }
+  },
+  "requirements": [
+    [
+      "perk_base_test_1"
+    ]
+  ]
+}

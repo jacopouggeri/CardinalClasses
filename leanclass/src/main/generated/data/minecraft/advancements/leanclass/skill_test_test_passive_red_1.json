@@ -1,9 +1,9 @@
 {
-  "parent": "minecraft:leanclass/skill_test_passive_red_1",
+  "parent": "minecraft:leanclass/class_test_passives",
   "criteria": {
-    "skill_test_passive_red_2": {
+    "skill_test_test_passive_red_1": {
       "conditions": {
-        "level": 2,
+        "level": 1,
         "player_skill": "test_passive_red"
       },
       "trigger": "leanclass:obtain_skill"
@@ -12,7 +12,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "skill.leanclass.test_passive_red_2.desc"
+      "translate": "skill.leanclass.test_passive_red.desc"
     },
     "frame": "task",
     "hidden": false,
@@ -29,15 +29,15 @@
           "text": " "
         },
         {
-          "text": "II"
+          "text": "I"
         }
       ],
-      "text": ""
+      "text": "North: "
     }
   },
   "requirements": [
     [
-      "skill_test_passive_red_2"
+      "skill_test_test_passive_red_1"
     ]
   ]
 }
