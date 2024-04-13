@@ -1,7 +1,7 @@
-package net.jayugg.leanclass.modules;
+package net.jayugg.leanclass.util;
 
-import com.mojang.brigadier.ParseResults;
 import net.jayugg.leanclass.advancement.ModCriteria;
+import net.jayugg.leanclass.base.*;
 import net.jayugg.leanclass.component.ModComponents;
 import net.jayugg.leanclass.component.PlayerClassComponent;
 import net.jayugg.leanclass.item.ModItems;
@@ -10,9 +10,7 @@ import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.PlayerAdvancementTracker;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerAdvancementLoader;
-import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 
@@ -74,12 +72,12 @@ public class PlayerClassManager {
         ModCriteria.OBTAIN_CLASS.trigger((ServerPlayerEntity) player, playerClass);
     }
 
-    public static boolean skillUp(PlayerEntity player, SkillSlot skillSlot) {
+    public static boolean skillUp(PlayerEntity player, SkillSlot skillSlot, AbilityType abilityType) {
         PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
         boolean success = playerClassComponent.skillUp(skillSlot);
         if (success) {
             PlayerClass playerClass = getClass(player);
-            ModCriteria.OBTAIN_SKILL.trigger((ServerPlayerEntity) player, playerClass.getSkills().get(skillSlot), getSkillLevel(player, skillSlot));
+            ModCriteria.OBTAIN_SKILL.trigger((ServerPlayerEntity) player, playerClass.getSkills(abilityType).get(skillSlot), getSkillLevel(player, skillSlot));
         }
         return success;
     }
@@ -95,8 +93,9 @@ public class PlayerClassManager {
     }
 
     public static OptionalInt getSkillLevel(PlayerEntity player, PlayerSkill skill) {
+        AbilityType type = skill.getType();
         for (SkillSlot skillSlot : SkillSlot.values()) {
-            if (getClass(player).getSkills().get(skillSlot).equals(skill)) {
+            if (getClass(player).getSkills(type).get(skillSlot).equals(skill)) {
                 return OptionalInt.of(getSkillLevel(player, skillSlot));
             }
         }
@@ -135,8 +134,8 @@ public class PlayerClassManager {
         return playerClassComponent.getId().equals(playerClass.getId());
     }
 
-    public static PlayerSkill getSkillInSlot(PlayerEntity player, SkillSlot skillSlot) {
-        return getClass(player).getSkills().get(skillSlot);
+    public static PlayerSkill getSkillInSlot(PlayerEntity player, SkillSlot skillSlot, AbilityType abilityType) {
+        return getClass(player).getSkills(abilityType).get(skillSlot);
     }
 
     public static int getTotalSkillPoints(PlayerEntity player) {
@@ -160,5 +159,11 @@ public class PlayerClassManager {
         if (!player.getInventory().insertStack(itemStack)) {
             player.dropItem(itemStack, false);
         }
+    }
+
+    public static void useActiveSkill(PlayerEntity player, SkillSlot skillSlot) {
+        LOGGER.warn("Using skill " + skillSlot);
+        ActiveSkill playerSkill = (ActiveSkill) PlayerClassManager.getClass(player).getActiveSkills().get(skillSlot);
+        playerSkill.use(player);
     }
 }

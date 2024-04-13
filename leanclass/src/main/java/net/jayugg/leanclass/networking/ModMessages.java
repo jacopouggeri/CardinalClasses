@@ -1,12 +1,13 @@
 package net.jayugg.leanclass.networking;
 
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.util.Identifier;
 
 public class ModMessages {
-    public static final Identifier OPEN_CLASS_MENU = new Identifier("leanclass", "open_class_menu");
+    public static final Identifier ACTIVE_SKILL= new Identifier("leanclass", "active_skill");
 
     public static void registerC2SPackets() {
-        // Register the packet for opening the class menu
+        ServerPlayNetworking.registerGlobalReceiver(ACTIVE_SKILL, ActiveSkillC2SPacket::receive);
     }
 
     public static void registerS2CPackets() {

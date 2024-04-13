@@ -1,10 +1,10 @@
 {
-  "parent": "minecraft:leanclass/skill_base_base_active_1",
+  "parent": "minecraft:leanclass/class_test_actives",
   "criteria": {
-    "skill_base_base_active_2": {
+    "skill_test_test_active_1": {
       "conditions": {
-        "level": 2,
-        "player_skill": "base_active"
+        "level": 1,
+        "player_skill": "test_active"
       },
       "trigger": "leanclass:obtain_skill"
     }
@@ -12,33 +12,32 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "skill.leanclass.base_active_2.desc"
+      "translate": "skill.leanclass.test_active.desc"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "minecraft:wooden_sword",
-      "nbt": "{Damage:0}"
+      "item": "minecraft:egg"
     },
     "show_toast": true,
     "title": {
       "extra": [
         {
-          "translate": "skill.leanclass.base_active"
+          "translate": "skill.leanclass.test_active"
         },
         {
           "text": " "
         },
         {
-          "text": "II"
+          "text": "I"
         }
       ],
-      "text": "South: "
+      "text": "North: "
     }
   },
   "requirements": [
     [
-      "skill_base_base_active_2"
+      "skill_test_test_active_1"
     ]
   ]
 }

@@ -1,22 +1,27 @@
 package net.jayugg.leanclass.implement;
 
-import net.jayugg.leanclass.modules.*;
+import net.jayugg.leanclass.base.*;
 import net.minecraft.item.Items;
 
 import java.util.Map;
 
 public class BaseClass extends PlayerClass {
-    private static Map<SkillSlot, PlayerSkill> createSkills() {
+    private static Map<SkillSlot, PassiveSkill> createPassiveSkills() {
         return Map.of(
-                SkillSlot.PASSIVE1, ModAbilities.BASE_PASSIVE,
-                SkillSlot.PASSIVE2, ModAbilities.BASE_PASSIVE,
-                SkillSlot.PASSIVE3, ModAbilities.BASE_PASSIVE,
-                SkillSlot.PASSIVE4, ModAbilities.BASE_PASSIVE,
-                SkillSlot.ACTIVE1, ModAbilities.BASE_ACTIVE,
-                SkillSlot.ACTIVE2, ModAbilities.BASE_ACTIVE,
-                SkillSlot.ACTIVE3, ModAbilities.BASE_ACTIVE,
-                SkillSlot.ACTIVE4, ModAbilities.BASE_ACTIVE
+                SkillSlot.NORTH, (PassiveSkill) ModAbilities.BASE_PASSIVE,
+                SkillSlot.EAST, (PassiveSkill) ModAbilities.BASE_PASSIVE,
+                SkillSlot.SOUTH, (PassiveSkill) ModAbilities.BASE_PASSIVE,
+                SkillSlot.WEST, (PassiveSkill) ModAbilities.BASE_PASSIVE
         );
+    }
+
+    private static Map<SkillSlot, ActiveSkill> createActiveSkills() {
+        return Map.of(
+                SkillSlot.NORTH, (ActiveSkill) ModAbilities.BASE_ACTIVE,
+                SkillSlot.EAST, (ActiveSkill) ModAbilities.BASE_ACTIVE,
+                SkillSlot.SOUTH, (ActiveSkill) ModAbilities.BASE_ACTIVE,
+                SkillSlot.WEST, (ActiveSkill) ModAbilities.BASE_ACTIVE
+                );
     }
 
     private static Map<PerkSlot, PlayerPerk> createPerks() {
@@ -27,6 +32,6 @@ public class BaseClass extends PlayerClass {
     }
 
     public BaseClass() {
-        super("base", createSkills(), createPerks(), Items.DIRT);
+        super("base", createPassiveSkills(), createActiveSkills(), createPerks(), Items.DIRT);
     }
 }

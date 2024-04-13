@@ -1,8 +1,8 @@
 package net.jayugg.leanclass.component;
 
 import dev.onyxstudios.cca.api.v3.component.ComponentV3;
-import net.jayugg.leanclass.modules.PerkSlot;
-import net.jayugg.leanclass.modules.SkillSlot;
+import net.jayugg.leanclass.base.PerkSlot;
+import net.jayugg.leanclass.base.SkillSlot;
 import net.minecraft.nbt.NbtCompound;
 
 import java.util.HashMap;
@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import static net.jayugg.leanclass.LeanClass.LOGGER;
-import static net.jayugg.leanclass.modules.PlayerSkill.SKILL_MAX_LEVEL;
+import static net.jayugg.leanclass.base.PlayerSkill.SKILL_MAX_LEVEL;
 
 public class PlayerClassComponent implements ComponentV3 {
     private String classId = "base";

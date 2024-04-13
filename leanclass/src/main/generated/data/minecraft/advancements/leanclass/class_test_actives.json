@@ -11,7 +11,7 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "text": "Smash 'em!"
+      "translate": "advancement.leanclass.actives.desc"
     },
     "frame": "goal",
     "hidden": false,
@@ -20,7 +20,7 @@
     },
     "show_toast": false,
     "title": {
-      "text": "Active Skills"
+      "translate": "advancement.leanclass.actives"
     }
   },
   "requirements": [

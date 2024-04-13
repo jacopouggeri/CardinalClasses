@@ -1,6 +1,6 @@
 package net.jayugg.leanclass.implement;
-import net.jayugg.leanclass.MixinManager;
-import net.jayugg.leanclass.modules.PlayerClass;
+import net.jayugg.leanclass.util.MixinManager;
+import net.jayugg.leanclass.base.PlayerClass;
 import net.jayugg.leanclass.registry.PlayerClassRegistry;
 
 public class ModClasses {

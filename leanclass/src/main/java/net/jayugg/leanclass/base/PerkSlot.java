@@ -1,4 +1,4 @@
-package net.jayugg.leanclass.modules;
+package net.jayugg.leanclass.base;
 
 public enum PerkSlot {
     ALPHA(1),

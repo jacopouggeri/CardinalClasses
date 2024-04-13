@@ -1,4 +1,4 @@
-package net.jayugg.leanclass.modules;
+package net.jayugg.leanclass.base;
 
 import net.minecraft.item.Item;
 import net.minecraft.text.MutableText;

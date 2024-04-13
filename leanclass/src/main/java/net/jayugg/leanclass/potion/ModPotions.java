@@ -2,7 +2,7 @@ package net.jayugg.leanclass.potion;
 
 import net.jayugg.leanclass.item.ModItems;
 import net.jayugg.leanclass.mixin.BrewingRecipeRegistryMixin;
-import net.jayugg.leanclass.modules.PlayerClass;
+import net.jayugg.leanclass.base.PlayerClass;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;

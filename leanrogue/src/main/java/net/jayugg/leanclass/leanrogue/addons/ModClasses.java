@@ -2,7 +2,7 @@ package net.jayugg.leanclass.leanrogue.addons;
 
 import net.jayugg.leanclass.MixinManager;
 import net.jayugg.leanclass.leanrogue.RogueClass;
-import net.jayugg.leanclass.modules.PlayerClass;
+import net.jayugg.leanclass.util.PlayerClass;
 import net.jayugg.leanclass.registry.PlayerClassRegistry;
 
 public class ModClasses {

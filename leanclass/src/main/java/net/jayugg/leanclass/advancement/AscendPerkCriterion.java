@@ -1,7 +1,7 @@
 package net.jayugg.leanclass.advancement;
 
 import com.google.gson.JsonObject;
-import net.jayugg.leanclass.modules.PlayerPerk;
+import net.jayugg.leanclass.base.PlayerPerk;
 import net.jayugg.leanclass.registry.AbilityRegistry;
 import net.minecraft.advancement.criterion.AbstractCriterion;
 import net.minecraft.advancement.criterion.AbstractCriterionConditions;

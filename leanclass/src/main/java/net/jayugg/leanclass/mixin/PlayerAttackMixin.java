@@ -1,8 +1,8 @@
 package net.jayugg.leanclass.mixin;
 
 import net.jayugg.leanclass.implement.ExampleAttackSkill;
-import net.jayugg.leanclass.modules.PlayerClassManager;
-import net.jayugg.leanclass.modules.PlayerSkill;
+import net.jayugg.leanclass.util.PlayerClassManager;
+import net.jayugg.leanclass.base.PlayerSkill;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static net.jayugg.leanclass.MixinManager.canLoadMixins;
+import static net.jayugg.leanclass.util.MixinManager.canLoadMixins;
 import static net.jayugg.leanclass.implement.ModAbilities.*;
 
 @Mixin(LivingEntity.class)

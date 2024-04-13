@@ -4,7 +4,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.jayugg.leanclass.item.ModItemGroup;
 import net.jayugg.leanclass.item.ModItems;
 import net.jayugg.leanclass.item.custom.ClassPotionItem;
-import net.jayugg.leanclass.modules.PlayerClass;
+import net.jayugg.leanclass.base.PlayerClass;
 import net.jayugg.leanclass.potion.ModPotions;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;

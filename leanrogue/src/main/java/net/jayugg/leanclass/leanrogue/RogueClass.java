@@ -2,7 +2,7 @@ package net.jayugg.leanclass.leanrogue;
 
 import net.jayugg.leanclass.implement.ModAbilities;
 import net.jayugg.leanclass.leanrogue.addons.CustomAbilities;
-import net.jayugg.leanclass.modules.*;
+import net.jayugg.leanclass.util.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;

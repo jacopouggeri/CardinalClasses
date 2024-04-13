@@ -1,7 +1,7 @@
 package net.jayugg.leanclass.advancement;
 
 import com.google.gson.JsonObject;
-import net.jayugg.leanclass.modules.PlayerClass;
+import net.jayugg.leanclass.base.PlayerClass;
 import net.jayugg.leanclass.registry.PlayerClassRegistry;
 import net.minecraft.advancement.criterion.AbstractCriterion;
 import net.minecraft.advancement.criterion.AbstractCriterionConditions;

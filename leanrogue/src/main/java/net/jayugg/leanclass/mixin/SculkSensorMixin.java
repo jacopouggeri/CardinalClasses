@@ -1,7 +1,7 @@
 package net.jayugg.leanclass.mixin;
 
-import net.jayugg.leanclass.modules.PerkSlot;
-import net.jayugg.leanclass.modules.PlayerClassManager;
+import net.jayugg.leanclass.util.PerkSlot;
+import net.jayugg.leanclass.util.PlayerClassManager;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SculkSensorBlock;
 import net.minecraft.entity.Entity;

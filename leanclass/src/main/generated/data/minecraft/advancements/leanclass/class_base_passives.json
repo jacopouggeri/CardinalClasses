@@ -11,17 +11,17 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "text": "An overall improvement"
+      "translate": "advancement.leanclass.passives.desc"
     },
     "frame": "goal",
     "hidden": false,
     "icon": {
       "item": "minecraft:player_head",
-      "nbt": "{SkullOwner:{Name:\"MHF_Pig\"}}"
+      "nbt": "{SkullOwner:{Name:\"MHF_Cow\"}}"
     },
     "show_toast": false,
     "title": {
-      "text": "Passive Skills"
+      "translate": "advancement.leanclass.passives"
     }
   },
   "requirements": [

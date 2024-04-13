@@ -22,7 +22,6 @@ public class LeanClass implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Starting LeanClasses");
-		ModMessages.registerC2SPackets();
 		ModItemGroup.registerItemGroup();
 		ModBlocks.registerModBlocks();
 		ModItems.registerModItems();

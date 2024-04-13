@@ -42,7 +42,8 @@
 	},
 	"custom": {
 		"cardinal-components": [
-			"leanclass:player_class"
+			"leanclass:player_class",
+			"leanclass:active_skills"
 		]
 	}
 }

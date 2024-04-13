@@ -1,7 +1,7 @@
 package net.jayugg.leanclass.registry;
 
-import net.jayugg.leanclass.modules.PlayerPerk;
-import net.jayugg.leanclass.modules.PlayerSkill;
+import net.jayugg.leanclass.base.PlayerPerk;
+import net.jayugg.leanclass.base.PlayerSkill;
 
 public class AbilityRegistry {
     public static final ModRegistry<PlayerSkill> SKILLS = new ModRegistry<>();

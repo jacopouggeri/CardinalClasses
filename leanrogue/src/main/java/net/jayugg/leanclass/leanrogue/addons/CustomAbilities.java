@@ -1,6 +1,6 @@
 package net.jayugg.leanclass.leanrogue.addons;
 
-import net.jayugg.leanclass.modules.PlayerPerk;
+import net.jayugg.leanclass.util.PlayerPerk;
 import net.jayugg.leanclass.registry.AbilityRegistry;
 
 public class CustomAbilities {

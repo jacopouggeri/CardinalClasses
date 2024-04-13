@@ -1,4 +1,4 @@
-package net.jayugg.leanclass;
+package net.jayugg.leanclass.util;
 
 public class MixinManager {
     static boolean classLoaded = false;

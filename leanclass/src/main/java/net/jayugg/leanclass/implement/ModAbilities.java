@@ -1,9 +1,7 @@
 package net.jayugg.leanclass.implement;
 
+import net.jayugg.leanclass.base.*;
 import net.jayugg.leanclass.registry.AbilityRegistry;
-import net.jayugg.leanclass.modules.AbilityType;
-import net.jayugg.leanclass.modules.PlayerPerk;
-import net.jayugg.leanclass.modules.PlayerSkill;
 import net.minecraft.item.Items;
 
 public class ModAbilities {
@@ -16,9 +14,13 @@ public class ModAbilities {
     public static final PlayerSkill TEST_PASSIVE_YELLOW = AbilityRegistry.registerSkill(
             new ExampleAttackSkill("test_passive_yellow", 0xFFFF00, Items.YELLOW_DYE));
     public static final PlayerSkill BASE_PASSIVE = AbilityRegistry.registerSkill(
-            new PlayerSkill("base_passive", AbilityType.PASSIVE, Items.CHAINMAIL_CHESTPLATE));
+            new PassiveSkill("base_passive", Items.CHAINMAIL_CHESTPLATE));
     public static final PlayerSkill BASE_ACTIVE = AbilityRegistry.registerSkill(
-            new PlayerSkill("base_active", AbilityType.ACTIVE, Items.WOODEN_SWORD));
+            new ThrowEggSkill("base_active", Items.WOODEN_SWORD,
+                    new SkillCooldownHelper(30, 10)));
+    public static final PlayerSkill TEST_ACTIVE = AbilityRegistry.registerSkill(
+            new ActiveSkill("test_active", Items.EGG,
+                    new SkillCooldownHelper(30, 10)));
     public static final PlayerPerk BASE_EFFECT_PERK = AbilityRegistry.registerPerk(
             new PlayerPerk("test", Items.POTION));
     public static final PlayerPerk BASE_PERK = AbilityRegistry.registerPerk(

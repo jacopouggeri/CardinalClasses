@@ -1,7 +1,7 @@
 package net.jayugg.leanclass.item.custom;
 
-import net.jayugg.leanclass.modules.PlayerClass;
-import net.jayugg.leanclass.modules.PlayerClassManager;
+import net.jayugg.leanclass.base.PlayerClass;
+import net.jayugg.leanclass.util.PlayerClassManager;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

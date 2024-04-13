@@ -43,13 +43,30 @@
   "skill.leanclass.test_passive_green_2.desc": "Test passive skill 2 description (green)",
   "skill.leanclass.test_passive_green_3.desc": "Test passive skill 3 description (green)",
 
+  "skill.leanclass.test_active.desc": "Test active skill description",
+  "skill.leanclass.test_active_2.desc": "Test active skill 2 description",
+  "skill.leanclass.test_active_3.desc": "Test active skill 3 description",
+
   "skill.leanclass.base_active": "Base Active Skill",
   "skill.leanclass.base_passive": "Base Passive Skill",
   "skill.leanclass.test_passive_yellow": "Test Yellow",
   "skill.leanclass.test_passive_blue": "Test Blue",
   "skill.leanclass.test_passive_red": "Test Red",
   "skill.leanclass.test_passive_green": "Test Green",
+  "skill.leanclass.test_active": "Test Active Skill",
 
-  "key.category.leanclass": "Lean Class Keys",
-  "key.leanclass.class_menu": "Open Class Menu"
+  "key.category.leanclass": "Cardinal Classes Skill Keybinds",
+  "key.leanclass.active_north": "Activate North Skill",
+  "key.leanclass.active_east": "Activate East Skill",
+  "key.leanclass.active_south": "Activate South Skill",
+  "key.leanclass.active_west": "Activate West Skill",
+
+  "advancement.leanclass.root": "Classer!",
+  "advancement.leanclass.root.desc": "Unlock your first class.",
+  "advancement.leanclass.passives": "Passive Skills",
+  "advancement.leanclass.passives.desc": "An overall improvement",
+  "advancement.leanclass.actives": "Active Skills",
+  "advancement.leanclass.actives.desc": "Smash 'em!",
+  "advancement.leanclass.perks": "Class Perks",
+  "advancement.leanclass.perks.desc": "Nice bonus!"
 }

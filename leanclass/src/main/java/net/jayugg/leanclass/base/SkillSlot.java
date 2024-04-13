@@ -1,14 +1,10 @@
-package net.jayugg.leanclass.modules;
+package net.jayugg.leanclass.base;
 
 public enum SkillSlot {
-    PASSIVE1(1, "North"),
-    PASSIVE2(2, "East"),
-    PASSIVE3(3, "South"),
-    PASSIVE4(4, "West"),
-    ACTIVE1(5, "North"),
-    ACTIVE2(6, "East"),
-    ACTIVE3(7, "South"),
-    ACTIVE4(8, "West");
+    NORTH(1, "North"),
+    EAST(2, "East"),
+    SOUTH(3, "South"),
+    WEST(4, "West");
 
     private final int value;
     private final String name;

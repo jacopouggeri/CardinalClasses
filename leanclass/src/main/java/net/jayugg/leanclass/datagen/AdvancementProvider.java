@@ -2,12 +2,12 @@ package net.jayugg.leanclass.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
-import net.jayugg.leanclass.Utils;
+import net.jayugg.leanclass.util.Utils;
 import net.jayugg.leanclass.advancement.AscendPerkCriterion;
 import net.jayugg.leanclass.advancement.ObtainClassCriterion;
 import net.jayugg.leanclass.advancement.ObtainSkillCriterion;
+import net.jayugg.leanclass.base.*;
 import net.jayugg.leanclass.item.ModItems;
-import net.jayugg.leanclass.modules.*;
 import net.jayugg.leanclass.registry.PlayerClassRegistry;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.AdvancementFrame;
@@ -38,12 +38,13 @@ public class AdvancementProvider extends FabricAdvancementProvider {
         passiveSkillNbt.putString("SkullOwner", "MHF_Cow");
         ItemStack passiveSkillIcon = new ItemStack(Items.PLAYER_HEAD);
         passiveSkillIcon.setNbt(passiveSkillNbt);
+        String translationKey = "advancement." + MOD_ID;
 
         Advancement rootAdvancement = Advancement.Builder.create()
                 .display(
                         ModItems.SKILL_SHARD, // The display icon
-                        Text.literal("Classer!"), // The title
-                        Text.literal("Obtain a Class"), // The description
+                        Text.translatable(translationKey + ".root"), // The title
+                        Text.translatable(translationKey + ".root.desc"), // The description
                         new Identifier("textures/gui/advancements/backgrounds/adventure.png"), // Background image used
                         AdvancementFrame.CHALLENGE, // Options: TASK, CHALLENGE, GOAL
                         false, // Show toast top right
@@ -76,8 +77,8 @@ public class AdvancementProvider extends FabricAdvancementProvider {
             Advancement passiveSkillAdvancement = Advancement.Builder.create().parent(playerClassAdvancement)
                     .display(
                             passiveSkillIcon, // The display icon
-                            Text.of("Passive Skills"), // The title
-                            Text.of("An overall improvement"), // The description
+                            Text.translatable(translationKey + ".passives"), // The title
+                            Text.translatable(translationKey + ".passives.desc"), // The description
                             null, // Background image used
                             AdvancementFrame.GOAL, // Options: TASK, CHALLENGE, GOAL
                             false, // Show toast top right
@@ -91,8 +92,8 @@ public class AdvancementProvider extends FabricAdvancementProvider {
             Advancement activeSkillAdvancement = Advancement.Builder.create().parent(playerClassAdvancement)
                     .display(
                             Items.SKELETON_SKULL, // The display icon
-                            Text.of("Active Skills"), // The title
-                            Text.of("Smash 'em!"), // The description
+                            Text.translatable(translationKey + ".actives"), // The title
+                            Text.translatable(translationKey + ".actives.desc"), // The description
                             null, // Background image used
                             AdvancementFrame.GOAL, // Options: TASK, CHALLENGE, GOAL
                             false, // Show toast top right
@@ -106,8 +107,8 @@ public class AdvancementProvider extends FabricAdvancementProvider {
             Advancement perkAdvancement = Advancement.Builder.create().parent(playerClassAdvancement)
                     .display(
                             Items.NETHER_STAR, // The display icon
-                            Text.of("Class Perks"), // The title
-                            Text.of("Nice bonus!"), // The description
+                            Text.translatable(translationKey + ".actives"), // The title
+                            Text.translatable(translationKey + ".actives.desc"), // The description
                             null, // Background image used
                             AdvancementFrame.GOAL, // Options: TASK, CHALLENGE, GOAL
                             false, // Show toast top right
@@ -147,30 +148,32 @@ public class AdvancementProvider extends FabricAdvancementProvider {
             }
 
             // loop through skills and create advancements for each skill
-            for (SkillSlot skillSlot : playerClass.getSkills().keySet()) {
-                PlayerSkill playerSkill = playerClass.getSkills().get(skillSlot);
-                String skillId = playerSkill.getId();
-                boolean isActive = playerClass.getSkills().get(skillSlot).getType() == AbilityType.ACTIVE;
-                Advancement parentAdvancement = isActive ? activeSkillAdvancement : passiveSkillAdvancement;
-                for (int i = 1; i < 4; i++) {
-                    MutableText skillTitle = Text.literal(skillSlot.getName() + ": ").append(playerSkill.getName()).append(" ").append(Utils.toRomanNumerals(i));
-                    Advancement.Builder builder = Advancement.Builder.create().parent(parentAdvancement)
-                            .display(
-                                    playerSkill.getIcon(),
-                                    skillTitle,
-                                    playerSkill.getDescription(i),
-                                    null, // children to parent advancements don't need a background set
-                                    i == 3 ? AdvancementFrame.CHALLENGE : AdvancementFrame.TASK,
-                                    true,
-                                    true,
-                                    false
-                            )
-                            .criterion(String.format("skill_%s_%s_%d", playerClassId, skillId, i),
-                                    new ObtainSkillCriterion.Conditions(EntityPredicate.Extended.EMPTY, SKILLS.get(skillId), i)
-                            );
-                    Advancement newAdvancement = builder.build(consumer, MOD_ID + String.format("/skill_%s_%s_%d", playerClassId, skillId, i));
-                    consumer.accept(newAdvancement);
-                    parentAdvancement = newAdvancement;
+            AbilityType[] types = {AbilityType.PASSIVE, AbilityType.ACTIVE};
+            for (AbilityType type : types) {
+                for (SkillSlot skillSlot : playerClass.getSkills(type).keySet()) {
+                    PlayerSkill playerSkill = playerClass.getSkills(type).get(skillSlot);
+                    String skillId = playerSkill.getId();
+                    Advancement parentAdvancement = type.equals(AbilityType.ACTIVE) ? activeSkillAdvancement : passiveSkillAdvancement;
+                    for (int i = 1; i < 4; i++) {
+                        MutableText skillTitle = Text.literal(skillSlot.getName() + ": ").append(playerSkill.getName()).append(" ").append(Utils.toRomanNumerals(i));
+                        Advancement.Builder builder = Advancement.Builder.create().parent(parentAdvancement)
+                                .display(
+                                        playerSkill.getIcon(),
+                                        skillTitle,
+                                        playerSkill.getDescription(i),
+                                        null, // children to parent advancements don't need a background set
+                                        i == 3 ? AdvancementFrame.CHALLENGE : AdvancementFrame.TASK,
+                                        true,
+                                        true,
+                                        false
+                                )
+                                .criterion(String.format("skill_%s_%s_%d", playerClassId, skillId, i),
+                                        new ObtainSkillCriterion.Conditions(EntityPredicate.Extended.EMPTY, SKILLS.get(skillId), i)
+                                );
+                        Advancement newAdvancement = builder.build(consumer, MOD_ID + String.format("/skill_%s_%s_%d", playerClassId, skillId, i));
+                        consumer.accept(newAdvancement);
+                        parentAdvancement = newAdvancement;
+                    }
                 }
             }
         }

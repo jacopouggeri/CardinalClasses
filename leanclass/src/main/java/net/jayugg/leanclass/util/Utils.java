@@ -1,4 +1,4 @@
-package net.jayugg.leanclass;
+package net.jayugg.leanclass.util;
 
 public class Utils {
     public static String toRomanNumerals(int number) {

@@ -1,6 +1,6 @@
 package net.jayugg.leanclass.mixin;
 
-import net.jayugg.leanclass.modules.PlayerClassManager;
+import net.jayugg.leanclass.util.PlayerClassManager;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;

@@ -1,6 +1,6 @@
 package net.jayugg.leanclass.implement;
 
-import net.jayugg.leanclass.modules.PlayerClassManager;
+import net.jayugg.leanclass.util.PlayerClassManager;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireworkRocketEntity;

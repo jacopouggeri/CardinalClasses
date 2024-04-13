@@ -9,7 +9,7 @@
     "announce_to_chat": false,
     "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
     "description": {
-      "text": "Obtain a Class"
+      "translate": "advancement.leanclass.root.desc"
     },
     "frame": "challenge",
     "hidden": false,
@@ -18,7 +18,7 @@
     },
     "show_toast": false,
     "title": {
-      "text": "Classer!"
+      "translate": "advancement.leanclass.root"
     }
   },
   "requirements": [

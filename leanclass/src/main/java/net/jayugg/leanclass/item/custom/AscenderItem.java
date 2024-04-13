@@ -1,7 +1,7 @@
 package net.jayugg.leanclass.item.custom;
 
-import net.jayugg.leanclass.modules.PerkSlot;
-import net.jayugg.leanclass.modules.PlayerClassManager;
+import net.jayugg.leanclass.base.PerkSlot;
+import net.jayugg.leanclass.util.PlayerClassManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

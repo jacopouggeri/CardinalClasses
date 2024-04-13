@@ -5,9 +5,12 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.jayugg.leanclass.base.AbilityType;
+import net.jayugg.leanclass.base.PerkSlot;
+import net.jayugg.leanclass.base.SkillSlot;
 import net.jayugg.leanclass.component.ModComponents;
 import net.jayugg.leanclass.component.PlayerClassComponent;
-import net.jayugg.leanclass.modules.*;
+import net.jayugg.leanclass.util.*;
 import net.jayugg.leanclass.registry.PlayerClassRegistry;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.argument.EntityArgumentType;
@@ -32,23 +35,25 @@ public class ModCommands {
                 .then(CommandManager.argument("target", EntityArgumentType.players())
                         .then(CommandManager.argument("skillNum", IntegerArgumentType.integer(1, 8))
                                 .then(CommandManager.argument("skillLevel", IntegerArgumentType.integer(0, 3))
+                                        .then(CommandManager.argument("abilityType", IntegerArgumentType.integer(1, 2))
                         .executes(context -> {
                             ServerCommandSource source = context.getSource();
                             Collection<? extends Entity> targets = EntityArgumentType.getEntities(context, "target");
                             int skillNum = IntegerArgumentType.getInteger(context, "skillNum");
                             int skillLevel = IntegerArgumentType.getInteger(context, "skillLevel");
+                            AbilityType type = AbilityType.fromInt(IntegerArgumentType.getInteger(context, "abilityType"));
                             targets.stream()
                                     .filter(entity -> entity instanceof PlayerEntity)
                                     .map(entity -> (PlayerEntity) entity)
                                     .forEach((player -> {
                                         ModCommands.setSkill(player, skillNum, skillLevel);
                                         source.sendFeedback(Text.literal("Skill " +
-                                                PlayerClassManager.getSkillInSlot(player, SkillSlot.fromValue(skillNum)).getId() +
+                                                PlayerClassManager.getSkillInSlot(player, SkillSlot.fromValue(skillNum), type).getId() +
                                                 " to level " + skillLevel +
                                                 " executed successfully for player " + player.getEntityName()), true);
                                     }));
                             return Command.SINGLE_SUCCESS;
-                        })))));
+                        }))))));
 
         dispatcher.register(CommandManager.literal(MOD_ID + ":setascendedperk")
                 .requires(source -> source.hasPermissionLevel(2)) // Require operator permission level

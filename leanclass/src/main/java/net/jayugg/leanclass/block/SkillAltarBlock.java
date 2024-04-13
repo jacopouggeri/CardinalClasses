@@ -1,17 +1,14 @@
 package net.jayugg.leanclass.block;
 
+import net.jayugg.leanclass.base.AbilityType;
 import net.jayugg.leanclass.item.ModItems;
-import net.jayugg.leanclass.modules.PlayerClassManager;
-import net.jayugg.leanclass.modules.SkillSlot;
+import net.jayugg.leanclass.util.PlayerClassManager;
+import net.jayugg.leanclass.base.SkillSlot;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.EnchantingTableBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageSources;
-import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -38,7 +35,7 @@ import org.jetbrains.annotations.Nullable;
 public class SkillAltarBlock extends Block {
     public static final BooleanProperty PASSIVE = BooleanProperty.of("passive");
     public static final EnumProperty<ShardSlot> SHARD_SLOT = EnumProperty.of("shard_slot", ShardSlot.class);
-    protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 12.0, 16.0);
+    protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 13.0, 16.0);
     public SkillAltarBlock(Settings settings) {
         super(settings.luminance(state -> state.get(SHARD_SLOT).asInt() > 0 ? 10 : 0));
         this.setDefaultState(this.stateManager.getDefaultState()
@@ -167,7 +164,8 @@ public class SkillAltarBlock extends Block {
         }
         BlockState state = world.getBlockState(player.getBlockPos());
         SkillSlot skillSlot = getSkillSlot(state);
-        if (skillSlot != null && PlayerClassManager.skillUp(player, skillSlot)) {
+        AbilityType type = state.get(PASSIVE) ? AbilityType.PASSIVE : AbilityType.ACTIVE;
+        if (skillSlot != null && PlayerClassManager.skillUp(player, skillSlot, type)) {
             world.setBlockState(player.getBlockPos(), state.with(SHARD_SLOT, ShardSlot.EMPTY));
             return true;
         }

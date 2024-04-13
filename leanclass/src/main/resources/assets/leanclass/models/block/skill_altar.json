@@ -1,9 +1,9 @@
 {
-  "parent": "leanclass:block/cardinal_altar",
-  "textures": {
-    "bottom": "leanclass:block/skill_altar_top",
-    "side": "leanclass:block/skill_altar_side",
-    "side2": "leanclass:block/skill_altar_side",
-    "top": "leanclass:block/skill_altar_top"
-  }
+	"parent": "leanclass:block/cardinal_altar",
+	"textures": {
+		"bottom": "leanclass:block/skill_altar_bottom",
+		"side": "leanclass:block/skill_altar_side",
+		"side2": "leanclass:block/skill_altar_side",
+		"top": "leanclass:block/skill_altar_top"
+	}
 }

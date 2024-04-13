@@ -1,7 +1,7 @@
 package net.jayugg.leanclass.mixin;
 
 import net.jayugg.leanclass.leanrogue.RogueClass;
-import net.jayugg.leanclass.modules.PlayerClassManager;
+import net.jayugg.leanclass.util.PlayerClassManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
