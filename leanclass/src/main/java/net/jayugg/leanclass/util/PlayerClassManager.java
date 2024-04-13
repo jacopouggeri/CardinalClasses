@@ -162,7 +162,6 @@ public class PlayerClassManager {
     }
 
     public static void useActiveSkill(PlayerEntity player, SkillSlot skillSlot) {
-        LOGGER.warn("Using skill " + skillSlot);
         ActiveSkill playerSkill = (ActiveSkill) PlayerClassManager.getClass(player).getActiveSkills().get(skillSlot);
         playerSkill.use(player);
     }

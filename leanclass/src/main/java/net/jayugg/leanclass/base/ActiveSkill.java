@@ -21,13 +21,18 @@ public class ActiveSkill extends PlayerSkill {
         long lastUsed = component.getLastUsed(slot);
         long worldTime = player.world.getTime();
         if (cooldownHelper.useSkill(worldTime, lastUsed)) {
-            LOGGER.warn("Skill {} is on cooldown", slot);
-            // Update the last used time by adding the charge time, but don't exceed the current world time
-            lastUsed = Math.min(worldTime, lastUsed + cooldownHelper.getChargeTime());
+            // LOGGER.warn("Skill {} is on cooldown", slot);
+            // Update the last used time by adding the charge time
+            lastUsed = lastUsed + cooldownHelper.getChargeTime();
             component.setLastUsed(slot, lastUsed);
-            LOGGER.warn("Charges: {}", cooldownHelper.getCharges(worldTime, lastUsed));
+            // LOGGER.warn("Charges: {}", cooldownHelper.getCharges(worldTime, lastUsed));
             skillEffect(player);
         }
+        ModComponents.ACTIVE_SKILLS_COMPONENT.sync(player); // TODO sync other components
+    }
+
+    public SkillCooldownHelper getCooldownHelper() {
+        return cooldownHelper;
     }
 
     public void skillEffect(PlayerEntity player) {}

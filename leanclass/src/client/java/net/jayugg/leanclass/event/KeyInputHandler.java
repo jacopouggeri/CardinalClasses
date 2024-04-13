@@ -27,7 +27,8 @@ public class KeyInputHandler {
         for (int i = 0; i < useActiveSkills.length; i++) {
             int skillIndex = i;
             ClientTickEvents.END_CLIENT_TICK.register(client -> {
-                if (useActiveSkills[skillIndex].wasPressed()) {
+                // Use .isPressed() instead of .wasPressed() to allow for holding the key
+                if (useActiveSkills[skillIndex].isPressed()) {
                     // Create the packet
                     PacketByteBuf buf = PacketByteBufs.create();
                     buf.writeInt(skillIndex);

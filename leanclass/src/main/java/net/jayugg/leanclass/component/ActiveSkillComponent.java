@@ -1,12 +1,13 @@
 package net.jayugg.leanclass.component;
 
 import dev.onyxstudios.cca.api.v3.component.ComponentV3;
+import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.jayugg.leanclass.base.SkillSlot;
 import net.minecraft.nbt.NbtCompound;
 
 import java.util.EnumMap;
 
-public class ActiveSkillComponent implements ComponentV3 {
+public class ActiveSkillComponent implements ComponentV3, AutoSyncedComponent {
     private EnumMap<SkillSlot, Long> lastUsed = null;
 
     public void setLastUsed(SkillSlot slot, Long time) {

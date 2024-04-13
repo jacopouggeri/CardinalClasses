@@ -1,6 +1,7 @@
 package net.jayugg.leanclass.component;
 
 import dev.onyxstudios.cca.api.v3.component.ComponentV3;
+import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.jayugg.leanclass.base.PerkSlot;
 import net.jayugg.leanclass.base.SkillSlot;
 import net.minecraft.nbt.NbtCompound;
@@ -12,7 +13,7 @@ import java.util.Optional;
 import static net.jayugg.leanclass.LeanClass.LOGGER;
 import static net.jayugg.leanclass.base.PlayerSkill.SKILL_MAX_LEVEL;
 
-public class PlayerClassComponent implements ComponentV3 {
+public class PlayerClassComponent implements ComponentV3, AutoSyncedComponent {
     private String classId = "base";
     private final Map<SkillSlot, Integer> skillLevels = new HashMap<>();
     private PerkSlot ascendedPerkSlot = null;
