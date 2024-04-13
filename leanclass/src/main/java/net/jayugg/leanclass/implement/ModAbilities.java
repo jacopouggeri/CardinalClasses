@@ -17,10 +17,10 @@ public class ModAbilities {
             new PassiveSkill("base_passive", Items.CHAINMAIL_CHESTPLATE));
     public static final PlayerSkill BASE_ACTIVE = AbilityRegistry.registerSkill(
             new ThrowEggSkill("base_active", Items.WOODEN_SWORD,
-                    new SkillCooldownHelper(30, 10)));
+                    new SkillCooldownHelper(100, 10)));
     public static final PlayerSkill TEST_ACTIVE = AbilityRegistry.registerSkill(
             new ActiveSkill("test_active", Items.EGG,
-                    new SkillCooldownHelper(30, 10)));
+                    new SkillCooldownHelper(100, 10)));
     public static final PlayerPerk BASE_EFFECT_PERK = AbilityRegistry.registerPerk(
             new PlayerPerk("test", Items.POTION));
     public static final PlayerPerk BASE_PERK = AbilityRegistry.registerPerk(

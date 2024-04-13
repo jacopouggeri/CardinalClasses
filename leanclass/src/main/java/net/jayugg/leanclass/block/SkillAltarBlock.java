@@ -192,4 +192,12 @@ public class SkillAltarBlock extends Block {
             ((PlayerEntity) entity).jump();
         }
     }
+
+    @Override
+    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        super.onBreak(world, pos, state, player);
+        if (state.get(SHARD_SLOT) != ShardSlot.EMPTY) {
+            world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ModItems.SKILL_SHARD)));
+        }
+    }
 }

@@ -25,6 +25,10 @@ public class SkillCooldownHelper {
         return chargeTime - (timeSinceLastUse % chargeTime);
     }
 
+    public int getChargeTime() {
+        return chargeTime;
+    }
+
     public boolean isOnCooldown(long worldTime, long lastUsedTime) {
         return getCharges(worldTime, lastUsedTime) <= 0;
     }
