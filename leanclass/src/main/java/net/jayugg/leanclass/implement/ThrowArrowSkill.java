@@ -4,8 +4,8 @@ import net.jayugg.leanclass.base.ActiveSkill;
 import net.jayugg.leanclass.base.SkillCooldownHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
-import net.minecraft.entity.projectile.thrown.EggEntity;
 import net.minecraft.item.Item;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class ThrowArrowSkill extends ActiveSkill {
@@ -22,9 +22,11 @@ public class ThrowArrowSkill extends ActiveSkill {
     public void skillEffect(PlayerEntity player, int level) {
         World world = player.world;
         if (!world.isClient) {
-            ArrowEntity eggEntity = new ArrowEntity(world, player);
-            eggEntity.setVelocity(player, player.prevPitch, player.headYaw, 0.0F, (float) level, 1.0F);
-            world.spawnEntity(eggEntity);
+            ArrowEntity arrowEntity = new ArrowEntity(world, player);
+            Vec3d vec3d = player.getRotationVec(1.0F);
+            arrowEntity.setVelocity(vec3d.x, vec3d.y, vec3d.z, 2.5F + 1F * level, 1.0F);
+            arrowEntity.setNoClip(false);
+            world.spawnEntity(arrowEntity);
         }
     }
 }

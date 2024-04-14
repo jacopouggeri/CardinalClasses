@@ -15,7 +15,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 
 import java.util.Optional;
-import java.util.OptionalInt;
 
 import static net.jayugg.leanclass.LeanClass.LOGGER;
 import static net.jayugg.leanclass.LeanClass.MOD_ID;

@@ -1,8 +1,6 @@
 package net.jayugg.leanclass;
 
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.jayugg.leanclass.event.ChargeHudOverlay;
 import net.jayugg.leanclass.event.KeyInputHandler;
 import net.jayugg.leanclass.networking.ModMessages;
 

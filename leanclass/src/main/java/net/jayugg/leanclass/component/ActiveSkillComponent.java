@@ -5,6 +5,7 @@ import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.jayugg.leanclass.base.SkillSlot;
 import net.minecraft.nbt.NbtCompound;
 
+import javax.annotation.Nonnull;
 import java.util.EnumMap;
 
 public class ActiveSkillComponent implements ComponentV3, AutoSyncedComponent {
@@ -38,7 +39,7 @@ public class ActiveSkillComponent implements ComponentV3, AutoSyncedComponent {
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag) {
+    public void writeToNbt(@Nonnull NbtCompound tag) {
         if (lastUsed != null) {
             NbtCompound lastUsedTag = new NbtCompound();
             lastUsed.forEach((slot, time) -> lastUsedTag.putLong(slot.toString(), time));

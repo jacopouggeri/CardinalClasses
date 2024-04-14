@@ -12,6 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class InGameHudMixin {
     @Inject(method = "render", at = @At(value = "HEAD"))
     public void onRender(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
-        ChargeHudOverlay.onHudRender(matrices, tickDelta);
+        ChargeHudOverlay.onHudRender(matrices);
     }
 }

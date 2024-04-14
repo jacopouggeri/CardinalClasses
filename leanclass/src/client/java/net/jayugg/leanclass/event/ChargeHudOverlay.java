@@ -20,8 +20,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static net.jayugg.leanclass.LeanClass.LOGGER;
-
 public class ChargeHudOverlay {
     public static final Identifier BAR_EMPTY = new Identifier("leanclass", "textures/gui/bar_empty.png");
     public static final Identifier BAR_FULL = new Identifier("leanclass", "textures/gui/bar_full.png");
@@ -30,20 +28,21 @@ public class ChargeHudOverlay {
     public static final Identifier BAR_EMPTY_10 = new Identifier("leanclass", "textures/gui/bar_empty_10.png");
     public static final Identifier BAR_FULL_10 = new Identifier("leanclass", "textures/gui/bar_full_10.png");
 
-    public static void onHudRender(MatrixStack matrixStack, float tickDelta) {
+    public static void onHudRender(MatrixStack matrixStack) {
         int baseX = 0;
         int baseY = 0;
         int barWidth = 90;
         int xOffset = 200;
         int yOffset = -15;
         MinecraftClient client = MinecraftClient.getInstance();
-        if (client != null) {
-            int width = client.getWindow().getScaledWidth();
-            int height = client.getWindow().getScaledHeight();
-
-            baseX = width / 2;
-            baseY = height;
+        if (client == null) {
+            return;
         }
+        int width = client.getWindow().getScaledWidth();
+        int height = client.getWindow().getScaledHeight();
+
+        baseX = width / 2;
+        baseY = height;
 
         List<Pair<Integer, Integer>> positions = Arrays.asList(
                 new Pair<>(yOffset, -xOffset), // Position for the first skill on the left
@@ -72,21 +71,24 @@ public class ChargeHudOverlay {
                 ActiveSkillComponent component = ModComponents.ACTIVE_SKILLS_COMPONENT.get(player);
                 int charges = cooldownHelper.getCharges(player.getWorld().getTime(), component.getLastUsed(skillSlot), skillLevel);
                 int maxCharges = cooldownHelper.getMaxCharges(skillLevel);
+                int chargeTime = cooldownHelper.getChargeTime(skillLevel);
                 float progress = (float) charges / maxCharges;
-                LOGGER.warn("Skill slot " + skillSlot + " has " + charges + " charges out of " + maxCharges + " with progress " + progress);
+                int lastUsed = (int) component.getLastUsed(skillSlot);
+                //LOGGER.warn("Skill slot " + skillSlot + " has " + charges + " charges out of " + maxCharges + " with progress " + progress);
                 int color = activeSkill.getColor();
 
-                if (charges == maxCharges) {
+                // Remove the skill from the list if it's been too long since it was last used
+                if ((player.world.getTime() - lastUsed) > (long) chargeTime * maxCharges + 300) {
                    continue;
                 }
 
                 RenderSystem.setShader(GameRenderer::getPositionTexProgram);
 
                 int filledWidth = Math.round(progress * barWidth);
-                if (maxCharges > 18) {
+                if (maxCharges >= 18) {
                     drawBar(BAR_EMPTY, matrixStack, x, y, barWidth, barWidth, color);
                     drawBar(BAR_FULL, matrixStack, x, y, filledWidth, barWidth, color);
-                } else if (maxCharges > 5) {
+                } else if (maxCharges >= 5) {
                     drawBar(BAR_EMPTY_10, matrixStack, x, y, barWidth, barWidth, color);
                     drawBar(BAR_FULL_10, matrixStack, x, y, filledWidth, barWidth, color);
                 } else {

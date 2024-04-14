@@ -37,16 +37,16 @@ public class ModAbilities {
             new ExampleAttackSkill("test_passive_yellow", 0xFFFF00, Items.YELLOW_DYE));
     public static final PlayerSkill TEST_ACTIVE_1 = AbilityRegistry.registerSkill(
             new ThrowEggSkill("test_active_egg", Items.EGG,
-                    new SkillCooldownHelper(200, 10, 2, 1), Color.YELLOW.getRGB()));
+                    new SkillCooldownHelper(20, 60, 10, 1), Color.YELLOW.getRGB()));
     public static final PlayerSkill TEST_ACTIVE_2 = AbilityRegistry.registerSkill(
             new ThrowFireballSkill("test_active_fire", Items.FIRE_CHARGE,
-                    new SkillCooldownHelper(600, 3, 1, 0.9f), Color.RED.getRGB()));
+                    new SkillCooldownHelper(100, 3, 1, 0.9f), Color.RED.getRGB()));
     public static final PlayerSkill TEST_ACTIVE_3 = AbilityRegistry.registerSkill(
             new ThrowSnowballSkill("test_active_snow", Items.SNOWBALL,
-                    new SkillCooldownHelper(200, 10, 2, 1), Color.WHITE.getRGB()));
+                    new SkillCooldownHelper(20, 60, 10, 1), Color.WHITE.getRGB()));
     public static final PlayerSkill TEST_ACTIVE_4 = AbilityRegistry.registerSkill(
             new ThrowArrowSkill("test_active_arrow", Items.ARROW,
-                    new SkillCooldownHelper(400, 5, 3, 0.8f), Color.GREEN.getRGB()));
+                    new SkillCooldownHelper(50, 9, 3, 0.8f), Color.GREEN.getRGB()));
     public static final PlayerPerk BASE_EFFECT_PERK = AbilityRegistry.registerPerk(
             new PlayerPerk("test", Items.POTION));
     public static final PlayerPerk BASE_PERK = AbilityRegistry.registerPerk(

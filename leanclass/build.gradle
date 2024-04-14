@@ -46,8 +46,8 @@ dependencies {
 	// Better Advancements (suggested)
 	modImplementation "maven.modrinth:Q2OqKxDG:0.3.1.158-fabric,1.19.4"
 
-	implementation 'com.google.guava:guava:30.1-jre'
-}
+	compileOnly 'com.google.guava:guava:33.0.0-jre'
+	}
 
 processResources {
 	inputs.property "version", project.version

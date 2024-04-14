@@ -6,19 +6,30 @@ import net.jayugg.leanclass.util.PlayerClassManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 
+import static net.jayugg.leanclass.LeanClass.LOGGER;
+
 public class ActiveSkill extends PlayerSkill {
     private final int color;
     private final SkillCooldownHelper cooldownHelper;
+    private final boolean spammable;
     public ActiveSkill(String id, Item icon, SkillCooldownHelper cooldownHelper) {
         super(id, AbilityType.ACTIVE, icon);
         this.cooldownHelper = cooldownHelper;
         this.color = 0xFFFFFF;
+        this.spammable = false;
     }
 
     public ActiveSkill(String id, Item icon, SkillCooldownHelper cooldownHelper, int color) {
         super(id, AbilityType.ACTIVE, icon);
         this.cooldownHelper = cooldownHelper;
         this.color = color;
+        this.spammable = false;
+    }
+    public ActiveSkill(String id, Item icon, SkillCooldownHelper cooldownHelper, int color, boolean spammable) {
+        super(id, AbilityType.ACTIVE, icon);
+        this.cooldownHelper = cooldownHelper;
+        this.color = color;
+        this.spammable = spammable;
     }
 
     public void use(PlayerEntity player) {
@@ -33,9 +44,18 @@ public class ActiveSkill extends PlayerSkill {
         if (cooldownHelper.useSkill(worldTime, lastUsed, skillLevel)) {
             // LOGGER.warn("Skill {} is on cooldown", slot);
             // Update the last used time by adding the charge time
-            lastUsed = lastUsed + cooldownHelper.getChargeTime();
+            int chargeTime = cooldownHelper.getChargeTime(skillLevel);
+            int maxCharges = cooldownHelper.getMaxCharges(skillLevel);
+            int maxChargeTime = chargeTime * maxCharges;
+            if ((worldTime - lastUsed) > maxChargeTime) {
+                lastUsed = worldTime - maxChargeTime + chargeTime;
+            } else {
+                lastUsed = lastUsed + chargeTime;
+            }
             component.setLastUsed(slot, lastUsed);
-            // LOGGER.warn("Charges: {}", cooldownHelper.getCharges(worldTime, lastUsed));
+            LOGGER.warn("Using skill {}", slot);
+            LOGGER.warn("Last used: {}", lastUsed);
+            LOGGER.warn("Charges: {}", cooldownHelper.getCharges(worldTime, lastUsed, skillLevel));
             skillEffect(player, skillLevel);
         }
     }
@@ -48,5 +68,9 @@ public class ActiveSkill extends PlayerSkill {
 
     public int getColor() {
         return color;
+    }
+
+    public boolean isSpammable() {
+        return spammable;
     }
 }

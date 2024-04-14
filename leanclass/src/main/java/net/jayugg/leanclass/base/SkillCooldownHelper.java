@@ -9,7 +9,7 @@ public class SkillCooldownHelper {
     public SkillCooldownHelper(int chargeTime, int maxCharges) {
         this.chargeTime = chargeTime;
         this.maxCharges = maxCharges;
-        this.extraCharges = 0;
+        this.extraCharges = 1;
         this.chargeTimeMultiplier = 1.0f;
     }
 
@@ -28,7 +28,7 @@ public class SkillCooldownHelper {
     public int getCharges(long worldTime, long lastUsedTime, int skillLevel) {
         int timeSinceLastUse = (int) (worldTime - lastUsedTime);
         int charges = timeSinceLastUse / (int) (chargeTime * Math.pow(chargeTimeMultiplier, skillLevel - 1));
-        return Math.min(charges, maxCharges + extraCharges * (skillLevel - 1));
+        return Math.min(charges, getMaxCharges(skillLevel));
     }
 
     public int getTimeToNextCharge(long worldTime, long lastUsedTime) {
@@ -36,8 +36,8 @@ public class SkillCooldownHelper {
         return chargeTime - (timeSinceLastUse % chargeTime);
     }
 
-    public int getChargeTime() {
-        return chargeTime;
+    public int getChargeTime(int skillLevel) {
+        return (int) (chargeTime * Math.pow(chargeTimeMultiplier, skillLevel - 1));
     }
 
     public boolean isOnCooldown(long worldTime, long lastUsedTime, int skillLevel) {
