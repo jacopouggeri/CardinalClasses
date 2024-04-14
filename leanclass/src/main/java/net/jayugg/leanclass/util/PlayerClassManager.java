@@ -70,46 +70,50 @@ public class PlayerClassManager {
         playerClassComponent.setClass(playerClass.getId());
         player.sendMessage(Text.literal("Your class has been set to " + playerClass.getId()), false);
         ModCriteria.OBTAIN_CLASS.trigger((ServerPlayerEntity) player, playerClass);
+        ModComponents.CLASS_COMPONENT.sync(player);
     }
 
-    public static boolean skillUp(PlayerEntity player, SkillSlot skillSlot, AbilityType abilityType) {
+    public static boolean skillUp(PlayerEntity player, AbilityType type, SkillSlot skillSlot) {
         PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
-        boolean success = playerClassComponent.skillUp(skillSlot);
+        boolean success = playerClassComponent.skillUp(type, skillSlot);
         if (success) {
             PlayerClass playerClass = getClass(player);
-            ModCriteria.OBTAIN_SKILL.trigger((ServerPlayerEntity) player, playerClass.getSkills(abilityType).get(skillSlot), getSkillLevel(player, skillSlot));
+            ModCriteria.OBTAIN_SKILL.trigger((ServerPlayerEntity) player, playerClass, playerClass.getSkills(type).get(skillSlot), getSkillLevel(player, type, skillSlot));
+            ModComponents.CLASS_COMPONENT.sync(player);
         }
         return success;
     }
 
-    public static boolean skillDown(PlayerEntity player, SkillSlot skillSlot) {
+    public static boolean skillDown(PlayerEntity player, AbilityType type, SkillSlot skillSlot) {
         PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
-        return playerClassComponent.skillDown(skillSlot);
+        ModComponents.CLASS_COMPONENT.sync(player);
+        return playerClassComponent.skillDown(type, skillSlot);
     }
 
-    public static int getSkillLevel(PlayerEntity player, SkillSlot skillSlot) {
+    public static int getSkillLevel(PlayerEntity player, AbilityType type, SkillSlot skillSlot) {
         PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
-        return playerClassComponent.getSkillLevel(skillSlot);
+        return playerClassComponent.getSkillLevel(type, skillSlot);
     }
 
-    public static OptionalInt getSkillLevel(PlayerEntity player, PlayerSkill skill) {
+    public static int getSkillLevel(PlayerEntity player, PlayerSkill skill) {
         AbilityType type = skill.getType();
         for (SkillSlot skillSlot : SkillSlot.values()) {
             if (getClass(player).getSkills(type).get(skillSlot).equals(skill)) {
-                return OptionalInt.of(getSkillLevel(player, skillSlot));
+                return getSkillLevel(player, type, skillSlot);
             }
         }
-        return OptionalInt.empty();
+        throw new IllegalArgumentException("Skill " + skill.getId() + " not found in player's class");
     }
 
     public static boolean hasSkill(PlayerEntity player, PlayerSkill skill) {
-        OptionalInt skillLevel = PlayerClassManager.getSkillLevel(player, skill);
-        return (skillLevel.isPresent() && skillLevel.getAsInt() > 0);
+        int skillLevel = PlayerClassManager.getSkillLevel(player, skill);
+        return skillLevel > 0;
     }
 
     public static boolean ascendPerk(PlayerEntity player, PerkSlot slot) {
         PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
         ModCriteria.ASCEND_PERK.trigger((ServerPlayerEntity) player, PlayerClassManager.getClass(player).getPerks().get(slot), true);
+        ModComponents.CLASS_COMPONENT.sync(player);
         return playerClassComponent.setAscendedPerk(slot);
     }
 
@@ -140,7 +144,9 @@ public class PlayerClassManager {
 
     public static int getTotalSkillPoints(PlayerEntity player) {
         PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
-        return playerClassComponent.getSkillLevels().values().stream().mapToInt(Integer::intValue).sum();
+        int activeLevels = playerClassComponent.getSkillLevels(AbilityType.ACTIVE).values().stream().mapToInt(Integer::intValue).sum();
+        int passiveLevels = playerClassComponent.getSkillLevels(AbilityType.PASSIVE).values().stream().mapToInt(Integer::intValue).sum();
+        return activeLevels + passiveLevels;
     }
 
     public static int resetSkillPoints(PlayerEntity player) {
@@ -148,6 +154,7 @@ public class PlayerClassManager {
         int totalSkillPoints = getTotalSkillPoints(player);
         playerClassComponent.resetSkills();
         refundSkillShards(player, totalSkillPoints);
+        ModComponents.CLASS_COMPONENT.sync(player);
         return totalSkillPoints;
     }
 
@@ -164,5 +171,6 @@ public class PlayerClassManager {
     public static void useActiveSkill(PlayerEntity player, SkillSlot skillSlot) {
         ActiveSkill playerSkill = (ActiveSkill) PlayerClassManager.getClass(player).getActiveSkills().get(skillSlot);
         playerSkill.use(player);
+        ModComponents.ACTIVE_SKILLS_COMPONENT.sync(player);
     }
 }

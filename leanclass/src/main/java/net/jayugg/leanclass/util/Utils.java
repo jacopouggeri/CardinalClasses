@@ -1,5 +1,10 @@
 package net.jayugg.leanclass.util;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+
+import java.util.Map;
+
 public class Utils {
     public static String toRomanNumerals(int number) {
         if (number < 1 || number > 3999) {
@@ -16,5 +21,9 @@ public class Utils {
                 hundreds[(number % 1000) / 100] +
                 tens[(number % 100) / 10] +
                 ones[number % 10];
+    }
+
+    public static <K, V> BiMap<K, V> mapToBiMap(Map<K, V> map) {
+        return HashBiMap.create(map);
     }
 }

@@ -26,6 +26,7 @@ import java.util.function.Consumer;
 import static net.jayugg.leanclass.LeanClass.MOD_ID;
 import static net.jayugg.leanclass.registry.AbilityRegistry.PERKS;
 import static net.jayugg.leanclass.registry.AbilityRegistry.SKILLS;
+import static net.jayugg.leanclass.registry.PlayerClassRegistry.CLASSES;
 
 public class AdvancementProvider extends FabricAdvancementProvider {
     protected AdvancementProvider(FabricDataOutput dataGenerator) {
@@ -168,7 +169,7 @@ public class AdvancementProvider extends FabricAdvancementProvider {
                                         false
                                 )
                                 .criterion(String.format("skill_%s_%s_%d", playerClassId, skillId, i),
-                                        new ObtainSkillCriterion.Conditions(EntityPredicate.Extended.EMPTY, SKILLS.get(skillId), i)
+                                        new ObtainSkillCriterion.Conditions(EntityPredicate.Extended.EMPTY, CLASSES.get(playerClassId), SKILLS.get(skillId), i)
                                 );
                         Advancement newAdvancement = builder.build(consumer, MOD_ID + String.format("/skill_%s_%s_%d", playerClassId, skillId, i));
                         consumer.accept(newAdvancement);

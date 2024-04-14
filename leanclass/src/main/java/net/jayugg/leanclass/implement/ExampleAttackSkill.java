@@ -19,7 +19,7 @@ public class ExampleAttackSkill extends AttackEffectSkill {
     }
     public void activateEffect(LivingEntity target, PlayerEntity player) {
         if (!target.world.isClient && target.world instanceof ServerWorld serverWorld) {
-            int level = PlayerClassManager.getSkillLevel(player, this).getAsInt();
+            int level = PlayerClassManager.getSkillLevel(player, this);
             ItemStack fireworkStack = new ItemStack(Items.FIREWORK_ROCKET);
             NbtCompound fireworks = new NbtCompound();
             NbtCompound fireworkCompound = new NbtCompound();

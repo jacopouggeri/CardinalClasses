@@ -1,10 +1,11 @@
 {
-  "parent": "minecraft:leanclass/skill_base_base_active_2",
+  "parent": "minecraft:leanclass/skill_test_test_active_arrow_2",
   "criteria": {
-    "skill_base_base_active_3": {
+    "skill_test_test_active_arrow_3": {
       "conditions": {
         "level": 3,
-        "player_skill": "base_active"
+        "player_class": "test",
+        "player_skill": "test_active_arrow"
       },
       "trigger": "leanclass:obtain_skill"
     }
@@ -12,19 +13,18 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "skill.leanclass.base_active_3.desc"
+      "translate": "skill.leanclass.test_active_arrow_3.desc"
     },
     "frame": "challenge",
     "hidden": false,
     "icon": {
-      "item": "minecraft:wooden_sword",
-      "nbt": "{Damage:0}"
+      "item": "minecraft:arrow"
     },
     "show_toast": true,
     "title": {
       "extra": [
         {
-          "translate": "skill.leanclass.base_active"
+          "translate": "skill.leanclass.test_active_arrow"
         },
         {
           "text": " "
@@ -33,12 +33,12 @@
           "text": "III"
         }
       ],
-      "text": "South: "
+      "text": "West: "
     }
   },
   "requirements": [
     [
-      "skill_base_base_active_3"
+      "skill_test_test_active_arrow_3"
     ]
   ]
 }

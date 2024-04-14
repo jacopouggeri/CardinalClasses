@@ -1,5 +1,8 @@
 package net.jayugg.leanclass.base;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.ImmutableBiMap;
+import net.jayugg.leanclass.util.Utils;
 import net.minecraft.item.Item;
 
 import java.util.Collections;
@@ -8,9 +11,9 @@ import java.util.Map;
 import static net.jayugg.leanclass.LeanClass.MOD_ID;
 
 public abstract class PlayerClass extends PlayerAddon {
-    private final Map<SkillSlot, PassiveSkill> passiveSkills;
-    private final Map<SkillSlot, ActiveSkill> activeSkills;
-    private final Map<PerkSlot, PlayerPerk> perks;
+    private final BiMap<SkillSlot, PassiveSkill> passiveSkills;
+    private final BiMap<SkillSlot, ActiveSkill> activeSkills;
+    private final BiMap<PerkSlot, PlayerPerk> perks;
 
     public PlayerClass(String id, Map<SkillSlot, PassiveSkill> passiveSkills, Map<SkillSlot, ActiveSkill> activeSkills, Map<PerkSlot, PlayerPerk> perks, Item icon) {
         super(id, icon);
@@ -27,16 +30,16 @@ public abstract class PlayerClass extends PlayerAddon {
             throw new IllegalArgumentException("Incorrect number of active skills provided.");
         }
 
-        this.passiveSkills = passiveSkills;
-        this.activeSkills = activeSkills;
-        this.perks = perks;
+        this.passiveSkills = Utils.mapToBiMap(passiveSkills);
+        this.activeSkills = Utils.mapToBiMap(activeSkills);
+        this.perks = Utils.mapToBiMap(perks);
     }
 
-    public Map<SkillSlot, PlayerSkill> getPassiveSkills() {
-        return Collections.unmodifiableMap(passiveSkills);
+    public BiMap<SkillSlot, PassiveSkill> getPassiveSkills() {
+        return ImmutableBiMap.copyOf(passiveSkills);
     }
-    public Map<SkillSlot, PlayerSkill> getActiveSkills() {
-        return Collections.unmodifiableMap(activeSkills);
+    public BiMap<SkillSlot, ActiveSkill> getActiveSkills() {
+        return ImmutableBiMap.copyOf(activeSkills);
     }
 
     public Map<SkillSlot, PlayerSkill> getSkills(AbilityType type) {
@@ -52,29 +55,25 @@ public abstract class PlayerClass extends PlayerAddon {
         return Collections.unmodifiableMap(perks);
     }
     public PerkSlot getPerkSlot(PlayerPerk perk) {
-        for (Map.Entry<PerkSlot, PlayerPerk> entry : perks.entrySet()) {
-            if (entry.getValue().equals(perk)) {
-                return entry.getKey();
-            }
+        if (perks.inverse().get(perk) == null) {
+            throw new IllegalArgumentException("Perk not found in class: " + perk);
         }
-        throw new IllegalArgumentException("Perk not found in class: " + perk);
+        return perks.inverse().get(perk);
     }
 
     public SkillSlot getSkillSlot(PlayerSkill skill) {
         if (skill instanceof PassiveSkill) {
-            for (Map.Entry<SkillSlot, PassiveSkill> entry : passiveSkills.entrySet()) {
-                if (entry.getValue().equals(skill)) {
-                    return entry.getKey();
-                }
+            if (passiveSkills.inverse().get(skill) == null) {
+                throw new IllegalArgumentException("Skill not found in class: " + skill);
             }
+            return passiveSkills.inverse().get(skill);
         } else if (skill instanceof ActiveSkill) {
-            for (Map.Entry<SkillSlot, ActiveSkill> entry : activeSkills.entrySet()) {
-                if (entry.getValue().equals(skill)) {
-                    return entry.getKey();
-                }
+            if (activeSkills.inverse().get(skill) == null) {
+                throw new IllegalArgumentException("Skill not found in class: " + skill);
             }
+            return activeSkills.inverse().get(skill);
         }
-        throw new IllegalArgumentException("Skill not found in class: " + skill);
+        throw new IllegalArgumentException("Invalid skill type: " + skill);
     }
 
     @Override

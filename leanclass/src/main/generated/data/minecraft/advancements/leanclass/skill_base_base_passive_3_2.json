@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:leanclass/skill_base_base_passive_3_1",
+  "criteria": {
+    "skill_base_base_passive_3_2": {
+      "conditions": {
+        "level": 2,
+        "player_class": "base",
+        "player_skill": "base_passive_3"
+      },
+      "trigger": "leanclass:obtain_skill"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "skill.leanclass.base_passive_3_2.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:chainmail_leggings",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "extra": [
+        {
+          "translate": "skill.leanclass.base_passive_3"
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "II"
+        }
+      ],
+      "text": "South: "
+    }
+  },
+  "requirements": [
+    [
+      "skill_base_base_passive_3_2"
+    ]
+  ]
+}

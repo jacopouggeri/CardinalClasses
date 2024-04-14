@@ -13,6 +13,6 @@ public class LeanClassClient implements ClientModInitializer {
 		KeyInputHandler.register();
 		ModMessages.registerC2SPackets();
 
-		HudRenderCallback.EVENT.register(new ChargeHudOverlay());
+		//HudRenderCallback.EVENT.register(new ChargeHudOverlay());
 	}
 }

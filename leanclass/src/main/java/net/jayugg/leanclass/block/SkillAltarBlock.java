@@ -17,7 +17,6 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -32,16 +31,18 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
+import static net.jayugg.leanclass.LeanClass.LOGGER;
+
 public class SkillAltarBlock extends Block {
-    public static final BooleanProperty PASSIVE = BooleanProperty.of("passive");
+    public final boolean passive;
     public static final EnumProperty<ShardSlot> SHARD_SLOT = EnumProperty.of("shard_slot", ShardSlot.class);
     protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 13.0, 16.0);
-    public SkillAltarBlock(Settings settings) {
+    public SkillAltarBlock(Settings settings, boolean passive) {
         super(settings.luminance(state -> state.get(SHARD_SLOT).asInt() > 0 ? 10 : 0));
         this.setDefaultState(this.stateManager.getDefaultState()
                 .with(SHARD_SLOT, ShardSlot.EMPTY)
-                .with(PASSIVE, true)
         );
+        this.passive = passive;
     }
 
     public static void loadShard(@Nullable Entity charger, World world, BlockPos pos, BlockState state, Direction direction) {
@@ -70,7 +71,7 @@ public class SkillAltarBlock extends Block {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(PASSIVE, SHARD_SLOT);
+        builder.add(SHARD_SLOT);
     }
 
     @Override
@@ -164,8 +165,9 @@ public class SkillAltarBlock extends Block {
         }
         BlockState state = world.getBlockState(player.getBlockPos());
         SkillSlot skillSlot = getSkillSlot(state);
-        AbilityType type = state.get(PASSIVE) ? AbilityType.PASSIVE : AbilityType.ACTIVE;
-        if (skillSlot != null && PlayerClassManager.skillUp(player, skillSlot, type)) {
+        AbilityType type = passive ? AbilityType.PASSIVE : AbilityType.ACTIVE;
+        LOGGER.warn("Using shard for skill slot: " + skillSlot + " with type: " + type);
+        if (skillSlot != null && PlayerClassManager.skillUp(player, type, skillSlot)) {
             world.setBlockState(player.getBlockPos(), state.with(SHARD_SLOT, ShardSlot.EMPTY));
             return true;
         }
@@ -177,13 +179,7 @@ public class SkillAltarBlock extends Block {
         if (shardSlot == ShardSlot.EMPTY) {
             return null;
         }
-
-        int slotNum = shardSlot.asInt();
-        if (!state.get(PASSIVE)) {
-            slotNum += 4;
-        }
-
-        return SkillSlot.fromValue(slotNum);
+        return SkillSlot.fromValue(shardSlot.asInt());
     }
 
     private void bounce(Entity entity) {

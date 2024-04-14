@@ -17,10 +17,10 @@ public class TestClass extends PlayerClass {
 
     private static Map<SkillSlot, ActiveSkill> createActiveSkills() {
         return Map.of(
-                SkillSlot.NORTH, (ActiveSkill) ModAbilities.TEST_ACTIVE,
-                SkillSlot.EAST, (ActiveSkill) ModAbilities.BASE_ACTIVE,
-                SkillSlot.SOUTH, (ActiveSkill) ModAbilities.BASE_ACTIVE,
-                SkillSlot.WEST, (ActiveSkill) ModAbilities.BASE_ACTIVE
+                SkillSlot.NORTH, (ActiveSkill) ModAbilities.TEST_ACTIVE_1,
+                SkillSlot.EAST, (ActiveSkill) ModAbilities.TEST_ACTIVE_2,
+                SkillSlot.SOUTH, (ActiveSkill) ModAbilities.TEST_ACTIVE_3,
+                SkillSlot.WEST, (ActiveSkill) ModAbilities.TEST_ACTIVE_4
         );
     }
 

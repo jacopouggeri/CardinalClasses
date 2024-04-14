@@ -29,7 +29,11 @@
 		]
 	},
 	"mixins": [
-      "leanclass.mixins.json"
+      "leanclass.mixins.json",
+		{
+			"config": "leanclass.client.mixins.json",
+			"environment": "client"
+		}
 	],
 	"depends": {
 		"fabricloader": ">=0.15.9",

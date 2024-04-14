@@ -33,9 +33,9 @@ public class ModCommands {
         dispatcher.register(CommandManager.literal(MOD_ID + ":setskilllevel")
                 .requires(source -> source.hasPermissionLevel(2)) // Require operator permission level
                 .then(CommandManager.argument("target", EntityArgumentType.players())
-                        .then(CommandManager.argument("skillNum", IntegerArgumentType.integer(1, 8))
+                        .then(CommandManager.argument("abilityType", IntegerArgumentType.integer(1, 2))
+                            .then(CommandManager.argument("skillSlot", IntegerArgumentType.integer(1, 4))
                                 .then(CommandManager.argument("skillLevel", IntegerArgumentType.integer(0, 3))
-                                        .then(CommandManager.argument("abilityType", IntegerArgumentType.integer(1, 2))
                         .executes(context -> {
                             ServerCommandSource source = context.getSource();
                             Collection<? extends Entity> targets = EntityArgumentType.getEntities(context, "target");
@@ -46,7 +46,7 @@ public class ModCommands {
                                     .filter(entity -> entity instanceof PlayerEntity)
                                     .map(entity -> (PlayerEntity) entity)
                                     .forEach((player -> {
-                                        ModCommands.setSkill(player, skillNum, skillLevel);
+                                        ModCommands.setSkill(player, type, SkillSlot.fromValue(skillNum), skillLevel);
                                         source.sendFeedback(Text.literal("Skill " +
                                                 PlayerClassManager.getSkillInSlot(player, SkillSlot.fromValue(skillNum), type).getId() +
                                                 " to level " + skillLevel +
@@ -92,11 +92,13 @@ public class ModCommands {
     private static void setPerk(PlayerEntity player, int perkId) {
         PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
         playerClassComponent.setAscendedPerkCreative(PerkSlot.fromValue(perkId));
+        ModComponents.CLASS_COMPONENT.sync(player);
     }
 
-    private static void setSkill(PlayerEntity player, int skillNum, int skillLevel) {
+    private static void setSkill(PlayerEntity player, AbilityType type, SkillSlot slot, int skillLevel) {
         PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
-        playerClassComponent.setSkillLevel(SkillSlot.fromValue(skillNum), skillLevel);
+        playerClassComponent.setSkillLevel(type, slot, skillLevel);
+        ModComponents.CLASS_COMPONENT.sync(player);
     }
 
     private static void setClass(PlayerEntity player, String className) {

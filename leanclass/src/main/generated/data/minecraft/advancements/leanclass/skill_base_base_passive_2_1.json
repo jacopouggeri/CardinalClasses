@@ -1,10 +1,11 @@
 {
-  "parent": "minecraft:leanclass/skill_base_base_passive_1",
+  "parent": "minecraft:leanclass/class_base_passives",
   "criteria": {
-    "skill_base_base_passive_2": {
+    "skill_base_base_passive_2_1": {
       "conditions": {
-        "level": 2,
-        "player_skill": "base_passive"
+        "level": 1,
+        "player_class": "base",
+        "player_skill": "base_passive_2"
       },
       "trigger": "leanclass:obtain_skill"
     }
@@ -24,21 +25,21 @@
     "title": {
       "extra": [
         {
-          "translate": "skill.leanclass.base_passive"
+          "translate": "skill.leanclass.base_passive_2"
         },
         {
           "text": " "
         },
         {
-          "text": "II"
+          "text": "I"
         }
       ],
-      "text": "South: "
+      "text": "East: "
     }
   },
   "requirements": [
     [
-      "skill_base_base_passive_2"
+      "skill_base_base_passive_2_1"
     ]
   ]
 }

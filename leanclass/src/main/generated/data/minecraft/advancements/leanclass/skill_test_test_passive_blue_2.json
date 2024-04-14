@@ -4,6 +4,7 @@
     "skill_test_test_passive_blue_2": {
       "conditions": {
         "level": 2,
+        "player_class": "test",
         "player_skill": "test_passive_blue"
       },
       "trigger": "leanclass:obtain_skill"

@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:leanclass/skill_base_base_active_1_1",
+  "criteria": {
+    "skill_base_base_active_1_2": {
+      "conditions": {
+        "level": 2,
+        "player_class": "base",
+        "player_skill": "base_active_1"
+      },
+      "trigger": "leanclass:obtain_skill"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "skill.leanclass.base_active_1_2.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:wooden_sword",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "extra": [
+        {
+          "translate": "skill.leanclass.base_active_1"
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "II"
+        }
+      ],
+      "text": "North: "
+    }
+  },
+  "requirements": [
+    [
+      "skill_base_base_active_1_2"
+    ]
+  ]
+}

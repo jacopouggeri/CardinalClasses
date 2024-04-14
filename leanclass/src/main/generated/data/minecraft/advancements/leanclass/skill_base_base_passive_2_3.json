@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:leanclass/skill_base_base_passive_2_2",
+  "criteria": {
+    "skill_base_base_passive_2_3": {
+      "conditions": {
+        "level": 3,
+        "player_class": "base",
+        "player_skill": "base_passive_2"
+      },
+      "trigger": "leanclass:obtain_skill"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "skill.leanclass.base_passive_2_3.desc"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:chainmail_chestplate",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "extra": [
+        {
+          "translate": "skill.leanclass.base_passive_2"
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "III"
+        }
+      ],
+      "text": "East: "
+    }
+  },
+  "requirements": [
+    [
+      "skill_base_base_passive_2_3"
+    ]
+  ]
+}

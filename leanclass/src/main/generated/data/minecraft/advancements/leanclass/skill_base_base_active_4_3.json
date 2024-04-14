@@ -1,10 +1,11 @@
 {
-  "parent": "minecraft:leanclass/skill_base_base_passive_2",
+  "parent": "minecraft:leanclass/skill_base_base_active_4_2",
   "criteria": {
-    "skill_base_base_passive_3": {
+    "skill_base_base_active_4_3": {
       "conditions": {
         "level": 3,
-        "player_skill": "base_passive"
+        "player_class": "base",
+        "player_skill": "base_active_4"
       },
       "trigger": "leanclass:obtain_skill"
     }
@@ -12,19 +13,19 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "skill.leanclass.base_passive_3.desc"
+      "translate": "skill.leanclass.base_active_4_3.desc"
     },
     "frame": "challenge",
     "hidden": false,
     "icon": {
-      "item": "minecraft:chainmail_chestplate",
+      "item": "minecraft:wooden_shovel",
       "nbt": "{Damage:0}"
     },
     "show_toast": true,
     "title": {
       "extra": [
         {
-          "translate": "skill.leanclass.base_passive"
+          "translate": "skill.leanclass.base_active_4"
         },
         {
           "text": " "
@@ -33,12 +34,12 @@
           "text": "III"
         }
       ],
-      "text": "South: "
+      "text": "West: "
     }
   },
   "requirements": [
     [
-      "skill_base_base_passive_3"
+      "skill_base_base_active_4_3"
     ]
   ]
 }

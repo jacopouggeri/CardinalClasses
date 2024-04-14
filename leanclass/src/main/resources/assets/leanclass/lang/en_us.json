@@ -43,9 +43,21 @@
   "skill.leanclass.test_passive_green_2.desc": "Test passive skill 2 description (green)",
   "skill.leanclass.test_passive_green_3.desc": "Test passive skill 3 description (green)",
 
-  "skill.leanclass.test_active.desc": "Test active skill description",
-  "skill.leanclass.test_active_2.desc": "Test active skill 2 description",
-  "skill.leanclass.test_active_3.desc": "Test active skill 3 description",
+  "skill.leanclass.test_active_egg.desc": "Test active skill description",
+  "skill.leanclass.test_active_egg_2.desc": "Test active skill 2 description",
+  "skill.leanclass.test_active_egg_3.desc": "Test active skill 3 description",
+
+  "skill.leanclass.test_active_fire.desc": "Test active skill description",
+  "skill.leanclass.test_active_fire_2.desc": "Test active skill 2 description",
+  "skill.leanclass.test_active_fire_3.desc": "Test active skill 3 description",
+
+  "skill.leanclass.test_active_snow.desc": "Test active skill description",
+  "skill.leanclass.test_active_snow_2.desc": "Test active skill 2 description",
+  "skill.leanclass.test_active_snow_3.desc": "Test active skill 3 description",
+
+  "skill.leanclass.test_active_arrow.desc": "Test active skill description",
+  "skill.leanclass.test_active_arrow_2.desc": "Test active skill 2 description",
+  "skill.leanclass.test_active_arrow_3.desc": "Test active skill 3 description",
 
   "skill.leanclass.base_active": "Base Active Skill",
   "skill.leanclass.base_passive": "Base Passive Skill",
@@ -53,7 +65,10 @@
   "skill.leanclass.test_passive_blue": "Test Blue",
   "skill.leanclass.test_passive_red": "Test Red",
   "skill.leanclass.test_passive_green": "Test Green",
-  "skill.leanclass.test_active": "Test Active Skill",
+  "skill.leanclass.test_active_egg": "Test Active Skill",
+  "skill.leanclass.test_active_fire": "Test Fireball Skill",
+  "skill.leanclass.test_active_snow": "Test Snowball Skill",
+  "skill.leanclass.test_active_arrow": "Test Arrow Skill",
 
   "key.category.leanclass": "Cardinal Classes Skill Keybinds",
   "key.leanclass.active_north": "Activate North Skill",

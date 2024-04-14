@@ -1,10 +1,11 @@
 {
-  "parent": "minecraft:leanclass/class_base_passives",
+  "parent": "minecraft:leanclass/skill_base_base_passive_3_2",
   "criteria": {
-    "skill_base_base_passive_1": {
+    "skill_base_base_passive_3_3": {
       "conditions": {
-        "level": 1,
-        "player_skill": "base_passive"
+        "level": 3,
+        "player_class": "base",
+        "player_skill": "base_passive_3"
       },
       "trigger": "leanclass:obtain_skill"
     }
@@ -12,25 +13,25 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "skill.leanclass.base_passive.desc"
+      "translate": "skill.leanclass.base_passive_3_3.desc"
     },
-    "frame": "task",
+    "frame": "challenge",
     "hidden": false,
     "icon": {
-      "item": "minecraft:chainmail_chestplate",
+      "item": "minecraft:chainmail_leggings",
       "nbt": "{Damage:0}"
     },
     "show_toast": true,
     "title": {
       "extra": [
         {
-          "translate": "skill.leanclass.base_passive"
+          "translate": "skill.leanclass.base_passive_3"
         },
         {
           "text": " "
         },
         {
-          "text": "I"
+          "text": "III"
         }
       ],
       "text": "South: "
@@ -38,7 +39,7 @@
   },
   "requirements": [
     [
-      "skill_base_base_passive_1"
+      "skill_base_base_passive_3_3"
     ]
   ]
 }

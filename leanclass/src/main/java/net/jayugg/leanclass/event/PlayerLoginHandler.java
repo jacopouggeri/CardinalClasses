@@ -35,9 +35,9 @@ public class PlayerLoginHandler {
             AbilityType[] types = {AbilityType.PASSIVE, AbilityType.ACTIVE};
             for (AbilityType type : types) { // TODO INCLUDE PERKS
                 for (SkillSlot skillSlot : playerClass.getSkills(type).keySet()) {
-                    int skillLevel = PlayerClassManager.getSkillLevel(player, skillSlot);
+                    int skillLevel = PlayerClassManager.getSkillLevel(player, type, skillSlot);
                     for (int i = 0; i < skillLevel; i++) {
-                        ModCriteria.OBTAIN_SKILL.trigger(player, playerClass.getSkills(type).get(skillSlot), i + 1);
+                        ModCriteria.OBTAIN_SKILL.trigger(player, playerClass, playerClass.getSkills(type).get(skillSlot), i + 1);
                     }
                 }
             }

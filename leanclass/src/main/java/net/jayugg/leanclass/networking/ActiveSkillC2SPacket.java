@@ -9,14 +9,15 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 
+import static net.jayugg.leanclass.LeanClass.LOGGER;
+
 public class ActiveSkillC2SPacket {
     public static void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
                                PacketByteBuf buf, PacketSender responseSender) {
         // Read the skill index from the packet
         int skillIndex = buf.readInt();
-
         // Map the skill index to the corresponding skill slot
-        SkillSlot skillSlot = SkillSlot.values()[skillIndex];
+        SkillSlot skillSlot = SkillSlot.fromValue(skillIndex + 1);
         PlayerClassManager.useActiveSkill(player, skillSlot);
     }
 }

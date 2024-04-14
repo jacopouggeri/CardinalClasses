@@ -13,12 +13,16 @@ public class ThrowEggSkill extends ActiveSkill {
         super(id, icon, cooldownHelper);
     }
 
+    public ThrowEggSkill(String id, Item icon, SkillCooldownHelper cooldownHelper, int color) {
+        super(id, icon, cooldownHelper, color);
+    }
+
     @Override
-    public void skillEffect(PlayerEntity player) {
+    public void skillEffect(PlayerEntity player, int level) {
         World world = player.world;
         if (!world.isClient) {
             EggEntity eggEntity = new EggEntity(world, player);
-            eggEntity.setVelocity(player, player.prevPitch, player.headYaw, 0.0F, 1.5F, 1.0F);
+            eggEntity.setVelocity(player, player.prevPitch, player.headYaw, 0.0F, 1.5F + 0.25F*level, 1.0F);
             world.spawnEntity(eggEntity);
         }
     }
