@@ -1,4 +1,4 @@
-package net.jayugg.leanclass.event;
+package net.jayugg.leanclass.gui;
 
 import com.google.common.collect.BiMap;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -29,8 +29,8 @@ public class ChargeHudOverlay {
     public static final Identifier BAR_FULL_10 = new Identifier("leanclass", "textures/gui/bar_full_10.png");
 
     public static void onHudRender(MatrixStack matrixStack) {
-        int baseX = 0;
-        int baseY = 0;
+        int baseX;
+        int baseY;
         int barWidth = 90;
         int xOffset = 200;
         int yOffset = -15;
@@ -78,7 +78,7 @@ public class ChargeHudOverlay {
                 int color = activeSkill.getColor();
 
                 // Remove the skill from the list if it's been too long since it was last used
-                if ((player.world.getTime() - lastUsed) > (long) chargeTime * maxCharges + 300) {
+                if ((player.world.getTime() - lastUsed) > (long) chargeTime * maxCharges + 100) {
                    continue;
                 }
 

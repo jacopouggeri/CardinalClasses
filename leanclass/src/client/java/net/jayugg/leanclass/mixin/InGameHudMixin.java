@@ -1,6 +1,6 @@
 package net.jayugg.leanclass.mixin;
 
-import net.jayugg.leanclass.event.ChargeHudOverlay;
+import net.jayugg.leanclass.gui.ChargeHudOverlay;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Mixin;
