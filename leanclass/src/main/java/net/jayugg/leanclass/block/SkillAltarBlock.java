@@ -4,11 +4,13 @@ import net.jayugg.leanclass.base.AbilityType;
 import net.jayugg.leanclass.item.ModItems;
 import net.jayugg.leanclass.util.PlayerClassManager;
 import net.jayugg.leanclass.base.SkillSlot;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -31,12 +33,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
-import static net.jayugg.leanclass.LeanClass.LOGGER;
-
-public class SkillAltarBlock extends Block {
+public class SkillAltarBlock extends BlockWithEntity {
     public final boolean passive;
     public static final EnumProperty<ShardSlot> SHARD_SLOT = EnumProperty.of("shard_slot", ShardSlot.class);
-    protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 13.0, 16.0);
+    protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 12.0, 16.0);
+
     public SkillAltarBlock(Settings settings, boolean passive) {
         super(settings.luminance(state -> state.get(SHARD_SLOT).asInt() > 0 ? 10 : 0));
         this.setDefaultState(this.stateManager.getDefaultState()
@@ -166,7 +167,7 @@ public class SkillAltarBlock extends Block {
         BlockState state = world.getBlockState(player.getBlockPos());
         SkillSlot skillSlot = getSkillSlot(state);
         AbilityType type = passive ? AbilityType.PASSIVE : AbilityType.ACTIVE;
-        LOGGER.warn("Using shard for skill slot: " + skillSlot + " with type: " + type);
+        // LOGGER.warn("Using shard for skill slot: {} with type: {}", skillSlot, type);
         if (skillSlot != null && PlayerClassManager.skillUp(player, type, skillSlot)) {
             world.setBlockState(player.getBlockPos(), state.with(SHARD_SLOT, ShardSlot.EMPTY));
             return true;
@@ -195,5 +196,30 @@ public class SkillAltarBlock extends Block {
         if (state.get(SHARD_SLOT) != ShardSlot.EMPTY) {
             world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ModItems.SKILL_SHARD)));
         }
+    }
+
+    // BlockEntity
+
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new ShardHolderBlockEntity(pos, state);
+    }
+
+    @Nullable
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return world.isClient ? checkType(type, ModBlockEntities.SHARD_HOLDER, ShardHolderBlockEntity::tick) : null;
+    }
+
+    public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
+        if (itemStack.hasCustomName()) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof ShardHolderBlockEntity) {
+                ((ShardHolderBlockEntity)blockEntity).setCustomName(itemStack.getName());
+            }
+        }
+
     }
 }

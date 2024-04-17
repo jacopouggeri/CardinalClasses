@@ -14,9 +14,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class ModBlocks {
-    public static final Block SKILL_ALTAR_PASSIVE = registerBlock("skill_altar_passive",
-            new SkillAltarBlock(FabricBlockSettings.of(Material.STONE).strength(50.0f, 1200.0f).requiresTool(), true), ModItemGroup.LEAN_GROUP);
-    public static final Block SKILL_ALTAR_ACTIVE = registerBlock("skill_altar_active",
+    public static final Block SKILL_ALTAR = registerBlock("skill_altar",
             new SkillAltarBlock(FabricBlockSettings.of(Material.STONE).strength(50.0f, 1200.0f).requiresTool(), false), ModItemGroup.LEAN_GROUP);
     private static Block registerBlock(String name, Block block, ItemGroup group) {
         registerBlockItem(name, block, group);

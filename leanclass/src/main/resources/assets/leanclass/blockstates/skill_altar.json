@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "leanclass:block/skill_altar" }
+  }
+}
