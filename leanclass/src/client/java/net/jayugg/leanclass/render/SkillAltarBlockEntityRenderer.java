@@ -2,9 +2,7 @@ package net.jayugg.leanclass.render;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.jayugg.leanclass.block.ShardHolderBlock;
-import net.jayugg.leanclass.block.ShardHolderBlockEntity;
-import net.jayugg.leanclass.item.ModItems;
+import net.jayugg.leanclass.block.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -19,13 +17,13 @@ import net.minecraft.item.Items;
 import org.joml.Quaternionf;
 
 @Environment(EnvType.CLIENT)
-public class ShardHolderBlockEntityRenderer implements BlockEntityRenderer<ShardHolderBlockEntity> {
+public class SkillAltarBlockEntityRenderer implements BlockEntityRenderer<SkillAltarBlockEntity> {
 
-    public ShardHolderBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
+    public SkillAltarBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
     }
 
     @Override
-    public void render(ShardHolderBlockEntity blockEntity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+    public void render(SkillAltarBlockEntity blockEntity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         // Get the BlockState if not null
         if (blockEntity == null) {
             return;
@@ -33,15 +31,24 @@ public class ShardHolderBlockEntityRenderer implements BlockEntityRenderer<Shard
         BlockState state = blockEntity.getWorld().getBlockState(blockEntity.getPos());
 
         // Decide which item to render based on the BlockState
-        if (!(state.getBlock() instanceof ShardHolderBlock)) {
+        if (!(state.getBlock() instanceof SkillAltarBlock)) {
             return;
         }
 
         ItemStack stack;
-        if (state.get(ShardHolderBlock.HAS_SHARD)) {
-            stack = new ItemStack(ModItems.SKILL_SHARD);
-        } else {
-            stack = new ItemStack(Items.AIR);
+        switch (state.get(SkillAltarBlock.ALTAR_CHARGE)) {
+            case INERT:
+                stack = new ItemStack(Items.AIR);
+                break;
+            case ACTIVE:
+                stack = new ItemStack(Items.MAGMA_BLOCK);
+                break;
+            case PASSIVE:
+                stack = new ItemStack(Items.AMETHYST_BLOCK);
+                break;
+            default:
+                stack = new ItemStack(Items.AIR);
+                break;
         }
 
         BakedModel model = MinecraftClient.getInstance().getItemRenderer().getModels().getModel(stack);

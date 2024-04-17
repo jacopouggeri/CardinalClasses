@@ -3,7 +3,9 @@
   "item.leanclass.skill_down": "Skill Down",
   "item.leanclass.ascender": "Ascender",
   "item.leanclass.class_potion": "%s Potion",
+
   "block.leanclass.skill_altar": "Skill Altar",
+  "block.leanclass.shard_holder": "Shard Holder",
 
   "class.leanclass.base": "Base Class",
   "class.leanclass.test": "Test Class",

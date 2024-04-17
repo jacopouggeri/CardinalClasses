@@ -3,8 +3,8 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "leanclass:block/skill_altar_bottom",
-		"1": "leanclass:block/skill_altar_side",
-		"2": "leanclass:block/skill_altar_top",
+		"1": "leanclass:block/skill_altar_side_active",
+		"2": "leanclass:block/skill_altar_top_active",
 		"particle": "leanclass:block/skill_altar_bottom"
 	},
 	"elements": [

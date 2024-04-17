@@ -33,7 +33,7 @@ public class KeyInputHandler {
                 if (client.player != null) {
                     boolean spammable = PlayerClassManager.getClass(client.player).getActiveSkills().get(SkillSlot.fromValue(skillIndex + 1)).isSpammable();
                     if (spammable) {
-                        if (useActiveSkills[skillIndex].wasPressed()) {
+                        if (useActiveSkills[skillIndex].isPressed()) {
                             // Create the packet
                             sendBuf(skillIndex);
                         }

@@ -6,10 +6,10 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ShardHolderBlockEntity extends BlockEntity {
+public class SkillAltarBlockEntity extends BlockEntity {
 
-    public ShardHolderBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.SHARD_HOLDER, pos, state);
+    public SkillAltarBlockEntity(BlockPos pos, BlockState state) {
+        super(ModBlockEntities.SKILL_ALTAR, pos, state);
     }
 
     protected void writeNbt(NbtCompound nbt) {
@@ -20,6 +20,6 @@ public class ShardHolderBlockEntity extends BlockEntity {
         super.readNbt(nbt);
     }
 
-    public static void tick(World world, BlockPos pos, BlockState state, ShardHolderBlockEntity blockEntity) {
+    public static void tick(World world, BlockPos pos, BlockState state, SkillAltarBlockEntity blockEntity) {
     }
 }

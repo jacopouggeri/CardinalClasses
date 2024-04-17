@@ -2,6 +2,7 @@ package net.jayugg.leanclass;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.jayugg.leanclass.render.ShardHolderBlockEntityRenderer;
+import net.jayugg.leanclass.render.SkillAltarBlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.jayugg.leanclass.block.ModBlockEntities;
 import net.jayugg.leanclass.event.KeyInputHandler;
@@ -14,6 +15,7 @@ public class LeanClassClient implements ClientModInitializer {
 		KeyInputHandler.register();
 		ModMessages.registerC2SPackets();
 		BlockEntityRendererFactories.register(ModBlockEntities.SHARD_HOLDER, ShardHolderBlockEntityRenderer::new);
+		BlockEntityRendererFactories.register(ModBlockEntities.SKILL_ALTAR, SkillAltarBlockEntityRenderer::new);
 		//HudRenderCallback.EVENT.register(new ChargeHudOverlay());
 	}
 }
