@@ -16,8 +16,8 @@ import net.minecraft.predicate.NumberRange;
 import net.minecraft.predicate.item.EnchantmentPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
 
-public class ModLootTableGenerator extends FabricBlockLootTableProvider {
-    protected ModLootTableGenerator(FabricDataOutput dataOutput) {
+public class ModBlockLootTableGenerator extends FabricBlockLootTableProvider {
+    protected ModBlockLootTableGenerator(FabricDataOutput dataOutput) {
         super(dataOutput);
     }
 

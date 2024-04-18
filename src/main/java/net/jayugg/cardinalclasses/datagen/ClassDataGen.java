@@ -9,7 +9,7 @@ public class ClassDataGen implements DataGeneratorEntrypoint {
         FabricDataGenerator.Pack pack = generator.createPack();
         pack.addProvider(AdvancementProvider::new);
         pack.addProvider(ModRecipeGenerator::new);
-        pack.addProvider(ModLootTableGenerator::new);
+        pack.addProvider(ModBlockLootTableGenerator::new);
         pack.addProvider(LanguageProvider::new);
     }
 }

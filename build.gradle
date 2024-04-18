@@ -112,6 +112,7 @@ tasks.withType(GenerateModuleMetadata).configureEach {
 	enabled = false
 }
 
+// Duplicate strategy on build
 tasks.withType(org.gradle.jvm.tasks.Jar).configureEach {
 	duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
