@@ -1,7 +1,5 @@
 package net.jayugg.leanclass.base;
 
-import net.jayugg.leanclass.base.AbilityType;
-import net.jayugg.leanclass.base.PlayerAbility;
 import net.minecraft.item.Item;
 
 import static net.jayugg.leanclass.LeanClass.MOD_ID;

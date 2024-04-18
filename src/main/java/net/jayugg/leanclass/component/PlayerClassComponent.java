@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import static net.jayugg.leanclass.LeanClass.LOGGER;
 import static net.jayugg.leanclass.base.PlayerSkill.SKILL_MAX_LEVEL;
 
 public class PlayerClassComponent implements ComponentV3, AutoSyncedComponent {
@@ -20,16 +19,12 @@ public class PlayerClassComponent implements ComponentV3, AutoSyncedComponent {
     private final Map<SkillSlot, Integer> activeSkillLevels = new HashMap<>();
     private Optional<PerkSlot> ascendedPerkSlot;
 
-    public boolean setClass(String newId) {
-        if (this.classId.equals("base")) {
-            this.classId = newId;
-            return true;
-        }
-        return false;
+    public void setClass(String newId) {
+        this.classId = newId;
     }
 
     public boolean setAscendedPerk(PerkSlot slot) {
-        if (!ascendedPerkSlot.isPresent()) {
+        if (ascendedPerkSlot.isEmpty()) {
             ascendedPerkSlot = Optional.of(slot);
             return true;
         }
@@ -67,8 +62,7 @@ public class PlayerClassComponent implements ComponentV3, AutoSyncedComponent {
 
     public boolean skillUp(AbilityType type, SkillSlot skillSlot) {
         int level = getSkillLevel(type, skillSlot);
-        boolean skillUp = setSkillLevel(type, skillSlot, level + 1);
-        return skillUp;
+        return setSkillLevel(type, skillSlot, level + 1);
     }
 
     public boolean skillDown(AbilityType type, SkillSlot skillSlot) {
@@ -114,9 +108,7 @@ public class PlayerClassComponent implements ComponentV3, AutoSyncedComponent {
     @Override
     public void writeToNbt(NbtCompound tag) {
         tag.putString("ClassId", classId);
-        if (ascendedPerkSlot.isPresent()) {
-            tag.putString("AscendedPerkSlot", ascendedPerkSlot.get().name());
-        }
+        ascendedPerkSlot.ifPresent(perkSlot -> tag.putString("AscendedPerkSlot", perkSlot.name()));
         NbtCompound passiveSkillLevelsTag = new NbtCompound();
         NbtCompound activeSkillLevelsTag = new NbtCompound();
         for (Map.Entry<SkillSlot, Integer> entry : passiveSkillLevels.entrySet()) {

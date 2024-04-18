@@ -4,8 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "PlayerAttackMixin",
-    "PlayerEffectMixin",
-    "BrewingRecipeRegistryMixin"
+    "PlayerEffectMixin"
   ],
   "client": [],
   "server": [],

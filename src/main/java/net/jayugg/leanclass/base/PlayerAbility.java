@@ -15,15 +15,7 @@ public abstract class PlayerAbility extends PlayerAddon {
         this.type = type;
     }
 
-    public int getMinLevel() { return minLevel; }
-    public int getMaxLevel() { return maxLevel; }
     public AbilityType getType() { return type; }
-    public String getId() { return id; }
-
-    @Override
-    public MutableText getName() {
-        return Text.translatable(getTranslationKey());
-    }
 
     public MutableText getDescription(int level) {
         String levelDescriptor = level == 1 ? "" : "_" + level;

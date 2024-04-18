@@ -10,10 +10,6 @@ import net.minecraft.world.World;
 
 public class ThrowArrowSkill extends ActiveSkill {
 
-    public ThrowArrowSkill(String id, Item icon, SkillCooldownHelper cooldownHelper) {
-        super(id, icon, cooldownHelper);
-    }
-
     public ThrowArrowSkill(String id, Item icon, SkillCooldownHelper cooldownHelper, int color) {
         super(id, icon, cooldownHelper, color);
     }

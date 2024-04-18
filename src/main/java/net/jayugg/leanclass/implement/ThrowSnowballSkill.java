@@ -10,10 +10,6 @@ import net.minecraft.world.World;
 
 public class ThrowSnowballSkill extends ActiveSkill {
 
-    public ThrowSnowballSkill(String id, Item icon, SkillCooldownHelper cooldownHelper) {
-        super(id, icon, cooldownHelper);
-    }
-
     public ThrowSnowballSkill(String id, Item icon, SkillCooldownHelper cooldownHelper, int color) {
         super(id, icon, cooldownHelper, color, true);
     }

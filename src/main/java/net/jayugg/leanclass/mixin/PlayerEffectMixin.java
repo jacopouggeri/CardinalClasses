@@ -21,7 +21,7 @@ public class PlayerEffectMixin {
         if (!player.world.isClient) {
             StatusEffect effect = StatusEffects.HEALTH_BOOST;
             if (PlayerClassManager.hasClass(player, TEST_CLASS) && !player.hasStatusEffect(effect)) {
-                boolean ascendedPerk = PlayerClassManager.getAscendedPerk(player).get().equals(PerkSlot.ALPHA);
+                boolean ascendedPerk = PlayerClassManager.hasAscendedPerk(player, PerkSlot.ALPHA);
                 StatusEffectInstance newEffect = new StatusEffectInstance(effect, StatusEffectInstance.INFINITE, ascendedPerk ? 2 : 1);
                 player.addStatusEffect(newEffect);
             }

@@ -12,10 +12,6 @@ import net.minecraft.world.World;
 
 public class ThrowFireballSkill extends ActiveSkill {
 
-    public ThrowFireballSkill(String id, Item icon, SkillCooldownHelper cooldownHelper) {
-        super(id, icon, cooldownHelper);
-    }
-
     public ThrowFireballSkill(String id, Item icon, SkillCooldownHelper cooldownHelper, int color) {
         super(id, icon, cooldownHelper, color);
     }

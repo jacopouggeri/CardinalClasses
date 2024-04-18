@@ -21,9 +21,9 @@ import static net.jayugg.leanclass.LeanClass.MOD_ID;
 
 
 public class PlayerClassManager {
-    public static boolean setPlayerClass(PlayerEntity player, String classId) {
+    public static void setPlayerClass(PlayerEntity player, String classId) {
         if (!(player instanceof ServerPlayerEntity)) {
-            return false;
+            return;
         }
         // Check if the class is registered
         PlayerClass playerClass = PlayerClassRegistry.getPlayerClass(classId);
@@ -35,7 +35,6 @@ public class PlayerClassManager {
         resetSkillPoints(player);
         resetPerkSlot(player);
         applyClassToPlayer(player, playerClass);
-        return true;
     }
 
     private static void revokeAdvancementAndChildren(ServerPlayerEntity player, Advancement advancement) {
@@ -82,12 +81,6 @@ public class PlayerClassManager {
             ModComponents.CLASS_COMPONENT.sync(player);
         }
         return success;
-    }
-
-    public static boolean skillDown(PlayerEntity player, AbilityType type, SkillSlot skillSlot) {
-        PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
-        ModComponents.CLASS_COMPONENT.sync(player);
-        return playerClassComponent.skillDown(type, skillSlot);
     }
 
     public static int getSkillLevel(PlayerEntity player, AbilityType type, SkillSlot skillSlot) {
@@ -155,18 +148,16 @@ public class PlayerClassManager {
 
     public static void resetPerkSlot(PlayerEntity player) {
         PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
-        Optional<PerkSlot> perkSlot = getAscendedPerk(player);
         playerClassComponent.resetAscendedPerk();
         ModComponents.CLASS_COMPONENT.sync(player);
     }
 
-    public static int resetSkillPoints(PlayerEntity player) {
+    public static void resetSkillPoints(PlayerEntity player) {
         PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
         int totalSkillPoints = getTotalSkillPoints(player);
         playerClassComponent.resetSkills();
         refundSkillShards(player, totalSkillPoints);
         ModComponents.CLASS_COMPONENT.sync(player);
-        return totalSkillPoints;
     }
 
     public static void refundSkillShards(PlayerEntity player, int points) {
@@ -180,7 +171,7 @@ public class PlayerClassManager {
     }
 
     public static void useActiveSkill(PlayerEntity player, SkillSlot skillSlot) {
-        ActiveSkill playerSkill = (ActiveSkill) PlayerClassManager.getClass(player).getActiveSkills().get(skillSlot);
+        ActiveSkill playerSkill = PlayerClassManager.getClass(player).getActiveSkills().get(skillSlot);
         playerSkill.use(player);
         ModComponents.ACTIVE_SKILLS_COMPONENT.sync(player);
     }
