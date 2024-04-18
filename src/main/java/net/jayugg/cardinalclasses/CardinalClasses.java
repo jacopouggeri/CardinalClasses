@@ -6,6 +6,7 @@ import net.jayugg.cardinalclasses.advancement.ModCriteria;
 import net.jayugg.cardinalclasses.block.ModBlockEntities;
 import net.jayugg.cardinalclasses.block.ModBlocks;
 import net.jayugg.cardinalclasses.command.ModCommands;
+import net.jayugg.cardinalclasses.effect.ModBrewing;
 import net.jayugg.cardinalclasses.event.PlayerLoginHandler;
 import net.jayugg.cardinalclasses.base.ModAbilities;
 import net.jayugg.cardinalclasses.base.ModClasses;
@@ -37,6 +38,7 @@ public class CardinalClasses implements ModInitializer {
 		ModItems.registerModItems();
 		ModAbilities.registerAbilities();
 		ModClasses.registerClasses();
+		ModBrewing.registerBrewingRecipes();
 		ModCriteria.registerCriteria();
 		ModCommands.register();
 		PlayerLoginHandler.register();

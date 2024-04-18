@@ -33,6 +33,6 @@ public class TestClass extends PlayerClass {
     }
 
     public TestClass() {
-        super("test", createPassiveSkills(), createActiveSkills(), createPerks(), Items.COMMAND_BLOCK);
+        super("test", createPassiveSkills(), createActiveSkills(), createPerks(), Items.COMMAND_BLOCK, 0xFFFFFF);
     }
 }

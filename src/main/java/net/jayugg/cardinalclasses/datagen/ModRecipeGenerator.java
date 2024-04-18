@@ -2,15 +2,10 @@ package net.jayugg.cardinalclasses.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.jayugg.cardinalclasses.core.PlayerClass;
 import net.jayugg.cardinalclasses.block.ModBlocks;
 import net.jayugg.cardinalclasses.item.ModItems;
-import net.jayugg.cardinalclasses.registry.PlayerClassRegistry;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 
@@ -56,25 +51,6 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .input('T', Items.DEEPSLATE_TILES)
                 .criterion("has_skill_fragment", conditionsFromItem(ModItems.SKILL_FRAGMENT))
                 .criterion("has_deepslate_tiles", conditionsFromItem(Items.DEEPSLATE_TILES))
-                .offerTo(exporter);
-
-        for (PlayerClass playerClass : PlayerClassRegistry.CLASSES.getRegistry().values()) {
-            Item classPotion = PlayerClassRegistry.CLASS_POTIONS.get(playerClass.getId());
-            offerQuadrupleInputShapelessRecipe(exporter, classPotion, ModItems.SKILL_FRAGMENT, Items.HONEY_BOTTLE,
-                    Items.POISONOUS_POTATO, playerClass.getIcon(),
-                    RecipeCategory.BREWING);
-        }
-    }
-
-    @SuppressWarnings("SameParameterValue")
-    private void offerQuadrupleInputShapelessRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input1, ItemConvertible input2, ItemConvertible input3, ItemConvertible input4, RecipeCategory category) {
-        ShapelessRecipeJsonBuilder.create(category, output, 1)
-                .input(input1)
-                .input(input2)
-                .input(input3)
-                .input(input4)
-                .criterion("has_input_item1", conditionsFromItem(input1))
-                .criterion("has_input_item2", conditionsFromItem(input2))
                 .offerTo(exporter);
     }
 }

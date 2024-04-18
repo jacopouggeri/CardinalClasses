@@ -14,10 +14,13 @@
   "advancement.cardinalclasses.perks": "Class Perks",
   "advancement.cardinalclasses.perks.desc": "Nice bonus!",
 
+  "item.minecraft.potion.effect.swirly": "Swirly Potion",
+  "item.minecraft.splash_potion.effect.swirly": "Splash Swirly Potion",
+  "item.minecraft.lingering_potion.effect.swirly": "Lingering Swirly Potion",
+
   "item.cardinalclasses.skill_shard": "Skill Shard",
   "item.cardinalclasses.skill_fragment": "Skill Fragment",
   "item.cardinalclasses.sage_emerald": "Sage's Emerald",
-  "item.cardinalclasses.class_potion": "%s Potion",
 
   "block.cardinalclasses.skill_altar": "Skill Altar",
   "block.cardinalclasses.shard_holder": "Shard Holder",

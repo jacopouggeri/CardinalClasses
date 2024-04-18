@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.jayugg.cardinalclasses.advancement.ModCriteria;
 import net.jayugg.cardinalclasses.component.ModComponents;
 import net.jayugg.cardinalclasses.core.AbilityType;
+import net.jayugg.cardinalclasses.core.PerkSlot;
 import net.jayugg.cardinalclasses.core.PlayerClass;
 import net.jayugg.cardinalclasses.registry.PlayerClassRegistry;
 import net.jayugg.cardinalclasses.util.PlayerClassManager;
@@ -36,12 +37,17 @@ public class PlayerLoginHandler {
 
         if (!advancementTracker.getProgress(rootAdvancement).isDone()) {
             ModCriteria.OBTAIN_CLASS.trigger(player, playerClass);
-            AbilityType[] types = {AbilityType.PASSIVE, AbilityType.ACTIVE};
-            for (AbilityType type : types) { // TODO INCLUDE PERKS
-                for (SkillSlot skillSlot : playerClass.getSkills(type).keySet()) {
-                    int skillLevel = PlayerClassManager.getSkillLevel(player, type, skillSlot);
-                    for (int i = 0; i < skillLevel; i++) {
-                        ModCriteria.OBTAIN_SKILL.trigger(player, playerClass, playerClass.getSkills(type).get(skillSlot), i + 1);
+            for (AbilityType type : AbilityType.values()) {
+                if (type == AbilityType.PERK) {
+                    if (PlayerClassManager.getAscendedPerk(player).isEmpty()) { continue; }
+                    PerkSlot ascendedPerk = PlayerClassManager.getAscendedPerk(player).get();
+                    ModCriteria.ASCEND_PERK.trigger(player, playerClass, playerClass.getPerks().get(ascendedPerk), true);
+                } else {
+                    for (SkillSlot skillSlot : playerClass.getSkills(type).keySet()) {
+                        int skillLevel = PlayerClassManager.getSkillLevel(player, type, skillSlot);
+                        for (int i = 0; i < skillLevel; i++) {
+                            ModCriteria.OBTAIN_SKILL.trigger(player, playerClass, playerClass.getSkills(type).get(skillSlot), i + 1);
+                        }
                     }
                 }
             }
