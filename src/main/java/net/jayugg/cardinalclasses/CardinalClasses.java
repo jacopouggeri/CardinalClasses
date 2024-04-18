@@ -14,7 +14,7 @@ import net.jayugg.cardinalclasses.item.ModItemGroup;
 import net.jayugg.cardinalclasses.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
-import net.jayugg.cardinalclasses.util.ModLootTableModifier;
+import net.jayugg.cardinalclasses.datagen.ModLootTableModifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

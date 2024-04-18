@@ -1,4 +1,4 @@
-package net.jayugg.cardinalclasses.util;
+package net.jayugg.cardinalclasses.datagen;
 
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.jayugg.cardinalclasses.item.ModItems;
@@ -20,6 +20,14 @@ public class ModLootTableModifier {
     private static final Identifier UNDERWATER_RUIN_BIG = new Identifier("minecraft", "chests/underwater_ruin_big");
     private static final Identifier PILLAGER_OUTPOST = new Identifier("minecraft", "chests/pillager_outpost");
     private static final Identifier BASTION_OTHER = new Identifier("minecraft", "chests/bastion_other");
+    private static final Identifier BASTION_BRIDGE = new Identifier("minecraft", "chests/bastion_bridge");
+    private static final Identifier IGLOO_CHEST = new Identifier("minecraft", "chests/igloo_chest");
+    private static final Identifier ABANDONDED_MINESHAFT = new Identifier("minecraft", "chests/abandoned_mineshaft");
+    private static final Identifier NETHER_BRIDGE = new Identifier("minecraft", "chests/nether_bridge");
+    private static final Identifier STRONGHOLD_CROSSING = new Identifier("minecraft", "chests/stronghold_crossing");
+    private static final Identifier STRONGHOLD_CORRIDOR = new Identifier("minecraft", "chests/stronghold_corridor");
+    private static final Identifier SIMPLE_DUNGEON = new Identifier("minecraft", "chests/simple_dungeon");
+    private static final Identifier BURIED_TREASURE = new Identifier("minecraft", "chests/buried_treasure");
 
     private static final Identifier WOODLAND_MANSION = new Identifier("minecraft", "chests/woodland_mansion");
     private static final Identifier END_CITY_TREASURE = new Identifier("minecraft", "chests/end_city_treasure");
@@ -37,7 +45,11 @@ public class ModLootTableModifier {
     private static final Identifier ELDER_GUARDIAN = new Identifier("minecraft", "entities/elder_guardian");
     public static void modifyLootTables() {
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
-            if (JUNGLE_TEMPLE.equals(id) || DESERT_PYRAMID.equals(id) || SHIPWRECK_TREASURE.equals(id) || STRONGHOLD_LIBRARY.equals(id) || VILLAGE_TEMPLE.equals(id) || SPAWN_BONUS_CHEST.equals(id) || UNDERWATER_RUIN_BIG.equals(id) || PILLAGER_OUTPOST.equals(id) || BASTION_OTHER.equals(id)) {
+            if (JUNGLE_TEMPLE.equals(id) || DESERT_PYRAMID.equals(id) || SHIPWRECK_TREASURE.equals(id) || STRONGHOLD_LIBRARY.equals(id) ||
+                    VILLAGE_TEMPLE.equals(id) || SPAWN_BONUS_CHEST.equals(id) || UNDERWATER_RUIN_BIG.equals(id) || PILLAGER_OUTPOST.equals(id) ||
+                    BASTION_OTHER.equals(id) || BASTION_BRIDGE.equals(id) || IGLOO_CHEST.equals(id) || ABANDONDED_MINESHAFT.equals(id) ||
+                    NETHER_BRIDGE.equals(id) || STRONGHOLD_CROSSING.equals(id) || STRONGHOLD_CORRIDOR.equals(id) || SIMPLE_DUNGEON.equals(id) ||
+                    BURIED_TREASURE.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(3.0f))
 
