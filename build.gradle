@@ -61,7 +61,7 @@ dependencies {
 
 processResources {
 	inputs.property "version", project.version
-	duplicatesStrategy = DuplicatesStrategy.WARN
+	duplicatesStrategy = DuplicatesStrategy.INCLUDE
 	filesMatching("fabric.mod.json") {
 		expand "version": project.version
 	}
@@ -110,6 +110,10 @@ tasks.withType(JavaCompile).configureEach {
 // other mod developers.
 tasks.withType(GenerateModuleMetadata).configureEach {
 	enabled = false
+}
+
+tasks.withType(org.gradle.jvm.tasks.Jar).configureEach {
+	duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
 sourceSets { main { resources { srcDirs += dataOutput } } }
