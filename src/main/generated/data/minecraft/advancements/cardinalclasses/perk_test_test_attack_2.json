@@ -1,0 +1,40 @@
+{
+  "parent": "minecraft:cardinalclasses/perk_test_test_attack_1",
+  "criteria": {
+    "perk_test_test_attack_2": {
+      "conditions": {
+        "player_class": "test",
+        "player_perk": "test_attack"
+      },
+      "trigger": "cardinalclasses:ascend_perk"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "perk.cardinalclasses.test_attack_2.desc"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:spider_eye"
+    },
+    "show_toast": true,
+    "title": {
+      "extra": [
+        {
+          "translate": "perk.cardinalclasses.test_attack"
+        },
+        {
+          "text": " ★"
+        }
+      ],
+      "text": "Perk: "
+    }
+  },
+  "requirements": [
+    [
+      "perk_test_test_attack_2"
+    ]
+  ]
+}

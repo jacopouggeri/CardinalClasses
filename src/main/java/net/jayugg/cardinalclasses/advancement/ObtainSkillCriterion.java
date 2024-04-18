@@ -34,13 +34,14 @@ public class ObtainSkillCriterion extends AbstractCriterion<ObtainSkillCriterion
     }
 
     public void trigger(ServerPlayerEntity player, PlayerClass playerClass, PlayerSkill playerSkill, int skillLevel) {
+        if (playerClass == null || playerSkill == null) return;
         trigger(player, conditions -> conditions.requirementsMet(playerClass.getId(), playerSkill.getId(), skillLevel));
     }
 
     public static class Conditions extends AbstractCriterionConditions {
-        PlayerSkill playerSkill;
-        PlayerClass playerClass;
-        int level;
+        final PlayerSkill playerSkill;
+        final PlayerClass playerClass;
+        final int level;
         public Conditions(EntityPredicate.Extended extended, PlayerClass playerClass, PlayerSkill playerSkill, int level) {
             super(ID, extended);
             this.playerClass = playerClass;

@@ -35,9 +35,6 @@ public abstract class PlayerClass extends PlayerAddon {
         this.perks = Utils.mapToBiMap(perks);
     }
 
-    public BiMap<SkillSlot, PassiveSkill> getPassiveSkills() {
-        return ImmutableBiMap.copyOf(passiveSkills);
-    }
     public BiMap<SkillSlot, ActiveSkill> getActiveSkills() {
         return ImmutableBiMap.copyOf(activeSkills);
     }

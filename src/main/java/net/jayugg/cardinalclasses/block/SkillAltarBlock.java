@@ -82,6 +82,15 @@ public class SkillAltarBlock extends BlockWithEntity {
         return SHAPE;
     }
 
+    @Override
+    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        if (state.get(ALTAR_CHARGE) != AltarCharge.INERT && !world.isClient) {
+            ItemEntity itemEntity = new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ITEM_TO_CHARGE_MAP.inverse().get(state.get(ALTAR_CHARGE))));
+            world.spawnEntity(itemEntity);
+        }
+        super.onBreak(world, pos, state, player);
+    }
+
     // Handle charging
 
     private static boolean isChargeItem(ItemStack stack) {
@@ -128,33 +137,31 @@ private static void updateChargeItem(@Nullable Entity charger, World world, Bloc
                 itemStack.decrement(1);
             }
         } else if (state.get(ALTAR_CHARGE) != AltarCharge.INERT) {
+            Item chargeItem = ITEM_TO_CHARGE_MAP.inverse().get(state.get(ALTAR_CHARGE));
             if (itemStack.isEmpty()) {
-                player.setStackInHand(hand, new ItemStack(ITEM_TO_CHARGE_MAP.inverse().get(state.get(ALTAR_CHARGE))));
+                player.setStackInHand(hand, new ItemStack(chargeItem));
                 unloadChargeItem(player, world, pos, state);
             } else if (isChargeItem) {
-                if (!isCreativeMode) {
-                    ItemStack stack = new ItemStack(ITEM_TO_CHARGE_MAP.inverse().get(state.get(ALTAR_CHARGE)));
-                    if (!player.getInventory().insertStack(stack)) {
-                        player.dropItem(stack, false);
-                    }
+                ItemStack stack = new ItemStack(chargeItem);
+                if (!isCreativeMode && !player.getInventory().insertStack(stack)) {
+                    player.dropItem(stack, false);
                 }
                 unloadChargeItem(player, world, pos, state);
+                // if the items are different, load the new item
+                if (chargeItem != itemStack.getItem()) {
+                    loadChargeItem(player, world, pos, state, itemStack);
+                    if (!isCreativeMode) {
+                        itemStack.decrement(1);
+                    }
+                }
             } else {
-                return ActionResult.PASS;
+                return ActionResult.SUCCESS;
             }
         } else {
-            return ActionResult.PASS;
+            return ActionResult.SUCCESS;
         }
 
         return ActionResult.success(world.isClient);
-    }
-
-    @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        if (state.get(ALTAR_CHARGE) != AltarCharge.INERT) {
-            world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ITEM_TO_CHARGE_MAP.inverse().get(state.get(ALTAR_CHARGE)))));
-        }
-        super.onBreak(world, pos, state, player);
     }
 
     // Handle Skill Up

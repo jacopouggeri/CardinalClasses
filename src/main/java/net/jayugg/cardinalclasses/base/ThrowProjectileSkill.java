@@ -12,8 +12,8 @@ import java.util.function.Supplier;
 
 public class ThrowProjectileSkill<T extends ProjectileEntity> extends ActiveSkill {
     private final Supplier<T> projectileSupplier;
-    float baseSpeed;
-    float levelScaling;
+    final float baseSpeed;
+    final float levelScaling;
 
     public ThrowProjectileSkill(String id, Item icon, SkillCooldownHelper cooldownHelper, int color, Supplier<T> projectileSupplier) {
         super(id, icon, cooldownHelper, color, true);

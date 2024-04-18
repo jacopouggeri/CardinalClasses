@@ -1,0 +1,39 @@
+{
+  "parent": "minecraft:cardinalclasses/class_test_perks",
+  "criteria": {
+    "perk_test_test_attack_1": {
+      "conditions": {
+        "player_class": "test"
+      },
+      "trigger": "cardinalclasses:obtain_class"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "perk.cardinalclasses.test_attack.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:spider_eye"
+    },
+    "show_toast": false,
+    "title": {
+      "extra": [
+        {
+          "translate": "perk.cardinalclasses.test_attack"
+        },
+        {
+          "text": ""
+        }
+      ],
+      "text": "Perk: "
+    }
+  },
+  "requirements": [
+    [
+      "perk_test_test_attack_1"
+    ]
+  ]
+}

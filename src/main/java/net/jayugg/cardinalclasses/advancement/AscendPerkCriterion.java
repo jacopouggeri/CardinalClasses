@@ -37,8 +37,8 @@ public class AscendPerkCriterion extends AbstractCriterion<AscendPerkCriterion.C
     }
 
     public static class Conditions extends AbstractCriterionConditions {
-        PlayerClass playerClass;
-        PlayerPerk playerPerk;
+        final PlayerClass playerClass;
+        final PlayerPerk playerPerk;
         public Conditions(EntityPredicate.Extended extended, PlayerClass playerClass, PlayerPerk playerPerk) {
             super(ID, extended);
             this.playerClass = playerClass;

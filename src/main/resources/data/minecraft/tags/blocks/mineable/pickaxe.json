@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "cardinalclasses:skill_altar",
+    "cardinalclasses:shard_holder"
+  ]
+}

@@ -14,6 +14,7 @@ import net.minecraft.server.ServerAdvancementLoader;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 import static net.jayugg.cardinalclasses.CardinalClasses.LOGGER;
@@ -31,10 +32,20 @@ public class PlayerClassManager {
             // The class is not registered, handle accordingly
             throw new IllegalArgumentException("Class with name " + classId + " is not registered!");
         }
-        revokeClassAdvancement((ServerPlayerEntity) player, PlayerClassManager.getClass(player).getId());
+        resetPlayerClass(player);
+        applyClassToPlayer(player, playerClass);
+    }
+
+    public static void resetPlayerClass(PlayerEntity player) {
+        PlayerClass playerClass = getClass(player);
+        if (playerClass == null) {
+            return;
+        }
+        revokeClassAdvancement((ServerPlayerEntity) player, playerClass.getId());
         resetSkillPoints(player);
         resetPerkSlot(player);
-        applyClassToPlayer(player, playerClass);
+        PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
+        playerClassComponent.setClass(null);
     }
 
     private static void revokeAdvancementAndChildren(ServerPlayerEntity player, Advancement advancement) {
@@ -46,7 +57,7 @@ public class PlayerClassManager {
     }
 
     private static void revokeClassAdvancement(ServerPlayerEntity player, String classId) {
-        if (player.getServer().getAdvancementLoader() == null) {
+        if (player.getServer() == null || player.getServer().getAdvancementLoader() == null) {
             return;
         }
         ServerAdvancementLoader advancementLoader = player.getServer().getAdvancementLoader();
@@ -55,7 +66,7 @@ public class PlayerClassManager {
             if (advancement.getId().toString().startsWith("minecraft:" + MOD_ID)) {
                 if (advancement.getCriteria().containsKey(criterionId)) {
                     revokeAdvancementAndChildren(player, advancement);
-                    LOGGER.info("Revoked advancement " + advancement.getId());
+                    LOGGER.info("Revoked advancement {}", advancement.getId());
                 }
             }
         });
@@ -77,6 +88,9 @@ public class PlayerClassManager {
         boolean success = playerClassComponent.skillUp(type, skillSlot);
         if (success) {
             PlayerClass playerClass = getClass(player);
+            if (playerClass == null) {
+                return false;
+            }
             ModCriteria.OBTAIN_SKILL.trigger((ServerPlayerEntity) player, playerClass, playerClass.getSkills(type).get(skillSlot), getSkillLevel(player, type, skillSlot));
             ModComponents.CLASS_COMPONENT.sync(player);
         }
@@ -89,10 +103,13 @@ public class PlayerClassManager {
     }
 
     public static int getSkillLevel(PlayerEntity player, PlayerSkill skill) {
-        AbilityType type = skill.getType();
-        for (SkillSlot skillSlot : SkillSlot.values()) {
-            if (getClass(player).getSkills(type).get(skillSlot).equals(skill)) {
-                return getSkillLevel(player, type, skillSlot);
+        PlayerClass playerClass = getClass(player);
+        if (playerClass != null) {
+            AbilityType type = skill.getType();
+            for (SkillSlot skillSlot : SkillSlot.values()) {
+                if (playerClass.getSkills(type).get(skillSlot).equals(skill)) {
+                    return getSkillLevel(player, type, skillSlot);
+                }
             }
         }
         throw new IllegalArgumentException("Skill " + skill.getId() + " not found in player's class");
@@ -108,6 +125,9 @@ public class PlayerClassManager {
         boolean success = playerClassComponent.setAscendedPerk(slot);
         if (success) {
             PlayerClass playerClass = getClass(player);
+            if (playerClass == null) {
+                return false;
+            }
             ModCriteria.ASCEND_PERK.trigger((ServerPlayerEntity) player, playerClass, playerClass.getPerks().get(slot), true);
             ModComponents.CLASS_COMPONENT.sync(player);
         }
@@ -120,23 +140,27 @@ public class PlayerClassManager {
         return ascendedPerk.isPresent() && ascendedPerk.get().equals(slot);
     }
 
-    public static Optional<PerkSlot> getAscendedPerk(PlayerEntity player) {
-        PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
-        return playerClassComponent.getAscendedPerk();
-    }
-
+    @Nullable
     public static PlayerClass getClass(PlayerEntity player) {
         PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
         return PlayerClassRegistry.getPlayerClass(playerClassComponent.getId());
     }
 
     public static boolean hasClass(PlayerEntity player, PlayerClass playerClass) {
-        PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
-        return playerClassComponent.getId().equals(playerClass.getId());
+        PlayerClass playerClass2 = getClass(player);
+        if (playerClass2 == null) {
+            return false;
+        }
+        return playerClass2.getId().equals(playerClass.getId());
     }
 
+    @Nullable
     public static PlayerSkill getSkillInSlot(PlayerEntity player, SkillSlot skillSlot, AbilityType abilityType) {
-        return getClass(player).getSkills(abilityType).get(skillSlot);
+        PlayerClass playerClass = getClass(player);
+        if (playerClass == null) {
+            return null;
+        }
+        return playerClass.getSkills(abilityType).get(skillSlot);
     }
 
     public static int getTotalSkillPoints(PlayerEntity player) {
@@ -146,13 +170,13 @@ public class PlayerClassManager {
         return activeLevels + passiveLevels;
     }
 
-    public static void resetPerkSlot(PlayerEntity player) {
+    private static void resetPerkSlot(PlayerEntity player) {
         PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
         playerClassComponent.resetAscendedPerk();
         ModComponents.CLASS_COMPONENT.sync(player);
     }
 
-    public static void resetSkillPoints(PlayerEntity player) {
+    private static void resetSkillPoints(PlayerEntity player) {
         PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
         int totalSkillPoints = getTotalSkillPoints(player);
         playerClassComponent.resetSkills();
@@ -160,7 +184,7 @@ public class PlayerClassManager {
         ModComponents.CLASS_COMPONENT.sync(player);
     }
 
-    public static void refundSkillShards(PlayerEntity player, int points) {
+    private static void refundSkillShards(PlayerEntity player, int points) {
         if (!(player instanceof ServerPlayerEntity)) {
             return;
         }
@@ -171,7 +195,11 @@ public class PlayerClassManager {
     }
 
     public static void useActiveSkill(PlayerEntity player, SkillSlot skillSlot) {
-        ActiveSkill playerSkill = PlayerClassManager.getClass(player).getActiveSkills().get(skillSlot);
+        PlayerClass playerClass = getClass(player);
+        if (playerClass == null) {
+            return;
+        }
+        ActiveSkill playerSkill = playerClass.getActiveSkills().get(skillSlot);
         playerSkill.use(player);
         ModComponents.ACTIVE_SKILLS_COMPONENT.sync(player);
     }

@@ -59,6 +59,9 @@ public class AdvancementProvider extends FabricAdvancementProvider {
 
         for (String playerClassId : PlayerClassRegistry.getClassIds()) {
             PlayerClass playerClass = PlayerClassRegistry.getPlayerClass(playerClassId);
+            if (playerClass == null ) {
+                continue;
+            }
 
             Advancement playerClassAdvancement = Advancement.Builder.create().parent(rootAdvancement)
                     .display(

@@ -11,9 +11,7 @@ public class ModRegistry<T> {
     public T get(String id) {
         return registry.get(id);
     }
-    public int size() {
-        return registry.size();
-    }
+
     public Map<String, T> getRegistry() {
         return registry;
     }

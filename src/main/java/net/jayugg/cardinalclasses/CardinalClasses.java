@@ -30,7 +30,7 @@ public class CardinalClasses implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		LOGGER.info("Starting CardinalClasseses");
+		LOGGER.info("Starting CardinalClasses");
 		ModItemGroup.registerItemGroup();
 		ModBlocks.registerModBlocks();
 		ModBlockEntities.registerBlockEntities();

@@ -6,6 +6,7 @@ import net.jayugg.cardinalclasses.core.AbilityType;
 import net.jayugg.cardinalclasses.core.PerkSlot;
 import net.jayugg.cardinalclasses.core.SkillSlot;
 import net.minecraft.nbt.NbtCompound;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,29 +15,29 @@ import java.util.Optional;
 import static net.jayugg.cardinalclasses.core.PlayerSkill.SKILL_MAX_LEVEL;
 
 public class PlayerClassComponent implements ComponentV3, AutoSyncedComponent {
-    private String classId = "base";
+    private String classId;
     private final Map<SkillSlot, Integer> passiveSkillLevels = new HashMap<>();
     private final Map<SkillSlot, Integer> activeSkillLevels = new HashMap<>();
-    private Optional<PerkSlot> ascendedPerkSlot = Optional.empty();
+    private PerkSlot ascendedPerkSlot;
 
     public void setClass(String newId) {
         this.classId = newId;
     }
 
     public boolean setAscendedPerk(PerkSlot slot) {
-        if (ascendedPerkSlot.isEmpty()) {
-            ascendedPerkSlot = Optional.of(slot);
+        if (ascendedPerkSlot == null) {
+            ascendedPerkSlot = slot;
             return true;
         }
         return false;
     }
 
     public void setAscendedPerkCreative(PerkSlot slot) {
-        ascendedPerkSlot = Optional.of(slot);
+        ascendedPerkSlot = slot;
     }
 
     public Optional<PerkSlot> getAscendedPerk() {
-        return ascendedPerkSlot;
+        return Optional.ofNullable(ascendedPerkSlot);
     }
 
     public String getId() {
@@ -65,11 +66,6 @@ public class PlayerClassComponent implements ComponentV3, AutoSyncedComponent {
         return setSkillLevel(type, skillSlot, level + 1);
     }
 
-    public boolean skillDown(AbilityType type, SkillSlot skillSlot) {
-        int level = getSkillLevel(type, skillSlot);
-        return setSkillLevel(type, skillSlot, level - 1);
-    }
-
     public void resetSkills() {
         // Set all skill levels to 0
         for (SkillSlot slot : SkillSlot.values()) {
@@ -79,7 +75,7 @@ public class PlayerClassComponent implements ComponentV3, AutoSyncedComponent {
     }
 
     public void resetAscendedPerk() {
-        ascendedPerkSlot = Optional.empty();
+        ascendedPerkSlot = null;
     }
 
     public Map<SkillSlot, Integer> getSkillLevels(AbilityType type) {
@@ -88,10 +84,10 @@ public class PlayerClassComponent implements ComponentV3, AutoSyncedComponent {
 
     @Override
     public void readFromNbt(NbtCompound tag) {
-        this.classId = tag.getString("ClassId");
+        classId = tag.getString("ClassId");
         String ascendedPerkSlotName = tag.getString("AscendedPerkSlot");
         if (!ascendedPerkSlotName.isEmpty()) {
-            this.ascendedPerkSlot = Optional.of(PerkSlot.valueOf(ascendedPerkSlotName));
+            ascendedPerkSlot = PerkSlot.valueOf(ascendedPerkSlotName);
         }
         NbtCompound passiveSkillLevelsTag = tag.getCompound("PassiveSkillLevels");
         NbtCompound activeSkillLevelsTag = tag.getCompound("ActiveSkillLevels");
@@ -106,9 +102,13 @@ public class PlayerClassComponent implements ComponentV3, AutoSyncedComponent {
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag) {
-        tag.putString("ClassId", classId);
-        ascendedPerkSlot.ifPresent(perkSlot -> tag.putString("AscendedPerkSlot", perkSlot.name()));
+    public void writeToNbt(@NotNull NbtCompound tag) {
+        if (classId != null) {
+            tag.putString("ClassId", classId);
+        }
+        if (ascendedPerkSlot != null) {
+            tag.putString("AscendedPerkSlot", ascendedPerkSlot.name());
+        }
         NbtCompound passiveSkillLevelsTag = new NbtCompound();
         NbtCompound activeSkillLevelsTag = new NbtCompound();
         for (Map.Entry<SkillSlot, Integer> entry : passiveSkillLevels.entrySet()) {

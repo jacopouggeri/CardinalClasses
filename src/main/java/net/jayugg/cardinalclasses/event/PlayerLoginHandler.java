@@ -2,8 +2,10 @@ package net.jayugg.cardinalclasses.event;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.jayugg.cardinalclasses.advancement.ModCriteria;
+import net.jayugg.cardinalclasses.component.ModComponents;
 import net.jayugg.cardinalclasses.core.AbilityType;
 import net.jayugg.cardinalclasses.core.PlayerClass;
+import net.jayugg.cardinalclasses.registry.PlayerClassRegistry;
 import net.jayugg.cardinalclasses.util.PlayerClassManager;
 import net.jayugg.cardinalclasses.core.SkillSlot;
 import net.minecraft.advancement.Advancement;
@@ -17,7 +19,7 @@ import static net.jayugg.cardinalclasses.CardinalClasses.MOD_ID;
 
 public class PlayerLoginHandler {
     public static void grantMissingAdvancements(ServerPlayerEntity player) {
-        if (player.getServer().getAdvancementLoader() == null) {
+        if (player.getServer() == null || player.getServer().getAdvancementLoader() == null) {
             return;
         }
         PlayerClass playerClass = PlayerClassManager.getClass(player);
@@ -26,12 +28,14 @@ public class PlayerLoginHandler {
 
         Advancement rootAdvancement = advancementLoader.get( new Identifier("minecraft", MOD_ID + "/root"));
 
-        if (rootAdvancement == null) {
+        if (rootAdvancement == null || playerClass == null) {
             return;
         }
 
+        LOGGER.warn("Player class: {}", playerClass.getId());
+
         if (!advancementTracker.getProgress(rootAdvancement).isDone()) {
-            ModCriteria.OBTAIN_CLASS.trigger(player, PlayerClassManager.getClass(player));
+            ModCriteria.OBTAIN_CLASS.trigger(player, playerClass);
             AbilityType[] types = {AbilityType.PASSIVE, AbilityType.ACTIVE};
             for (AbilityType type : types) { // TODO INCLUDE PERKS
                 for (SkillSlot skillSlot : playerClass.getSkills(type).keySet()) {
@@ -41,13 +45,24 @@ public class PlayerLoginHandler {
                     }
                 }
             }
-            LOGGER.warn("Granting missing class advancements to " + player.getName().getString());
+            LOGGER.warn("Granting missing class advancements to {}", player.getName().getString());
         }
 
+    }
+    public static void handleMissingClassId(ServerPlayerEntity player) {
+        String playerClassId = ModComponents.CLASS_COMPONENT.get(player).getId();
+        if (PlayerClassManager.getClass(player) == null) {
+            return;
+        }
+        if (PlayerClassRegistry.getPlayerClass(playerClassId) == null) {
+            LOGGER.warn("Player {} has an invalid class id: {} - Resetting Class", player.getName().getString(), playerClassId);
+            PlayerClassManager.resetPlayerClass(player);
+        }
     }
     public static void register() {
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             ServerPlayerEntity player = handler.player;
+            handleMissingClassId(player);
             grantMissingAdvancements(player);
         });
     }

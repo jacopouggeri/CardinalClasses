@@ -27,8 +27,8 @@ public class TestClass extends PlayerClass {
 
     private static Map<PerkSlot, PlayerPerk> createPerks() {
         return Map.of(
-                PerkSlot.ALPHA, ModAbilities.BASE_EFFECT_PERK,
-                PerkSlot.OMEGA, ModAbilities.BASE_PERK
+                PerkSlot.ALPHA, ModAbilities.TEST_EFFECT_PERK,
+                PerkSlot.OMEGA, ModAbilities.TEST_ATTACK_PERK
         );
     }
 

@@ -30,7 +30,7 @@ public class KeyInputHandler {
         for (int i = 0; i < useActiveSkills.length; i++) {
             int skillIndex = i;
             ClientTickEvents.END_CLIENT_TICK.register(client -> {
-                if (client.player != null) {
+                if (client.player != null && PlayerClassManager.getClass(client.player) != null) {
                     boolean spammable = PlayerClassManager.getClass(client.player).getActiveSkills().get(SkillSlot.fromValue(skillIndex + 1)).isSpammable();
                     if (spammable) {
                         if (useActiveSkills[skillIndex].isPressed()) {

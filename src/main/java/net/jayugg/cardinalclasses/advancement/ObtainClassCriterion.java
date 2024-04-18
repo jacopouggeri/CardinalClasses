@@ -36,7 +36,7 @@ public class ObtainClassCriterion extends AbstractCriterion<ObtainClassCriterion
     }
 
     public static class Conditions extends AbstractCriterionConditions {
-        PlayerClass playerClass;
+        final PlayerClass playerClass;
         public Conditions(EntityPredicate.Extended extended, @Nullable PlayerClass playerClass) {
             super(ID, extended);
             this.playerClass = playerClass;

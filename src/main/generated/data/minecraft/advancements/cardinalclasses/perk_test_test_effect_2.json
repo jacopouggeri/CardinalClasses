@@ -1,0 +1,40 @@
+{
+  "parent": "minecraft:cardinalclasses/perk_test_test_effect_1",
+  "criteria": {
+    "perk_test_test_effect_2": {
+      "conditions": {
+        "player_class": "test",
+        "player_perk": "test_effect"
+      },
+      "trigger": "cardinalclasses:ascend_perk"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "perk.cardinalclasses.test_effect_2.desc"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:potion"
+    },
+    "show_toast": true,
+    "title": {
+      "extra": [
+        {
+          "translate": "perk.cardinalclasses.test_effect"
+        },
+        {
+          "text": " ★"
+        }
+      ],
+      "text": "Perk: "
+    }
+  },
+  "requirements": [
+    [
+      "perk_test_test_effect_2"
+    ]
+  ]
+}

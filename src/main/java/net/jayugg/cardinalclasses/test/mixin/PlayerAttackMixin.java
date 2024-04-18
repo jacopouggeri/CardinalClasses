@@ -1,6 +1,8 @@
 package net.jayugg.cardinalclasses.test.mixin;
 
-import net.jayugg.cardinalclasses.test.ExampleAttackSkill;
+import net.jayugg.cardinalclasses.base.WithAttackEffect;
+import net.jayugg.cardinalclasses.core.AbilityType;
+import net.jayugg.cardinalclasses.core.PlayerAbility;
 import net.jayugg.cardinalclasses.util.PlayerClassManager;
 import net.jayugg.cardinalclasses.core.PlayerSkill;
 import net.minecraft.entity.LivingEntity;
@@ -11,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import static net.jayugg.cardinalclasses.base.ModClasses.TEST_CLASS;
 import static net.jayugg.cardinalclasses.util.MixinManager.canLoadMixins;
 import static net.jayugg.cardinalclasses.base.ModAbilities.*;
 
@@ -23,10 +26,16 @@ public class PlayerAttackMixin {
             if (source.getAttacker() instanceof PlayerEntity player) {
                 if (!player.world.isClient) {
                     LivingEntity target = (LivingEntity) (Object) this; // This mixin is applied to LivingEntity, so 'this' is the target
-                    PlayerSkill[] skills = {TEST_PASSIVE_RED, TEST_PASSIVE_YELLOW, TEST_PASSIVE_GREEN, TEST_PASSIVE_BLUE};
-                    for (PlayerSkill skill : skills) {
-                        if (PlayerClassManager.hasSkill(player, skill)) {
-                            ((ExampleAttackSkill) skill).activateEffect(target, player);
+                    WithAttackEffect[] abilities = { (WithAttackEffect) TEST_PASSIVE_RED,
+                            (WithAttackEffect) TEST_PASSIVE_YELLOW,(WithAttackEffect) TEST_PASSIVE_GREEN,
+                            (WithAttackEffect) TEST_PASSIVE_BLUE, (WithAttackEffect) TEST_ATTACK_PERK};
+                    for (WithAttackEffect ability : abilities) {
+                        if (PlayerClassManager.hasClass(player, TEST_CLASS)) {
+                            if (((PlayerAbility) ability).getType() == AbilityType.PERK) {
+                                ability.activateEffect(target, player);
+                            } else if (PlayerClassManager.hasSkill(player, (PlayerSkill) ability)) {
+                                ability.activateEffect(target, player);
+                            }
                         }
                     }
                 }

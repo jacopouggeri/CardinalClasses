@@ -21,7 +21,6 @@ import java.util.List;
 import static net.jayugg.cardinalclasses.CardinalClasses.MOD_ID;
 
 public class ClassPotionItem extends Item {
-    private static final int MAX_USE_TIME = 40;
     private final PlayerClass playerClass;
 
     public ClassPotionItem(Item.Settings settings, PlayerClass playerClass) {
@@ -57,11 +56,6 @@ public class ClassPotionItem extends Item {
     @Override
     public UseAction getUseAction(ItemStack stack) {
         return UseAction.DRINK;
-    }
-
-    @Override
-    public SoundEvent getDrinkSound() {
-        return SoundEvents.ENTITY_GENERIC_DRINK;
     }
 
     @Override

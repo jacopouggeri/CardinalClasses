@@ -3,6 +3,7 @@ package net.jayugg.cardinalclasses.gui;
 import com.google.common.collect.BiMap;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.jayugg.cardinalclasses.core.ActiveSkill;
+import net.jayugg.cardinalclasses.core.PlayerClass;
 import net.jayugg.cardinalclasses.core.SkillCooldownHelper;
 import net.jayugg.cardinalclasses.core.SkillSlot;
 import net.jayugg.cardinalclasses.component.ActiveSkillComponent;
@@ -38,6 +39,11 @@ public class ChargeHudOverlay {
         if (client == null) {
             return;
         }
+        ClientPlayerEntity player = client.player;
+        PlayerClass playerClass = PlayerClassManager.getClass(player);
+        if (player == null || playerClass == null) {
+            return;
+        }
         int width = client.getWindow().getScaledWidth();
         int height = client.getWindow().getScaledHeight();
 
@@ -51,9 +57,7 @@ public class ChargeHudOverlay {
                 new Pair<>(yOffset - 15, xOffset - barWidth)  // Position for the second skill on the right
         );
 
-        assert MinecraftClient.getInstance() != null;
-        ClientPlayerEntity player = MinecraftClient.getInstance().player;
-        BiMap<SkillSlot, ActiveSkill> activeSkills = PlayerClassManager.getClass(player).getActiveSkills();
+        BiMap<SkillSlot, ActiveSkill> activeSkills = playerClass.getActiveSkills();
 
         for (Map.Entry<SkillSlot, ActiveSkill> entry : activeSkills.entrySet()) {
             client.getProfiler().push("skillBar" + entry.getKey().getValue());

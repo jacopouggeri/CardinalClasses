@@ -46,8 +46,10 @@ public class ShardHolderBlock extends BlockWithEntity {
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         if (state.get(HAS_SHARD)) {
-            world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ModItems.SKILL_SHARD)));
+            ItemEntity itemEntity = new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ModItems.SKILL_SHARD));
+            world.spawnEntity(itemEntity);
         }
+        super.onBreak(world, pos, state, player);
     }
 
     public static void loadShard(@Nullable Entity charger, World world, BlockPos pos, BlockState state) {
@@ -104,10 +106,10 @@ public class ShardHolderBlock extends BlockWithEntity {
                 }
                 unloadShard(player, world, pos, state);
             } else {
-                return ActionResult.PASS;
+                return ActionResult.SUCCESS;
             }
         } else {
-            return ActionResult.PASS;
+            return ActionResult.SUCCESS;
         }
 
         return ActionResult.success(world.isClient);

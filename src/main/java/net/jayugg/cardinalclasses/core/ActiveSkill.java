@@ -34,7 +34,9 @@ public class ActiveSkill extends PlayerSkill {
 
     public void use(PlayerEntity player) {
         ActiveSkillComponent component = ModComponents.ACTIVE_SKILLS_COMPONENT.get(player);
-        SkillSlot slot = PlayerClassManager.getClass(player).getSkillSlot(this);
+        PlayerClass playerClass = PlayerClassManager.getClass(player);
+        if (playerClass == null) { return; }
+        SkillSlot slot = playerClass.getSkillSlot(this);
         int skillLevel = PlayerClassManager.getSkillLevel(player, AbilityType.ACTIVE, slot);
         if (skillLevel == 0) {
             return;

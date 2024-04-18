@@ -1,4 +1,19 @@
 {
+  "key.category.cardinalclasses": "Cardinal Classes Skill Keybinds",
+  "key.cardinalclasses.active_north": "Activate North Skill",
+  "key.cardinalclasses.active_east": "Activate East Skill",
+  "key.cardinalclasses.active_south": "Activate South Skill",
+  "key.cardinalclasses.active_west": "Activate West Skill",
+
+  "advancement.cardinalclasses.root": "Classer!",
+  "advancement.cardinalclasses.root.desc": "Unlock your first class.",
+  "advancement.cardinalclasses.passives": "Passive Skills",
+  "advancement.cardinalclasses.passives.desc": "An overall improvement",
+  "advancement.cardinalclasses.actives": "Active Skills",
+  "advancement.cardinalclasses.actives.desc": "Smash 'em!",
+  "advancement.cardinalclasses.perks": "Class Perks",
+  "advancement.cardinalclasses.perks.desc": "Nice bonus!",
+
   "item.cardinalclasses.skill_shard": "Skill Shard",
   "item.cardinalclasses.skill_fragment": "Skill Fragment",
   "item.cardinalclasses.sage_emerald": "Sage's Emerald",
@@ -7,27 +22,15 @@
   "block.cardinalclasses.skill_altar": "Skill Altar",
   "block.cardinalclasses.shard_holder": "Shard Holder",
 
-  "class.cardinalclasses.base": "Base Class",
   "class.cardinalclasses.test": "Test Class",
-
-  "class.cardinalclasses.base.desc": "Base class description",
   "class.cardinalclasses.test.desc": "Test class description",
 
-  "perk.cardinalclasses.base": "Base Perk",
-  "perk.cardinalclasses.test": "Test Perk",
-
-  "perk.cardinalclasses.base.desc": "Base perk description",
-  "perk.cardinalclasses.base_2.desc": "Base perk ascended description",
-  "perk.cardinalclasses.test.desc": "Test perk description",
-  "perk.cardinalclasses.test_2.desc": "Test perk ascended description",
-
-  "skill.cardinalclasses.base_active.desc": "Base active skill description",
-  "skill.cardinalclasses.base_active_2.desc": "Base active skill 2 description",
-  "skill.cardinalclasses.base_active_3.desc": "Base active skill 3 description",
-
-  "skill.cardinalclasses.base_passive.desc": "Base passive skill description",
-  "skill.cardinalclasses.base_passive_2.desc": "Base passive skill 2 description",
-  "skill.cardinalclasses.base_passive_3.desc": "Base passive skill 3 description",
+  "perk.cardinalclasses.test_attack": "Test Attack Perk",
+  "perk.cardinalclasses.test_attack.desc": "Test attack perk description",
+  "perk.cardinalclasses.test_attack_2.desc": "Test attack perk ascended description",
+  "perk.cardinalclasses.test_effect": "Test Effect Perk",
+  "perk.cardinalclasses.test_effect.desc": "Test effect perk description",
+  "perk.cardinalclasses.test_effect_2.desc": "Test effect perk ascended description",
 
   "skill.cardinalclasses.test_passive_yellow.desc": "Test passive skill description (yellow)",
   "skill.cardinalclasses.test_passive_yellow_2.desc": "Test passive skill 2 description (yellow)",
@@ -61,8 +64,6 @@
   "skill.cardinalclasses.test_active_arrow_2.desc": "Test active skill 2 description",
   "skill.cardinalclasses.test_active_arrow_3.desc": "Test active skill 3 description",
 
-  "skill.cardinalclasses.base_active": "Base Active Skill",
-  "skill.cardinalclasses.base_passive": "Base Passive Skill",
   "skill.cardinalclasses.test_passive_yellow": "Test Yellow",
   "skill.cardinalclasses.test_passive_blue": "Test Blue",
   "skill.cardinalclasses.test_passive_red": "Test Red",
@@ -70,20 +71,5 @@
   "skill.cardinalclasses.test_active_egg": "Test Active Skill",
   "skill.cardinalclasses.test_active_fire": "Test Fireball Skill",
   "skill.cardinalclasses.test_active_snow": "Test Snowball Skill",
-  "skill.cardinalclasses.test_active_arrow": "Test Arrow Skill",
-
-  "key.category.cardinalclasses": "Cardinal Classes Skill Keybinds",
-  "key.cardinalclasses.active_north": "Activate North Skill",
-  "key.cardinalclasses.active_east": "Activate East Skill",
-  "key.cardinalclasses.active_south": "Activate South Skill",
-  "key.cardinalclasses.active_west": "Activate West Skill",
-
-  "advancement.cardinalclasses.root": "Classer!",
-  "advancement.cardinalclasses.root.desc": "Unlock your first class.",
-  "advancement.cardinalclasses.passives": "Passive Skills",
-  "advancement.cardinalclasses.passives.desc": "An overall improvement",
-  "advancement.cardinalclasses.actives": "Active Skills",
-  "advancement.cardinalclasses.actives.desc": "Smash 'em!",
-  "advancement.cardinalclasses.perks": "Class Perks",
-  "advancement.cardinalclasses.perks.desc": "Nice bonus!"
+  "skill.cardinalclasses.test_active_arrow": "Test Arrow Skill"
 }

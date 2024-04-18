@@ -10,6 +10,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
+import javax.annotation.Nullable;
 import java.util.Set;
 
 import static net.jayugg.cardinalclasses.CardinalClasses.LOGGER;
@@ -25,7 +26,7 @@ public class PlayerClassRegistry {
         }
         CLASSES.register(playerClass.getId(), playerClass);
         ModItems.addToItemGroup(ModItemGroup.MOD_GROUP, registerClassPotion(playerClass));
-        LOGGER.info("Registered class: " + playerClass.getId());
+        LOGGER.info("Registered class: {}", playerClass.getId());
         return playerClass;
     }
 
@@ -35,6 +36,7 @@ public class PlayerClassRegistry {
         return potionItem;
     }
 
+    @Nullable
     public static PlayerClass getPlayerClass(String id) {
         return CLASSES.get(id);
     }
