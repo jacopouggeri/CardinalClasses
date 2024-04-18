@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": {
+      "item": "minecraft:emerald"
+    },
+    "F": {
+      "item": "leanclass:skill_fragment"
+    }
+  },
+  "pattern": [
+    "FFF",
+    "FEF",
+    "FFF"
+  ],
+  "result": {
+    "item": "leanclass:sage_emerald"
+  },
+  "show_notification": true
+}

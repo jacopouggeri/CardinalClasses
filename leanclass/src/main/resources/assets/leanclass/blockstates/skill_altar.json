@@ -1,7 +1,0 @@
-{
-  "variants": {
-    "altar_charge=inert": { "model": "leanclass:block/skill_altar" },
-    "altar_charge=active": { "model": "leanclass:block/skill_altar_active" },
-    "altar_charge=passive": { "model": "leanclass:block/skill_altar_passive" }
-  }
-}
