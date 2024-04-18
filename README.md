@@ -11,7 +11,7 @@ It's built on the Fabric modding platform and uses the Cardinal Components API.
 ### Simple Class System
 The mod adds a simple class system to the game, allowing players
 to acquire a class by brewing and drinking a class potion.
-Each class has 4 passive skills, 4 active skills, and two perks.
+Each class has four passive skills, four active skills, and two perks.
 
 ### Skill System
 Skills and Perks can be upgraded using the skill altar.
