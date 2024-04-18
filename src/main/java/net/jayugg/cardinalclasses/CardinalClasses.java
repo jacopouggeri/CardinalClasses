@@ -14,6 +14,7 @@ import net.jayugg.cardinalclasses.item.ModItemGroup;
 import net.jayugg.cardinalclasses.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
+import net.jayugg.cardinalclasses.util.ModLootTableModifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,5 +43,6 @@ public class CardinalClasses implements ModInitializer {
 		ModCriteria.registerCriteria();
 		ModCommands.register();
 		PlayerLoginHandler.register();
+		ModLootTableModifier.modifyLootTables();
 	}
 }
