@@ -140,6 +140,11 @@ public class PlayerClassManager {
         return ascendedPerk.isPresent() && ascendedPerk.get().equals(slot);
     }
 
+    public static Optional<PerkSlot> getAscendedPerk(PlayerEntity player) {
+        PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);
+        return playerClassComponent.getAscendedPerk();
+    }
+
     @Nullable
     public static PlayerClass getClass(PlayerEntity player) {
         PlayerClassComponent playerClassComponent = ModComponents.CLASS_COMPONENT.get(player);

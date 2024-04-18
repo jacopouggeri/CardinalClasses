@@ -14,9 +14,11 @@ public abstract class PlayerClass extends PlayerAddon {
     private final BiMap<SkillSlot, PassiveSkill> passiveSkills;
     private final BiMap<SkillSlot, ActiveSkill> activeSkills;
     private final BiMap<PerkSlot, PlayerPerk> perks;
+    private final int color;
 
-    public PlayerClass(String id, Map<SkillSlot, PassiveSkill> passiveSkills, Map<SkillSlot, ActiveSkill> activeSkills, Map<PerkSlot, PlayerPerk> perks, Item icon) {
+    public PlayerClass(String id, Map<SkillSlot, PassiveSkill> passiveSkills, Map<SkillSlot, ActiveSkill> activeSkills, Map<PerkSlot, PlayerPerk> perks, Item icon, int color) {
         super(id, icon);
+        this.color = color;
 
         // Verify the correct number of skills and perks are provided
         if (passiveSkills.size() != SkillSlot.values().length ||
@@ -51,12 +53,6 @@ public abstract class PlayerClass extends PlayerAddon {
     public Map<PerkSlot, PlayerPerk> getPerks() {
         return Collections.unmodifiableMap(perks);
     }
-    public PerkSlot getPerkSlot(PlayerPerk perk) {
-        if (perks.inverse().get(perk) == null) {
-            throw new IllegalArgumentException("Perk not found in class: " + perk);
-        }
-        return perks.inverse().get(perk);
-    }
 
     public SkillSlot getSkillSlot(PlayerSkill skill) {
         if (skill instanceof PassiveSkill) {
@@ -78,6 +74,9 @@ public abstract class PlayerClass extends PlayerAddon {
         return String.format("class.%s.%s", MOD_ID, id);
     }
 
+    public int getColor() {
+        return color;
+    }
 }
 
 
