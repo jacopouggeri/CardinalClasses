@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:cardinalclasses/class_test_actives",
+  "criteria": {
+    "skill_test_test_active_arrow_1": {
+      "conditions": {
+        "level": 1,
+        "player_class": "test",
+        "player_skill": "test_active_arrow"
+      },
+      "trigger": "cardinalclasses:obtain_skill"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "skill.cardinalclasses.test_active_arrow.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:arrow"
+    },
+    "show_toast": true,
+    "title": {
+      "extra": [
+        {
+          "translate": "skill.cardinalclasses.test_active_arrow"
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "I"
+        }
+      ],
+      "text": "West: "
+    }
+  },
+  "requirements": [
+    [
+      "skill_test_test_active_arrow_1"
+    ]
+  ]
+}

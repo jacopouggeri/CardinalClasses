@@ -1,9 +1,9 @@
 {
 	"schemaVersion": 1,
-	"id": "leanclass",
+	"id": "cardinalclasses",
 	"version": "${version}",
-	"name": "Lean Class",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Cardinal Classes",
+	"description": "Simple and modular class system for Minecraft",
 	"authors": [
 		"jayugg"
 	],
@@ -12,26 +12,26 @@
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/leanclass/icon.png",
+	"icon": "assets/cardinalclasses/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.jayugg.leanclass.LeanClass"
+			"net.jayugg.cardinalclasses.CardinalClasses"
 		],
 		"client": [
-			"net.jayugg.leanclass.LeanClassClient"
+			"net.jayugg.cardinalclasses.CardinalClassesClient"
 		],
 		"cardinal-components-entity": [
-			"net.jayugg.leanclass.component.ModComponents"
+			"net.jayugg.cardinalclasses.component.ModComponents"
 		],
 		"fabric-datagen": [
-          "net.jayugg.leanclass.datagen.ClassDataGen"
+          "net.jayugg.cardinalclasses.datagen.ClassDataGen"
 		]
 	},
 	"mixins": [
-      "leanclass.mixins.json",
+		"cardinalclasses.mixins.json",
 		{
-			"config": "leanclass.client.mixins.json",
+			"config": "cardinalclasses.client.mixins.json",
 			"environment": "client"
 		}
 	],
@@ -46,8 +46,8 @@
 	},
 	"custom": {
 		"cardinal-components": [
-			"leanclass:player_class",
-			"leanclass:active_skills"
+			"cardinalclasses:player_class",
+			"cardinalclasses:active_skills"
 		]
 	}
 }

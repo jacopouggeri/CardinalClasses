@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:cardinalclasses/skill_test_test_passive_green_1",
+  "criteria": {
+    "skill_test_test_passive_green_2": {
+      "conditions": {
+        "level": 2,
+        "player_class": "test",
+        "player_skill": "test_passive_green"
+      },
+      "trigger": "cardinalclasses:obtain_skill"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "skill.cardinalclasses.test_passive_green_2.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:green_dye"
+    },
+    "show_toast": true,
+    "title": {
+      "extra": [
+        {
+          "translate": "skill.cardinalclasses.test_passive_green"
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "II"
+        }
+      ],
+      "text": "South: "
+    }
+  },
+  "requirements": [
+    [
+      "skill_test_test_passive_green_2"
+    ]
+  ]
+}

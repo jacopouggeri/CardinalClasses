@@ -1,0 +1,31 @@
+{
+  "parent": "minecraft:cardinalclasses/root",
+  "criteria": {
+    "class_test": {
+      "conditions": {
+        "player_class": "test"
+      },
+      "trigger": "cardinalclasses:obtain_class"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "class.cardinalclasses.test.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:command_block"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "class.cardinalclasses.test"
+    }
+  },
+  "requirements": [
+    [
+      "class_test"
+    ]
+  ]
+}

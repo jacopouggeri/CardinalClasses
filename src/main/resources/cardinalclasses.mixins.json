@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "net.jayugg.cardinalclasses.test.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "PlayerAttackMixin",
+    "PlayerEffectMixin"
+  ],
+  "client": [],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

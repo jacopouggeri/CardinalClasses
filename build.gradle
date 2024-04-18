@@ -25,7 +25,7 @@ loom {
     splitEnvironmentSourceSets()
 
 	mods {
-		"leanclass" {
+		"cardinalclasses" {
 			sourceSet sourceSets.main
 			sourceSet sourceSets.client
 		}

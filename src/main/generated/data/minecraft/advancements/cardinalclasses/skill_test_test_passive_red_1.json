@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:cardinalclasses/class_test_passives",
+  "criteria": {
+    "skill_test_test_passive_red_1": {
+      "conditions": {
+        "level": 1,
+        "player_class": "test",
+        "player_skill": "test_passive_red"
+      },
+      "trigger": "cardinalclasses:obtain_skill"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "skill.cardinalclasses.test_passive_red.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:red_dye"
+    },
+    "show_toast": true,
+    "title": {
+      "extra": [
+        {
+          "translate": "skill.cardinalclasses.test_passive_red"
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "I"
+        }
+      ],
+      "text": "North: "
+    }
+  },
+  "requirements": [
+    [
+      "skill_test_test_passive_red_1"
+    ]
+  ]
+}

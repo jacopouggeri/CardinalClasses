@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:cardinalclasses/skill_test_test_active_fire_2",
+  "criteria": {
+    "skill_test_test_active_fire_3": {
+      "conditions": {
+        "level": 3,
+        "player_class": "test",
+        "player_skill": "test_active_fire"
+      },
+      "trigger": "cardinalclasses:obtain_skill"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "skill.cardinalclasses.test_active_fire_3.desc"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:fire_charge"
+    },
+    "show_toast": true,
+    "title": {
+      "extra": [
+        {
+          "translate": "skill.cardinalclasses.test_active_fire"
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "III"
+        }
+      ],
+      "text": "East: "
+    }
+  },
+  "requirements": [
+    [
+      "skill_test_test_active_fire_3"
+    ]
+  ]
+}

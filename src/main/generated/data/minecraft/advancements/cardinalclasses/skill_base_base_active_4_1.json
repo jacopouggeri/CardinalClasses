@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:cardinalclasses/class_base_actives",
+  "criteria": {
+    "skill_base_base_active_4_1": {
+      "conditions": {
+        "level": 1,
+        "player_class": "base",
+        "player_skill": "base_active_4"
+      },
+      "trigger": "cardinalclasses:obtain_skill"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "skill.cardinalclasses.base_active_4.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:wooden_shovel",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "extra": [
+        {
+          "translate": "skill.cardinalclasses.base_active_4"
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "I"
+        }
+      ],
+      "text": "West: "
+    }
+  },
+  "requirements": [
+    [
+      "skill_base_base_active_4_1"
+    ]
+  ]
+}

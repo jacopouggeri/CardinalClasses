@@ -1,0 +1,6 @@
+0.0.4-1.19.4 Changelog
+=========================
+- 0.0.4b-1.19.4 Beta development, renamed to cardinalclasses
+- 0.0.3a-1.19.4 Various testing features
+- 0.0.2a-1.19.4 Added class system
+- 0.0.1a-1.19.4 Minimal working version

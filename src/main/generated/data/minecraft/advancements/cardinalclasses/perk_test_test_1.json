@@ -1,0 +1,39 @@
+{
+  "parent": "minecraft:cardinalclasses/class_test_perks",
+  "criteria": {
+    "perk_test_test_1": {
+      "conditions": {
+        "player_class": "test"
+      },
+      "trigger": "cardinalclasses:obtain_class"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "perk.cardinalclasses.test.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:potion"
+    },
+    "show_toast": false,
+    "title": {
+      "extra": [
+        {
+          "translate": "perk.cardinalclasses.test"
+        },
+        {
+          "text": ""
+        }
+      ],
+      "text": "Perk: "
+    }
+  },
+  "requirements": [
+    [
+      "perk_test_test_1"
+    ]
+  ]
+}

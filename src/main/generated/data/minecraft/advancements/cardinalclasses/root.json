@@ -1,0 +1,32 @@
+{
+  "criteria": {
+    "classer": {
+      "conditions": {},
+      "trigger": "cardinalclasses:obtain_class"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": {
+      "translate": "advancement.cardinalclasses.root.desc"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "cardinalclasses:skill_shard"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancement.cardinalclasses.root"
+    }
+  },
+  "requirements": [
+    [
+      "classer"
+    ]
+  ],
+  "rewards": {
+    "experience": 1000
+  }
+}

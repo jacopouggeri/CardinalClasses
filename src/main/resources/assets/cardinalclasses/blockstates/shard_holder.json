@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "cardinalclasses:block/shard_holder" }
+  }
+}

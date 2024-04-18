@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:cardinalclasses/class_test_actives",
+  "criteria": {
+    "skill_test_test_active_egg_1": {
+      "conditions": {
+        "level": 1,
+        "player_class": "test",
+        "player_skill": "test_active_egg"
+      },
+      "trigger": "cardinalclasses:obtain_skill"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "skill.cardinalclasses.test_active_egg.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:egg"
+    },
+    "show_toast": true,
+    "title": {
+      "extra": [
+        {
+          "translate": "skill.cardinalclasses.test_active_egg"
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "I"
+        }
+      ],
+      "text": "North: "
+    }
+  },
+  "requirements": [
+    [
+      "skill_test_test_active_egg_1"
+    ]
+  ]
+}

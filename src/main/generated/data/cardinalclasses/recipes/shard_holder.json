@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "cardinalclasses:skill_fragment"
+    },
+    "T": {
+      "item": "minecraft:deepslate_tiles"
+    }
+  },
+  "pattern": [
+    " F ",
+    " T ",
+    "TTT"
+  ],
+  "result": {
+    "item": "cardinalclasses:shard_holder"
+  },
+  "show_notification": true
+}

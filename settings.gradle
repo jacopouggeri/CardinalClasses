@@ -8,6 +8,4 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-rootProject.name = "lean_classes_dev"
-include "leanclass"
-//include "leanrogue"
+rootProject.name = "CardinalClasses"

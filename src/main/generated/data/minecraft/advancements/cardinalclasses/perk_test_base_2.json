@@ -1,0 +1,40 @@
+{
+  "parent": "minecraft:cardinalclasses/perk_test_base_1",
+  "criteria": {
+    "perk_test_base_2": {
+      "conditions": {
+        "player_class": "test",
+        "player_perk": "base"
+      },
+      "trigger": "cardinalclasses:ascend_perk"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "perk.cardinalclasses.base_2.desc"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:beacon"
+    },
+    "show_toast": true,
+    "title": {
+      "extra": [
+        {
+          "translate": "perk.cardinalclasses.base"
+        },
+        {
+          "text": " ★"
+        }
+      ],
+      "text": "Perk: "
+    }
+  },
+  "requirements": [
+    [
+      "perk_test_base_2"
+    ]
+  ]
+}

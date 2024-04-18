@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:cardinalclasses/skill_test_test_passive_blue_2",
+  "criteria": {
+    "skill_test_test_passive_blue_3": {
+      "conditions": {
+        "level": 3,
+        "player_class": "test",
+        "player_skill": "test_passive_blue"
+      },
+      "trigger": "cardinalclasses:obtain_skill"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "skill.cardinalclasses.test_passive_blue_3.desc"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:blue_dye"
+    },
+    "show_toast": true,
+    "title": {
+      "extra": [
+        {
+          "translate": "skill.cardinalclasses.test_passive_blue"
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "III"
+        }
+      ],
+      "text": "East: "
+    }
+  },
+  "requirements": [
+    [
+      "skill_test_test_passive_blue_3"
+    ]
+  ]
+}

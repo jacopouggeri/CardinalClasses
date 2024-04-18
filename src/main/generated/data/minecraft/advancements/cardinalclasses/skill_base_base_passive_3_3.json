@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:cardinalclasses/skill_base_base_passive_3_2",
+  "criteria": {
+    "skill_base_base_passive_3_3": {
+      "conditions": {
+        "level": 3,
+        "player_class": "base",
+        "player_skill": "base_passive_3"
+      },
+      "trigger": "cardinalclasses:obtain_skill"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "skill.cardinalclasses.base_passive_3_3.desc"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:chainmail_leggings",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "extra": [
+        {
+          "translate": "skill.cardinalclasses.base_passive_3"
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "III"
+        }
+      ],
+      "text": "South: "
+    }
+  },
+  "requirements": [
+    [
+      "skill_base_base_passive_3_3"
+    ]
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "parent": "minecraft:cardinalclasses/root",
+  "criteria": {
+    "class_base": {
+      "conditions": {
+        "player_class": "base"
+      },
+      "trigger": "cardinalclasses:obtain_class"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "class.cardinalclasses.base.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:dirt"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "class.cardinalclasses.base"
+    }
+  },
+  "requirements": [
+    [
+      "class_base"
+    ]
+  ]
+}
