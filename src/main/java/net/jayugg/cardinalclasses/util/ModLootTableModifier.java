@@ -40,6 +40,7 @@ public class ModLootTableModifier {
             if (JUNGLE_TEMPLE.equals(id) || DESERT_PYRAMID.equals(id) || SHIPWRECK_TREASURE.equals(id) || STRONGHOLD_LIBRARY.equals(id) || VILLAGE_TEMPLE.equals(id) || SPAWN_BONUS_CHEST.equals(id) || UNDERWATER_RUIN_BIG.equals(id) || PILLAGER_OUTPOST.equals(id) || BASTION_OTHER.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(3.0f))
+
                         .conditionally(RandomChanceLootCondition.builder(0.1f))
                         .with(ItemEntry.builder(ModItems.SKILL_FRAGMENT))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 3.0f)).build())
