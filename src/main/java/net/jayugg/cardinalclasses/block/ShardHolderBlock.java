@@ -31,7 +31,7 @@ public class ShardHolderBlock extends ModWaterloggableBlock {
     public static final BooleanProperty HAS_SHARD = BooleanProperty.of("has_shard");
 
     protected ShardHolderBlock(Settings settings) {
-        super(settings.luminance(state -> state.get(HAS_SHARD) ? 10 : 0));
+        super(settings.luminance(state -> state.get(HAS_SHARD) ? 12 : 0));
         this.setDefaultState(this.stateManager.getDefaultState().with(HAS_SHARD, false).with(ModWaterloggableBlock.WATERLOGGED, false));
     }
 

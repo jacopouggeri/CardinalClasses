@@ -68,7 +68,7 @@ public class SkillAltarBlock extends ModWaterloggableBlock {
 
 
     public SkillAltarBlock(Settings settings) {
-        super(settings.luminance(state -> state.get(ALTAR_CHARGE) == AltarCharge.INERT ? 5 : 12));
+        super(settings.luminance(state -> state.get(ALTAR_CHARGE) == AltarCharge.INERT ? 7 : 14));
         this.setDefaultState(this.stateManager.getDefaultState().with(ALTAR_CHARGE, AltarCharge.INERT).with(ModWaterloggableBlock.WATERLOGGED, false));
     }
 
