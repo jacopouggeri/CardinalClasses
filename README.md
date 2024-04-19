@@ -17,11 +17,11 @@ Each class has four passive skills, four active skills, and two perks.
 Skills and Perks can be upgraded using the skill altar.
 An altar needs to have a shard holder to its north/south/east/west side with an air block in between.
 By placing a shard on a holder, and charging the altar with the relevant item, the player can step on it and upgrade skills and perks.
-Skills can be upgraded three times from level 0 to level 3, while only one of the two perk can be ascended once.
+Skills can be upgraded three times from level 0 to level 3, while only one of the two perks can be ascended once.
 
 #### Charge Items
 
-- Shard Holder: Skill Shard - Consumed upgrade skills and perks.
+- Shard Holder: Skill Shard - Consumed to upgrade skills and perks.
 - Skill Altar: Magma Block - Used to upgrade active skills.
 - Skill Altar: Amethyst Block - Used to upgrade passive skills.
 - Skill Shard: Sage's Emerald - Used to ascend perks.
