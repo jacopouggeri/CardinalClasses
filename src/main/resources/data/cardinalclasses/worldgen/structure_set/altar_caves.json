@@ -4,6 +4,10 @@
   "structures": [
     {
       "structure": "cardinalclasses:altar_caves",
+      "weight": 2
+    },
+    {
+      "structure": "cardinalclasses:altar_ruin_caves",
       "weight": 1
     }
   ],
@@ -12,11 +16,11 @@
     "salt": 1119869404,
 
     // The average distance apart in chunks for spawn attempts
-    "spacing": 2,
+    "spacing": 15,
 
     // Minimum distance apart in chunks for spawn attempts
     // MUST ALWAYS BE SMALLER THAN spacing ABOVE
-    "separation": 1,
+    "separation": 7,
 
     // The kind of placement to use. The other kind is ring based like strongholds use.
     "type": "minecraft:random_spread"

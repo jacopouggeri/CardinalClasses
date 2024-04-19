@@ -8,8 +8,9 @@
             "predicate_type": "minecraft:always_true"
           },
           "input_predicate": {
-            "predicate_type": "minecraft:block_match",
-            "block": "minecraft:spawner"
+            "predicate_type": "minecraft:random_block_match",
+            "block": "minecraft:spawner",
+            "probability": 0.8
           },
           "output_state": {
             "Name": "minecraft:deepslate_tiles"
@@ -75,6 +76,13 @@
           }
         },
         {
+          "position_predicate": {
+            "predicate_type": "minecraft:linear_pos",
+            "min_dist": 0,
+            "max_dist": 1,
+            "min_chance": 1,
+            "max_chance": 1
+          },
           "location_predicate": {
             "predicate_type": "minecraft:block_match",
             "block": "minecraft:water"
@@ -96,6 +104,13 @@
           }
         },
         {
+          "position_predicate": {
+            "predicate_type": "minecraft:linear_pos",
+            "min_dist": 0,
+            "max_dist": 1,
+            "min_chance": 1,
+            "max_chance": 1
+          },
           "location_predicate": {
             "predicate_type": "minecraft:block_match",
             "block": "minecraft:water"
