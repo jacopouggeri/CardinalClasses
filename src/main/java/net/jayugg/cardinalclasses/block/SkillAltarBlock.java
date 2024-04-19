@@ -17,6 +17,8 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -42,7 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class SkillAltarBlock extends BlockWithEntity {
+public class SkillAltarBlock extends ModWaterloggableBlock {
     public static EnumProperty<AltarCharge> ALTAR_CHARGE = EnumProperty.of("altar_charge", AltarCharge.class);
     protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 12.0, 16.0);
     public static final List<BlockPos> HOLDER_OFFSETS = BlockPos.stream(-2, 0, -2, 2, 0, 2)
@@ -69,14 +71,15 @@ public class SkillAltarBlock extends BlockWithEntity {
 
     public SkillAltarBlock(Settings settings) {
         super(settings.luminance(state -> state.get(ALTAR_CHARGE) == AltarCharge.INERT ? 5 : 12));
-        this.setDefaultState(this.stateManager.getDefaultState().with(ALTAR_CHARGE, AltarCharge.INERT));
+        this.setDefaultState(this.stateManager.getDefaultState().with(ALTAR_CHARGE, AltarCharge.INERT).with(ModWaterloggableBlock.WATERLOGGED, false));
     }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(ALTAR_CHARGE);
+        builder.add(ALTAR_CHARGE).add(ModWaterloggableBlock.WATERLOGGED);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
@@ -121,6 +124,7 @@ private static void updateChargeItem(@Nullable Entity charger, World world, Bloc
         world.playSound(null, (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, SoundEvents.BLOCK_AMETHYST_CLUSTER_PLACE, SoundCategory.BLOCKS, 1.5f, 0.5f);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack itemStack = player.getStackInHand(hand);
@@ -155,10 +159,10 @@ private static void updateChargeItem(@Nullable Entity charger, World world, Bloc
                     }
                 }
             } else {
-                return ActionResult.SUCCESS;
+                return ActionResult.PASS;
             }
         } else {
-            return ActionResult.SUCCESS;
+            return ActionResult.PASS;
         }
 
         return ActionResult.success(world.isClient);

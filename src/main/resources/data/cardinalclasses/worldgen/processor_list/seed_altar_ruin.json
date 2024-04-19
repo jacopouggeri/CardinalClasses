@@ -1,0 +1,207 @@
+{
+  "processors": [
+    {
+      "processor_type": "minecraft:rule",
+      "rules": [
+        {
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "input_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:spawner"
+          },
+          "output_state": {
+            "Name": "minecraft:deepslate_tiles"
+          }
+        }
+      ]
+    },
+    {
+      "processor_type": "minecraft:rule",
+      "rules": [
+        {
+          "location_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:air"
+          },
+          "input_predicate": {
+            "predicate_type": "minecraft:random_blockstate_match",
+            "block_state": {
+              "Name": "minecraft:basalt",
+              "Properties": {
+                "axis": "y"
+              }
+            },
+            "probability": 0.05
+          },
+          "output_state": {
+            "Name": "minecraft:chain",
+            "Properties": {
+              "axis": "y",
+              "waterlogged": "false"
+            }
+          }
+        },
+        {
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "input_predicate": {
+            "predicate_type": "minecraft:random_blockstate_match",
+            "block_state": {
+              "Name": "cardinalclasses:shard_holder",
+              "Properties": {
+                "has_shard": "false"
+              }
+            },
+            "probability": 0.1
+          },
+          "output_state": {
+            "Name": "minecraft:deepslate_tile_slab"
+          }
+        },
+        {
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "input_predicate": {
+            "predicate_type": "minecraft:random_block_match",
+            "block": "minecraft:dropper",
+            "probability": 0.90
+          },
+          "output_state": {
+            "Name": "minecraft:smooth_basalt"
+          }
+        },
+        {
+          "location_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:water"
+          },
+          "input_predicate": {
+            "predicate_type": "minecraft:blockstate_match",
+            "block_state": {
+              "Name": "cardinalclasses:shard_holder",
+              "Properties": {
+                "waterlogged": "false"
+              }
+            }
+          },
+          "output_state": {
+            "Name": "cardinalclasses:shard_holder",
+            "Properties": {
+              "waterlogged": "true"
+            }
+          }
+        },
+        {
+          "location_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:water"
+          },
+          "input_predicate": {
+            "predicate_type": "minecraft:blockstate_match",
+            "block_state": {
+              "Name": "cardinalclasses:skill_altar",
+              "Properties": {
+                "waterlogged": "false"
+              }
+            }
+          },
+          "output_state": {
+            "Name": "cardinalclasses:skill_altar",
+            "Properties": {
+              "waterlogged": "true"
+            }
+          }
+        },
+        {
+          "location_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:water"
+          },
+          "input_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:air"
+          },
+          "output_state": {
+            "Name": "minecraft:water"
+          }
+        }
+      ]
+    },
+    {
+      "processor_type": "minecraft:rule",
+      "rules": [
+        {
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "input_predicate": {
+            "predicate_type": "minecraft:random_blockstate_match",
+            "block_state": {
+              "Name": "cardinalclasses:skill_altar",
+              "Properties": {
+                "altar_charge": "inert"
+              }
+            },
+            "probability": 0.5
+          },
+          "output_state": {
+            "Name": "cardinalclasses:skill_altar",
+            "Properties": {
+              "altar_charge": "active"
+            }
+          }
+        },
+        {
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "input_predicate": {
+            "predicate_type": "minecraft:random_blockstate_match",
+            "block_state": {
+              "Name": "cardinalclasses:skill_altar",
+              "Properties": {
+                "altar_charge": "inert"
+              }
+            },
+            "probability": 0.5
+          },
+          "output_state": {
+            "Name": "cardinalclasses:skill_altar",
+            "Properties": {
+              "altar_charge": "passive"
+            }
+          }
+        },
+        {
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "input_predicate": {
+            "predicate_type": "minecraft:random_blockstate_match",
+            "block_state": {
+              "Name": "cardinalclasses:shard_holder",
+              "Properties": {
+                "has_shard": "false"
+              }
+            },
+            "probability": 0.05
+          },
+          "output_state": {
+            "Name": "cardinalclasses:shard_holder",
+            "Properties": {
+              "has_shard": "true"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "processor_type": "minecraft:block_age",
+      "mossiness": 0
+    }
+  ]
+}

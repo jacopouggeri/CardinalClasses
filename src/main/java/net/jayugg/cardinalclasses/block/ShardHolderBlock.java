@@ -26,22 +26,23 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
-public class ShardHolderBlock extends BlockWithEntity {
+public class ShardHolderBlock extends ModWaterloggableBlock {
     protected static final VoxelShape SHAPE = VoxelShapes.combineAndSimplify(Block.createCuboidShape(1, 0, 1, 15, 5, 15), Block.createCuboidShape(4, 5, 4, 12, 9, 12), BooleanBiFunction.OR);
     public static final BooleanProperty HAS_SHARD = BooleanProperty.of("has_shard");
 
     protected ShardHolderBlock(Settings settings) {
         super(settings.luminance(state -> state.get(HAS_SHARD) ? 10 : 0));
-        this.setDefaultState(this.stateManager.getDefaultState().with(HAS_SHARD, false));
+        this.setDefaultState(this.stateManager.getDefaultState().with(HAS_SHARD, false).with(ModWaterloggableBlock.WATERLOGGED, false));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) { builder.add(HAS_SHARD); }
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) { builder.add(HAS_SHARD).add(ModWaterloggableBlock.WATERLOGGED); }
 
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
@@ -77,6 +78,7 @@ public class ShardHolderBlock extends BlockWithEntity {
         return stack.isOf(ModItems.SKILL_SHARD);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack itemStack = player.getStackInHand(hand);
@@ -106,10 +108,10 @@ public class ShardHolderBlock extends BlockWithEntity {
                 }
                 unloadShard(player, world, pos, state);
             } else {
-                return ActionResult.SUCCESS;
+                return ActionResult.PASS;
             }
         } else {
-            return ActionResult.SUCCESS;
+            return ActionResult.PASS;
         }
 
         return ActionResult.success(world.isClient);
