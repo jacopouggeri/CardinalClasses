@@ -32,10 +32,6 @@ public class PlayerClassComponent implements ComponentV3, AutoSyncedComponent {
         return false;
     }
 
-    public void setAscendedPerkCreative(PerkSlot slot) {
-        ascendedPerkSlot = slot;
-    }
-
     public Optional<PerkSlot> getAscendedPerk() {
         return Optional.ofNullable(ascendedPerkSlot);
     }
