@@ -1,10 +1,10 @@
 0.8-1.19.4 Changelog
 =========================
-- 0.8-1.19.4 Initial release
-- 0.7b-1.19.4 Added Skill Shard and Fragment loot tables for vanilla structures and mobs
+- 0.8-1.19.4 Initial release, added altar ruin structure.
+- 0.7b-1.19.4 Added Skill Shard and Fragment loot tables for vanilla structures and mobs.
 - 0.6b-1.19.4 Reworked class potion and added class grant effects.
 - 0.5b-1.19.4 Removed base class, now a player with no class has a null PlayerClass. Added block loot tables and tags.
-- 0.4b-1.19.4 Beta development, renamed to cardinalclasses
-- 0.3a-1.19.4 Various testing features
-- 0.2a-1.19.4 Added class system
-- 0.1a-1.19.4 Minimal working version
+- 0.4b-1.19.4 Beta development, renamed to cardinalclasses.
+- 0.3a-1.19.4 Various testing features.
+- 0.2a-1.19.4 Added class system.
+- 0.1a-1.19.4 Minimal working version.

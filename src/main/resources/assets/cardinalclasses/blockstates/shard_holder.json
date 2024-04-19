@@ -1,5 +1,6 @@
 {
   "variants": {
-    "": { "model": "cardinalclasses:block/shard_holder" }
+    "has_shard=false": { "model": "cardinalclasses:block/shard_holder" },
+    "has_shard=true": { "model": "cardinalclasses:block/shard_holder_1" }
   }
 }
