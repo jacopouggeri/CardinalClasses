@@ -78,6 +78,8 @@ loom {
 			vmArg "-Dfabric-api.datagen"
 			vmArg "-Dfabric-api.datagen.output-dir=${file(dataOutput)}"
 
+			vmArg "-Dcardinalclasses.datagen.disable"
+
 			runDir "build/datagen"
 		}
 	}

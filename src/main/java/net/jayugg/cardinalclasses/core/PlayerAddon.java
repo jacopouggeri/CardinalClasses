@@ -1,13 +1,13 @@
 package net.jayugg.cardinalclasses.core;
 
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 
 public abstract class PlayerAddon {
     protected final String id;
-    private final Item icon;
-    public PlayerAddon(String id, Item icon) {
+    private final ItemConvertible icon;
+    public PlayerAddon(String id, ItemConvertible icon) {
         this.id = id;
         this.icon = icon;
     }
@@ -21,7 +21,7 @@ public abstract class PlayerAddon {
         return Text.translatable(getTranslationKey() + ".desc");
     }
     public abstract String getTranslationKey();
-    public Item getIcon() {
+    public ItemConvertible getIcon() {
         return icon;
     }
 

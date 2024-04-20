@@ -1,6 +1,6 @@
 package net.jayugg.cardinalclasses.core;
 
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 
@@ -8,7 +8,7 @@ public abstract class PlayerAbility extends PlayerAddon {
     private final int minLevel;
     private final int maxLevel;
     private final AbilityType type;
-    public PlayerAbility(String id, int minLevel, int maxLevel, AbilityType type, Item icon) {
+    public PlayerAbility(String id, int minLevel, int maxLevel, AbilityType type, ItemConvertible icon) {
         super(id, icon);
         this.minLevel = minLevel;
         this.maxLevel = maxLevel;

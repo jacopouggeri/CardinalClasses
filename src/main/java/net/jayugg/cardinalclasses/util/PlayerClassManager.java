@@ -193,7 +193,7 @@ public class PlayerClassManager {
         if (!(player instanceof ServerPlayerEntity)) {
             return;
         }
-        ItemStack itemStack = new ItemStack(ModItems.SKILL_SHARD, points);
+        ItemStack itemStack = new ItemStack(ModItems.SKILL_FRAGMENT, points*9);
         if (!player.getInventory().insertStack(itemStack)) {
             player.dropItem(itemStack, false);
         }

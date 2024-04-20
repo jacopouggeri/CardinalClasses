@@ -9,13 +9,9 @@ import net.jayugg.cardinalclasses.advancement.ObtainSkillCriterion;
 import net.jayugg.cardinalclasses.core.*;
 import net.jayugg.cardinalclasses.item.ModItems;
 import net.jayugg.cardinalclasses.registry.PlayerClassRegistry;
-import net.minecraft.advancement.Advancement;
-import net.minecraft.advancement.AdvancementFrame;
-import net.minecraft.advancement.AdvancementRewards;
+import net.minecraft.advancement.*;
 import net.minecraft.advancement.criterion.AbstractCriterionConditions;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -29,18 +25,13 @@ import static net.jayugg.cardinalclasses.registry.AbilityRegistry.SKILLS;
 import static net.jayugg.cardinalclasses.registry.PlayerClassRegistry.CLASSES;
 
 public class AdvancementProvider extends FabricAdvancementProvider {
-    protected AdvancementProvider(FabricDataOutput dataGenerator) {
+    public AdvancementProvider(FabricDataOutput dataGenerator) {
         super(dataGenerator);
     }
 
     @Override
     public void generateAdvancement(Consumer<Advancement> consumer) {
-        NbtCompound passiveSkillNbt = new NbtCompound();
-        passiveSkillNbt.putString("SkullOwner", "MHF_Cow");
-        ItemStack passiveSkillIcon = new ItemStack(Items.PLAYER_HEAD);
-        passiveSkillIcon.setNbt(passiveSkillNbt);
         String translationKey = "advancement." + MOD_ID;
-
         Advancement rootAdvancement = Advancement.Builder.create()
                 .display(
                         ModItems.SKILL_SHARD, // The display icon
@@ -52,7 +43,7 @@ public class AdvancementProvider extends FabricAdvancementProvider {
                         false, // Announce to chat
                         false // Hidden in the advancement tab
                 )
-                .rewards(AdvancementRewards.Builder.experience(1000))
+                .rewards(AdvancementRewards.Builder.experience(200))
                 // The first string used in conditions is the name referenced by other advancements when they want to have 'requirements'
                 .criterion("classer",  new ObtainClassCriterion.Conditions(EntityPredicate.Extended.EMPTY, null))
                 .build(consumer, MOD_ID + "/root");
@@ -80,7 +71,7 @@ public class AdvancementProvider extends FabricAdvancementProvider {
 
             Advancement passiveSkillAdvancement = Advancement.Builder.create().parent(playerClassAdvancement)
                     .display(
-                            passiveSkillIcon, // The display icon
+                            Items.AMETHYST_SHARD, // The display icon
                             Text.translatable(translationKey + ".passives"), // The title
                             Text.translatable(translationKey + ".passives.desc"), // The description
                             null, // Background image used
@@ -95,7 +86,7 @@ public class AdvancementProvider extends FabricAdvancementProvider {
 
             Advancement activeSkillAdvancement = Advancement.Builder.create().parent(playerClassAdvancement)
                     .display(
-                            Items.SKELETON_SKULL, // The display icon
+                            Items.MAGMA_CREAM, // The display icon
                             Text.translatable(translationKey + ".actives"), // The title
                             Text.translatable(translationKey + ".actives.desc"), // The description
                             null, // Background image used
@@ -110,7 +101,7 @@ public class AdvancementProvider extends FabricAdvancementProvider {
 
             Advancement perkAdvancement = Advancement.Builder.create().parent(playerClassAdvancement)
                     .display(
-                            Items.NETHER_STAR, // The display icon
+                            Items.EMERALD, // The display icon
                             Text.translatable(translationKey + ".perks"), // The title
                             Text.translatable(translationKey + ".perks.desc"), // The description
                             null, // Background image used

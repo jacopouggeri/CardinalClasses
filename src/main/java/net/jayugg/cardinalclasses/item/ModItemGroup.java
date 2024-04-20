@@ -11,10 +11,10 @@ import static net.jayugg.cardinalclasses.CardinalClasses.MOD_ID;
 
 public class ModItemGroup {
     public static ItemGroup MOD_GROUP;
+
     public static void registerItemGroup() {
-        MOD_GROUP = FabricItemGroup.builder(new Identifier(MOD_ID, MOD_ID))
+        ModItemGroup.MOD_GROUP = FabricItemGroup.builder(new Identifier(MOD_ID, MOD_ID))
                 .displayName(Text.literal("Cardinal Classes"))
                 .icon(() -> new ItemStack(ModBlocks.SKILL_ALTAR.asItem())).build();
     }
-
 }

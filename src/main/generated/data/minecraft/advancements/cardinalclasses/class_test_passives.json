@@ -16,8 +16,7 @@
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "minecraft:player_head",
-      "nbt": "{SkullOwner:{Name:\"MHF_Cow\"}}"
+      "item": "minecraft:amethyst_shard"
     },
     "show_toast": false,
     "title": {

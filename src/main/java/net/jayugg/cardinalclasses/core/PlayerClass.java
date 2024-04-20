@@ -3,7 +3,7 @@ package net.jayugg.cardinalclasses.core;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import net.jayugg.cardinalclasses.util.Utils;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 
 import java.util.Collections;
 import java.util.Map;
@@ -16,7 +16,7 @@ public abstract class PlayerClass extends PlayerAddon {
     private final BiMap<PerkSlot, PlayerPerk> perks;
     private final int color;
 
-    public PlayerClass(String id, Map<SkillSlot, PassiveSkill> passiveSkills, Map<SkillSlot, ActiveSkill> activeSkills, Map<PerkSlot, PlayerPerk> perks, Item icon, int color) {
+    public PlayerClass(String id, Map<SkillSlot, PassiveSkill> passiveSkills, Map<SkillSlot, ActiveSkill> activeSkills, Map<PerkSlot, PlayerPerk> perks, ItemConvertible icon, int color) {
         super(id, icon);
         this.color = color;
 

@@ -23,7 +23,7 @@ public class ModBrewing {
         for (ClassGrantEffect classEffect : PlayerClassRegistry.CLASS_EFFECTS.getRegistry().values()) {
             BrewingRecipeRegistry.registerPotionRecipe(
                     SWIRLY,
-                    classEffect.getIcon(),
+                    classEffect.getIcon().asItem(),
                     PlayerClassRegistry.CLASS_POTIONS.get(classEffect.getPlayerClassId())
             );
         }

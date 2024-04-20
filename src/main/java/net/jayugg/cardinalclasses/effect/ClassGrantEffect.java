@@ -6,14 +6,12 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.util.math.random.Random;
-
-import static net.jayugg.cardinalclasses.CardinalClasses.MOD_ID;
 
 public class ClassGrantEffect extends StatusEffect {
     private final String playerClassId;
-    private final Item icon;
+    private final ItemConvertible icon;
     private final Random random = Random.create();
 
     public ClassGrantEffect(PlayerClass playerClass) {
@@ -40,7 +38,7 @@ public class ClassGrantEffect extends StatusEffect {
         return playerClassId;
     }
 
-    public Item getIcon() {
+    public ItemConvertible getIcon() {
         return icon;
     }
 }

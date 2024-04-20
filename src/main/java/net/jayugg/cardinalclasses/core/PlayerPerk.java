@@ -1,12 +1,12 @@
 package net.jayugg.cardinalclasses.core;
 
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 
 import static net.jayugg.cardinalclasses.CardinalClasses.MOD_ID;
 
 public class PlayerPerk extends PlayerAbility {
     public final PerkSlot perkSlot;
-    public PlayerPerk(String id, Item icon, PerkSlot perkSlot) {
+    public PlayerPerk(String id, ItemConvertible icon, PerkSlot perkSlot) {
         super(id, 1, 2, AbilityType.PERK, icon);
         this.perkSlot = perkSlot;
     }

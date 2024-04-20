@@ -5,13 +5,16 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.jayugg.cardinalclasses.effect.ClassGrantEffect;
 import net.jayugg.cardinalclasses.registry.PlayerClassRegistry;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static net.jayugg.cardinalclasses.CardinalClasses.MOD_ID;
 
 public class LanguageProvider extends FabricLanguageProvider {
 
-    protected LanguageProvider(FabricDataOutput dataOutput) {
+    public LanguageProvider(FabricDataOutput dataOutput) {
         super(dataOutput, "en_us");
     }
 
@@ -32,10 +35,14 @@ public class LanguageProvider extends FabricLanguageProvider {
 
             // Load an existing language file.
             try {
-                Path existingFilePath = dataOutput.getModContainer().findPath("assets/" + dataOutput.getModId() + "/lang/en_us.json").get();
-                translationBuilder.add(existingFilePath);
-            } catch (Exception e) {
-                throw new RuntimeException("Failed to add existing language file!", e);
+                Path existingFilePath = Paths.get("../../src/main/resources/assets/cardinalclasses/lang/en_us.json");
+                if (Files.exists(existingFilePath)) {
+                    translationBuilder.add(existingFilePath);
+                } else {
+                    LOGGER.warn("Warning: Language file does not exist: {}", existingFilePath);
+                }
+            } catch (IOException e) {
+                LOGGER.error("Error: Failed to add existing language file!", e);
             }
         }
     }
