@@ -3,17 +3,10 @@ package net.jayugg.cardinalclasses.core;
 public class SkillCooldownHelper {
     private final int chargeTime;
     private final int maxCharges;
-    private final int extraCharges;
+    private final float extraCharges;
     private final float chargeTimeMultiplier;
 
-    public SkillCooldownHelper(int chargeTime, int maxCharges) {
-        this.chargeTime = chargeTime;
-        this.maxCharges = maxCharges;
-        this.extraCharges = 1;
-        this.chargeTimeMultiplier = 1.0f;
-    }
-
-    public SkillCooldownHelper(int chargeTime, int maxCharges, int extraCharges, float chargeTimeMultiplier) {
+    public SkillCooldownHelper(int chargeTime, int maxCharges, float extraCharges, float chargeTimeMultiplier) {
         this.chargeTime = chargeTime;
         this.maxCharges = maxCharges;
         this.extraCharges = extraCharges;
@@ -45,6 +38,6 @@ public class SkillCooldownHelper {
     }
 
     public int getMaxCharges(int skillLevel) {
-        return maxCharges + extraCharges * (skillLevel - 1);
+        return maxCharges + (int) (extraCharges * (skillLevel - 1));
     }
 }

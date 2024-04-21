@@ -29,7 +29,7 @@ public class ModAbilities {
             new ThrowArrowSkill("test_active_arrow", Items.ARROW,
                     new SkillCooldownHelper(50, 9, 3, 0.8f), Color.GREEN.getRGB()));
     public static final PlayerPerk TEST_EFFECT_PERK = AbilityRegistry.registerPerk(
-            new PlayerPerk("test_effect", Items.POTION, PerkSlot.ALPHA));
+            new HealthBoostPerk("test_effect", Items.POTION, PerkSlot.ALPHA));
     public static final PlayerPerk TEST_ATTACK_PERK = AbilityRegistry.registerPerk(
             new AttackLevitationPerk("test_attack", Items.SPIDER_EYE, PerkSlot.OMEGA));
 

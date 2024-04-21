@@ -5,7 +5,9 @@ import com.google.common.collect.ImmutableBiMap;
 import net.jayugg.cardinalclasses.util.Utils;
 import net.minecraft.item.ItemConvertible;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import static net.jayugg.cardinalclasses.CardinalClasses.MOD_ID;
@@ -76,6 +78,21 @@ public abstract class PlayerClass extends PlayerAddon {
 
     public int getColor() {
         return color;
+    }
+
+    public List<PlayerAbility> getAbilities() {
+        List<PlayerAbility> abilities = new ArrayList<>();
+
+        for (SkillSlot slot : SkillSlot.values()) {
+            abilities.add(passiveSkills.get(slot));
+            abilities.add(activeSkills.get(slot));
+        }
+
+        for (PerkSlot perk : PerkSlot.values()) {
+            abilities.add(perks.get(perk));
+        }
+
+        return abilities;
     }
 }
 

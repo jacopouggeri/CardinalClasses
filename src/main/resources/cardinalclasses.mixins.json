@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "net.jayugg.cardinalclasses.test.mixin",
+  "package": "net.jayugg.cardinalclasses.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "PlayerAttackMixin",

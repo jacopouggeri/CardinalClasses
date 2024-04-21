@@ -1,6 +1,7 @@
 package net.jayugg.cardinalclasses.test;
 
-import net.jayugg.cardinalclasses.base.AttackEffectSkill;
+import net.jayugg.cardinalclasses.base.WithAttackEffect;
+import net.jayugg.cardinalclasses.core.PassiveSkill;
 import net.jayugg.cardinalclasses.util.PlayerClassManager;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,7 +13,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.server.world.ServerWorld;
 
-public class FireworkAttackSkill extends AttackEffectSkill {
+public class FireworkAttackSkill extends PassiveSkill implements WithAttackEffect {
     private final int fireworkColor;
     public FireworkAttackSkill(String id, int color, Item icon) {
         super(id, icon);
