@@ -1,7 +1,7 @@
 package net.jayugg.cardinalclasses.util;
 
 import net.jayugg.cardinalclasses.base.WithAttackEffect;
-import net.jayugg.cardinalclasses.base.WithStatusEffect;
+import net.jayugg.cardinalclasses.base.WithPassiveEffect;
 import net.jayugg.cardinalclasses.core.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,9 +25,9 @@ public class AbilityManager {
             return;
         }
         playerClass.getAbilities().stream()
-                .filter(ability -> ability instanceof WithStatusEffect)
+                .filter(ability -> ability instanceof WithPassiveEffect)
                 .filter(ability -> getAbilityLevel(player, ability) > 0)
-                .map(ability -> (WithStatusEffect) ability)
+                .map(ability -> (WithPassiveEffect) ability)
                 .forEach(ability -> ability.applyEffect(player));
     }
 

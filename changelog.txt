@@ -1,5 +1,6 @@
-0.8.2-1.19.4 Changelog – Cardinal Classes
+0.8.4-1.19.4 Changelog – Cardinal Classes
 =========================
+- 0.8.4-1.19.4 Added WithAttackEffect and WithPassiveEffect interfaces that allow to define abilities with a certain archetype without manually using a mixin each of them.
 - 0.8.3-1.19.4 Now skill and class icons can be instances of ItemConvertible instead of Item.
 - 0.8.2-1.19.4 Fixed altar ruin generation frequency. Now generated translations copy from the main translations file. Changed advancement icons for abilities to be more consistent.
 - 0.8.1-1.19.4 Improved altar ruin generation in oceans. Now skill altars emit a light level of 14 when charged and 7 when inert.

@@ -1,4 +1,4 @@
-// 1.19.4	2024-04-21T11:05:18.791873	Cardinal Classes/Recipes
+// 1.19.4	2024-04-21T16:24:52.183666	Cardinal Classes/Recipes
 8d99456cd683ab1a46126bfee9dfd44e9837ec51 data/cardinalclasses/advancements/recipes/misc/skill_fragment.json
 007d6f0d97051c88d11c77ecba46c0669c5e5b3c data/cardinalclasses/recipes/sage_emerald.json
 990df0db91a32c7d455ee7caa1486cba3b246d71 data/cardinalclasses/recipes/skill_fragment.json
@@ -6,6 +6,6 @@
 e208f99e34bebeca6836796adf3add0d45b1cc34 data/cardinalclasses/advancements/recipes/misc/sage_emerald.json
 10c9d6c11cacc2dec5b67128dfe2a094fa09b2eb data/cardinalclasses/advancements/recipes/misc/skill_altar.json
 ade6f9055a021dbb19af7936ff397897ff0c75d3 data/cardinalclasses/advancements/recipes/misc/shard_holder.json
-d9191eeca7148858f085a9be3761c1c422bdfe3e data/cardinalclasses/advancements/recipes/misc/skill_shard.json
 0261558823c135ad2ba15a44889bcac3b2e3557d data/cardinalclasses/recipes/skill_altar.json
+d9191eeca7148858f085a9be3761c1c422bdfe3e data/cardinalclasses/advancements/recipes/misc/skill_shard.json
 471957ab7e8bd8283985ee1817f1a2449a8a0ecf data/cardinalclasses/recipes/skill_shard.json
