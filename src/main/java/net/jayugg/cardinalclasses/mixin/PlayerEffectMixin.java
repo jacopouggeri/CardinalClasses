@@ -13,7 +13,7 @@ public class PlayerEffectMixin {
     public void onTick(CallbackInfo ci) {
         PlayerEntity player = (PlayerEntity) (Object) this;
         if (!player.world.isClient) {
-            AbilityManager.applyStatusEffectAbilities(player);
+            AbilityManager.applyPassiveEffectAbilities(player);
         }
     }
 }

@@ -4,7 +4,7 @@ import net.jayugg.cardinalclasses.component.ActiveSkillComponent;
 import net.jayugg.cardinalclasses.component.ModComponents;
 import net.jayugg.cardinalclasses.util.PlayerClassManager;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 
 import static net.jayugg.cardinalclasses.CardinalClasses.LOGGER;
 
@@ -12,20 +12,20 @@ public class ActiveSkill extends PlayerSkill {
     private final int color;
     private final SkillCooldownHelper cooldownHelper;
     private final boolean spammable;
-    public ActiveSkill(String id, Item icon, SkillCooldownHelper cooldownHelper) {
+    public ActiveSkill(String id, ItemConvertible icon, SkillCooldownHelper cooldownHelper) {
         super(id, AbilityType.ACTIVE, icon);
         this.cooldownHelper = cooldownHelper;
         this.color = 0xFFFFFF;
         this.spammable = false;
     }
 
-    public ActiveSkill(String id, Item icon, SkillCooldownHelper cooldownHelper, int color) {
+    public ActiveSkill(String id, ItemConvertible icon, SkillCooldownHelper cooldownHelper, int color) {
         super(id, AbilityType.ACTIVE, icon);
         this.cooldownHelper = cooldownHelper;
         this.color = color;
         this.spammable = false;
     }
-    public ActiveSkill(String id, Item icon, SkillCooldownHelper cooldownHelper, int color, boolean spammable) {
+    public ActiveSkill(String id, ItemConvertible icon, SkillCooldownHelper cooldownHelper, int color, boolean spammable) {
         super(id, AbilityType.ACTIVE, icon);
         this.cooldownHelper = cooldownHelper;
         this.color = color;
