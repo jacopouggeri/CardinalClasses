@@ -6,9 +6,7 @@ import net.jayugg.cardinalclasses.util.PlayerClassManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemConvertible;
 
-import static net.jayugg.cardinalclasses.CardinalClasses.LOGGER;
-
-public class ActiveSkill extends PlayerSkill {
+public abstract class ActiveSkill extends PlayerSkill {
     private final int color;
     private final SkillCooldownHelper cooldownHelper;
     private final boolean spammable;
@@ -25,6 +23,7 @@ public class ActiveSkill extends PlayerSkill {
         this.color = color;
         this.spammable = false;
     }
+
     public ActiveSkill(String id, ItemConvertible icon, SkillCooldownHelper cooldownHelper, int color, boolean spammable) {
         super(id, AbilityType.ACTIVE, icon);
         this.cooldownHelper = cooldownHelper;
@@ -54,11 +53,9 @@ public class ActiveSkill extends PlayerSkill {
             } else {
                 lastUsed = lastUsed + chargeTime;
             }
-            component.setLastUsed(slot, lastUsed);
-            LOGGER.warn("Using skill {}", slot);
-            LOGGER.warn("Last used: {}", lastUsed);
-            LOGGER.warn("Charges: {}", cooldownHelper.getCharges(worldTime, lastUsed, skillLevel));
-            skillEffect(player, skillLevel);
+            if (skillEffect(player, skillLevel)) {
+                component.setLastUsed(slot, lastUsed);
+            }
         }
     }
 
@@ -66,7 +63,7 @@ public class ActiveSkill extends PlayerSkill {
         return cooldownHelper;
     }
 
-    public void skillEffect(PlayerEntity player, int level) {}
+    public abstract boolean skillEffect(PlayerEntity player, int level);
 
     public int getColor() {
         return color;

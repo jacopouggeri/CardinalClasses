@@ -30,7 +30,7 @@ public class ThrowProjectileSkill<T extends ProjectileEntity> extends ActiveSkil
     }
 
     @Override
-    public void skillEffect(PlayerEntity player, int level) {
+    public boolean skillEffect(PlayerEntity player, int level) {
         World world = player.world;
         if (!world.isClient) {
             Vec3d vec3d = player.getRotationVec(1.0F);
@@ -39,5 +39,6 @@ public class ThrowProjectileSkill<T extends ProjectileEntity> extends ActiveSkil
             projectile.setVelocity(vec3d.x, vec3d.y, vec3d.z, baseSpeed + levelScaling*level, 1.0F);
             world.spawnEntity(projectile);
         }
+        return true;
     }
 }

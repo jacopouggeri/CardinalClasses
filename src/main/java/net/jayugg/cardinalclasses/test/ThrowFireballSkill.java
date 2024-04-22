@@ -17,7 +17,7 @@ public class ThrowFireballSkill extends ActiveSkill {
     }
 
     @Override
-    public void skillEffect(PlayerEntity player, int level) {
+    public boolean skillEffect(PlayerEntity player, int level) {
         World world = player.world;
         if (!world.isClient) {
             Vec3d vec3d = player.getRotationVec(1.0F); // get the player's look vector (x, y, z
@@ -26,5 +26,6 @@ public class ThrowFireballSkill extends ActiveSkill {
             world.spawnEntity(fireballEntity);
             player.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 20, 4));
         }
+        return true;
     }
 }

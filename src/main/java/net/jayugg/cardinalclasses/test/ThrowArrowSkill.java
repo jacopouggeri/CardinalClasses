@@ -15,7 +15,7 @@ public class ThrowArrowSkill extends ActiveSkill {
     }
 
     @Override
-    public void skillEffect(PlayerEntity player, int level) {
+    public boolean skillEffect(PlayerEntity player, int level) {
         World world = player.world;
         if (!world.isClient) {
             ArrowEntity arrowEntity = new ArrowEntity(world, player);
@@ -24,5 +24,6 @@ public class ThrowArrowSkill extends ActiveSkill {
             arrowEntity.setNoClip(false);
             world.spawnEntity(arrowEntity);
         }
+        return true;
     }
 }

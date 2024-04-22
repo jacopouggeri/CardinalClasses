@@ -19,7 +19,7 @@ public class ThrowEggSkill extends ActiveSkill {
     }
 
     @Override
-    public void skillEffect(PlayerEntity player, int level) {
+    public boolean skillEffect(PlayerEntity player, int level) {
         World world = player.world;
         if (!world.isClient) {
             EggEntity eggEntity = new EggEntity(world, player);
@@ -27,5 +27,6 @@ public class ThrowEggSkill extends ActiveSkill {
             eggEntity.setVelocity(vec3d.x, vec3d.y, vec3d.z, 1.5F + 0.5F*level, 1.0F);
             world.spawnEntity(eggEntity);
         }
+        return true;
     }
 }

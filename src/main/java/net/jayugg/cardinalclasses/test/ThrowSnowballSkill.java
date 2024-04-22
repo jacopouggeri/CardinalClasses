@@ -15,7 +15,7 @@ public class ThrowSnowballSkill extends ActiveSkill {
     }
 
     @Override
-    public void skillEffect(PlayerEntity player, int level) {
+    public boolean skillEffect(PlayerEntity player, int level) {
         World world = player.world;
         if (!world.isClient) {
             Vec3d vec3d = player.getRotationVec(1.0F);
@@ -23,5 +23,6 @@ public class ThrowSnowballSkill extends ActiveSkill {
             snowballEntity.setVelocity(vec3d.x, vec3d.y, vec3d.z, 1.5F + 0.5F*level, 1.0F);
             world.spawnEntity(snowballEntity);
         }
+        return true;
     }
 }
