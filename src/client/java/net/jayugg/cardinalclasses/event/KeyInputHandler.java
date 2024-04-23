@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.jayugg.cardinalclasses.core.PlayerClass;
 import net.jayugg.cardinalclasses.core.SkillSlot;
 import net.jayugg.cardinalclasses.networking.ModMessages;
 import net.jayugg.cardinalclasses.util.PlayerClassManager;
@@ -13,6 +14,7 @@ import org.lwjgl.glfw.GLFW;
 
 import java.util.Arrays;
 
+import static net.jayugg.cardinalclasses.CardinalClasses.LOGGER;
 import static net.jayugg.cardinalclasses.CardinalClasses.MOD_ID;
 
 public class KeyInputHandler {
@@ -30,8 +32,10 @@ public class KeyInputHandler {
         for (int i = 0; i < useActiveSkills.length; i++) {
             int skillIndex = i;
             ClientTickEvents.END_CLIENT_TICK.register(client -> {
-                if (client.player != null && PlayerClassManager.getClass(client.player) != null) {
-                    boolean spammable = PlayerClassManager.getClass(client.player).getActiveSkills().get(SkillSlot.fromValue(skillIndex + 1)).isSpammable();
+                if (client.player == null) return;
+                PlayerClass playerClass = PlayerClassManager.getClass(client.player);
+                if (client.player != null && playerClass != null) {
+                    boolean spammable = playerClass.getActiveSkills().get(SkillSlot.fromValue(skillIndex + 1)).isSpammable();
                     if (spammable) {
                         if (useActiveSkills[skillIndex].isPressed()) {
                             // Create the packet
@@ -54,7 +58,7 @@ public class KeyInputHandler {
     private static void sendBuf(int skillIndex) {
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeInt(skillIndex);
-
+        LOGGER.warn("Sending active skill packet for skill index {}", skillIndex);
         // Send the packet
         ClientPlayNetworking.send(ModMessages.ACTIVE_SKILL, buf);
     }

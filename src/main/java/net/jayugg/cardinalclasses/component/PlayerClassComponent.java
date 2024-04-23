@@ -25,6 +25,9 @@ public class PlayerClassComponent implements ComponentV3, AutoSyncedComponent {
     }
 
     public boolean setAscendedPerk(PerkSlot slot) {
+        if (classId == null) {
+            return false;
+        }
         if (ascendedPerkSlot == null) {
             ascendedPerkSlot = slot;
             return true;
@@ -41,6 +44,9 @@ public class PlayerClassComponent implements ComponentV3, AutoSyncedComponent {
     }
 
     public boolean setSkillLevel(AbilityType type, SkillSlot skillSlot, int level) {
+        if (classId == null) {
+            return false;
+        }
         if (0 <= level && level <= SKILL_MAX_LEVEL) {
             if (type == AbilityType.PASSIVE) {
                 passiveSkillLevels.put(skillSlot, level);
@@ -58,6 +64,9 @@ public class PlayerClassComponent implements ComponentV3, AutoSyncedComponent {
     }
 
     public boolean skillUp(AbilityType type, SkillSlot skillSlot) {
+        if (classId == null) {
+            return false;
+        }
         int level = getSkillLevel(type, skillSlot);
         return setSkillLevel(type, skillSlot, level + 1);
     }
