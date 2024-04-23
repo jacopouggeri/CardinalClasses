@@ -37,7 +37,7 @@ build and balance their own modpacks by selecting only the classes they want to 
 ## Installation
 
 1. Install [Fabric Loader](https://fabricmc.net/use/).
-2. Download the latest version of Cardinal Classes from [Modrinth](https://github.com/yourusername/CardinalClasses/releases).
+2. Download the latest version of Cardinal Classes from [Modrinth](https://modrinth.com/mod/cardinal-classes/versions).
 3. Place the downloaded .jar file into your `mods` folder.
 4. Launch the game using the Fabric profile.
 
