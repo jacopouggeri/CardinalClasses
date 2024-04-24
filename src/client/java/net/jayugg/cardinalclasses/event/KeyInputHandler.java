@@ -58,7 +58,6 @@ public class KeyInputHandler {
     private static void sendBuf(int skillIndex) {
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeInt(skillIndex);
-        LOGGER.warn("Sending active skill packet for skill index {}", skillIndex);
         // Send the packet
         ClientPlayNetworking.send(ModMessages.ACTIVE_SKILL, buf);
     }

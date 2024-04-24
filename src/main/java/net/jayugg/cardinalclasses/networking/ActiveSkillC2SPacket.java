@@ -1,6 +1,5 @@
 package net.jayugg.cardinalclasses.networking;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
-import net.jayugg.cardinalclasses.CardinalClasses;
 import net.jayugg.cardinalclasses.core.SkillSlot;
 import net.jayugg.cardinalclasses.util.PlayerClassManager;
 import net.minecraft.network.PacketByteBuf;
@@ -11,7 +10,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 public class ActiveSkillC2SPacket {
     public static void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
                                PacketByteBuf buf, PacketSender responseSender) {
-        CardinalClasses.LOGGER.warn("Received active skill packet");
         // Read the skill index from the packet
         int skillIndex = buf.readInt();
         // Map the skill index to the corresponding skill slot

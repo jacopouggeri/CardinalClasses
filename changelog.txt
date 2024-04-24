@@ -2,3 +2,4 @@
 =========================
 - Fixed active skill keybindings only working in single player.
 - Fixed bug that would accumulate skill ups done when the player had no class, allowing to level up skills without spending shards.
+- Fixed bug that mapped perk slots to the wrong holders when ascending perks.

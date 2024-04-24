@@ -287,10 +287,8 @@ private static void updateChargeItem(@Nullable Entity charger, World world, Bloc
     }
 
     private PerkSlot offsetToPerkSlot(BlockPos offset) {
-        CardinalClasses.LOGGER.warn("Offset: {}", offset);
-        CardinalClasses.LOGGER.warn(String.valueOf((int) (((float)offset.getX() + offset.getZ())/4 + 1.5f)));
-        CardinalClasses.LOGGER.warn(PerkSlot.fromInt((int) (((float)offset.getX() + offset.getZ())/4 + 1.5f)).toString());
-        return PerkSlot.fromInt((int) (((float)offset.getX() + offset.getZ())/4 + 1.5f));
+
+        return PerkSlot.fromInt((Math.abs(offset.getX()) + 2*Math.abs(offset.getZ()))/2);
     }
 
     private List<BlockPos> getActiveHolders(BlockView world, BlockPos pos) {
