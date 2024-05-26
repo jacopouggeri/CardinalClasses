@@ -1,6 +1,7 @@
 package net.jayugg.cardinalclasses.gui;
 
 import com.google.common.collect.BiMap;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.jayugg.cardinalclasses.core.ActiveSkill;
 import net.jayugg.cardinalclasses.core.PlayerClass;
 import net.jayugg.cardinalclasses.core.SkillCooldownHelper;
@@ -9,13 +10,17 @@ import net.jayugg.cardinalclasses.component.ActiveSkillComponent;
 import net.jayugg.cardinalclasses.component.ModComponents;
 import net.jayugg.cardinalclasses.util.PlayerClassManager;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Identifier;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ChargeHudOverlay {
+    public static final Identifier STAR = new Identifier("cardinalclasses", "textures/gui/star.png");
 
     public static void onHudRender(MatrixStack matrixStack) {
         int baseX;
@@ -35,6 +40,10 @@ public class ChargeHudOverlay {
         baseX = width / 2;
         baseY = height;
 
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
+        RenderSystem.setShaderTexture(0, STAR);
+        DrawableHelper.drawTexture(matrixStack, baseX - 21, baseY - 80 - 21, 0, 0, 42, 42, 42, 42);
+
         BiMap<SkillSlot, ActiveSkill> activeSkills = playerClass.getActiveSkills();
 
         Map<SkillSlot, Float> percentages = new HashMap<>();
@@ -52,13 +61,13 @@ public class ChargeHudOverlay {
                 int charges = cooldownHelper.getCharges(player.getWorld().getTime(), component.getLastUsed(skillSlot), skillLevel);
                 int maxCharges = cooldownHelper.getMaxCharges(skillLevel);
                 float progress = (float) charges / maxCharges;
-                //LOGGER.warn("Skill slot " + skillSlot + " has " + charges + " charges out of " + maxCharges + " with progress " + progress);
                 int color = activeSkill.getColor();
 
                 percentages.put(skillSlot, progress);
                 colors.put(skillSlot, color);
             }
         }
+
         SkillBarRenderer.renderSkillBars(matrixStack, baseX, baseY - 80, 15, 6, percentages, colors);
         SkillBarRenderer.renderDirectionLetters(matrixStack, baseX, baseY - 80, 15, client.textRenderer, percentages);
     }
