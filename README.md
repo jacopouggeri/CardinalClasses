@@ -1,4 +1,5 @@
-# Cardinal Classes Mod
+![Banner](banner.png)
+# Cardinal Classes
 
 ## Description
 
