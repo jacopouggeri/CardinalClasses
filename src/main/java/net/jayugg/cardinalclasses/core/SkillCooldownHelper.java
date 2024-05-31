@@ -40,4 +40,23 @@ public class SkillCooldownHelper {
     public int getMaxCharges(int skillLevel) {
         return maxCharges + (int) (extraCharges * (skillLevel - 1));
     }
+
+    public float fullChargeProgress(long worldTime, long lastUsedTime, int skillLevel) {
+        int charges = getCharges(worldTime, lastUsedTime, skillLevel);
+        int maxCharges = getMaxCharges(skillLevel);
+        return (float) charges / maxCharges;
+    }
+
+    private boolean fullyCharged(long worldTime, long lastUsedTime, int skillLevel) {
+        return getCharges(worldTime, lastUsedTime, skillLevel) >= getMaxCharges(skillLevel);
+    }
+
+    public float nextChargeProgress(long worldTime, long lastUsedTime, int skillLevel) {
+        if (fullyCharged(worldTime, lastUsedTime, skillLevel)) {
+            return 0;
+        }
+        int timeToNextCharge = getTimeToNextCharge(worldTime, lastUsedTime);
+        int currentChargeTime = getChargeTime(skillLevel) - timeToNextCharge;
+        return (float) currentChargeTime / (getChargeTime(skillLevel) * maxCharges);
+    }
 }

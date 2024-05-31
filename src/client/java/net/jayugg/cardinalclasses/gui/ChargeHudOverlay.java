@@ -17,24 +17,24 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 
+import java.awt.*;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ChargeHudOverlay {
-    public static final Identifier BAR_EMPTY = new Identifier("cardinalclasses", "textures/gui/bar_empty.png");
-    public static final Identifier BAR_FULL = new Identifier("cardinalclasses", "textures/gui/bar_full.png");
-    public static final Identifier BAR_EMPTY_5 = new Identifier("cardinalclasses", "textures/gui/bar_empty_5.png");
-    public static final Identifier BAR_FULL_5 = new Identifier("cardinalclasses", "textures/gui/bar_full_5.png");
-    public static final Identifier BAR_EMPTY_10 = new Identifier("cardinalclasses", "textures/gui/bar_empty_10.png");
-    public static final Identifier BAR_FULL_10 = new Identifier("cardinalclasses", "textures/gui/bar_full_10.png");
+    public static final Identifier BAR = new Identifier("cardinalclasses", "textures/gui/bar.png");
+    private static final boolean ONLY_IN_USE = false;
+
+    private static final HashMap<SkillSlot, Integer> currentFilledWidths = new HashMap<>();
 
     public static void onHudRender(MatrixStack matrixStack) {
         int baseX;
         int baseY;
-        int barWidth = 90;
-        int xOffset = 200;
-        int yOffset = -15;
+        int barWidth = 80;
+        int xOffset = 90;
+        int yOffset = -60;
         MinecraftClient client = MinecraftClient.getInstance();
         if (client == null) {
             return;
@@ -52,9 +52,9 @@ public class ChargeHudOverlay {
 
         List<Pair<Integer, Integer>> positions = Arrays.asList(
                 new Pair<>(yOffset, -xOffset), // Position for the first skill on the left
-                new Pair<>(yOffset - 15, -xOffset),  // Position for the second skill on the left
+                new Pair<>(yOffset - 6, -xOffset),  // Position for the second skill on the left
                 new Pair<>(yOffset, xOffset - barWidth),  // Position for the first skill on the right
-                new Pair<>(yOffset - 15, xOffset - barWidth)  // Position for the second skill on the right
+                new Pair<>(yOffset - 6, xOffset - barWidth)  // Position for the second skill on the right
         );
 
         BiMap<SkillSlot, ActiveSkill> activeSkills = playerClass.getActiveSkills();
@@ -73,48 +73,81 @@ public class ChargeHudOverlay {
             if (skillLevel > 0) {
                 SkillCooldownHelper cooldownHelper = activeSkill.getCooldownHelper();
                 ActiveSkillComponent component = ModComponents.ACTIVE_SKILLS_COMPONENT.get(player);
-                int charges = cooldownHelper.getCharges(player.getWorld().getTime(), component.getLastUsed(skillSlot), skillLevel);
+                int lastUsed = (int) component.getLastUsed(skillSlot);
                 int maxCharges = cooldownHelper.getMaxCharges(skillLevel);
                 int chargeTime = cooldownHelper.getChargeTime(skillLevel);
-                float progress = (float) charges / maxCharges;
-                int lastUsed = (int) component.getLastUsed(skillSlot);
-                //LOGGER.warn("Skill slot " + skillSlot + " has " + charges + " charges out of " + maxCharges + " with progress " + progress);
-                int color = activeSkill.getColor();
-
                 // Remove the skill from the list if it's been too long since it was last used
-                if ((player.world.getTime() - lastUsed) > (long) chargeTime * maxCharges + 100) {
+                if (ONLY_IN_USE && (player.world.getTime() - lastUsed) > (long) chargeTime * maxCharges + 200) {
                    continue;
                 }
 
-                RenderSystem.setShader(GameRenderer::getPositionTexProgram);
-
-                int filledWidth = Math.round(progress * barWidth);
-                if (maxCharges >= 18) {
-                    drawBar(BAR_EMPTY, matrixStack, x, y, barWidth, barWidth, color);
-                    drawBar(BAR_FULL, matrixStack, x, y, filledWidth, barWidth, color);
-                } else if (maxCharges >= 5) {
-                    drawBar(BAR_EMPTY_10, matrixStack, x, y, barWidth, barWidth, color);
-                    drawBar(BAR_FULL_10, matrixStack, x, y, filledWidth, barWidth, color);
-                } else {
-                    drawBar(BAR_EMPTY_5, matrixStack, x, y, barWidth, barWidth, color);
-                    drawBar(BAR_FULL_5, matrixStack, x, y, filledWidth, barWidth, color);
-                }
-                DrawableHelper.drawTextWithShadow(matrixStack, client.textRenderer, skillSlot.getName().substring(0, 1), x + barWidth/2 - 2, y - 5, color);
-
+                long worldTime = player.world.getTime();
+                float progressPercent = cooldownHelper.fullChargeProgress(worldTime, lastUsed, skillLevel)
+                        + cooldownHelper.nextChargeProgress(worldTime, lastUsed, skillLevel);
+                int color = activeSkill.getColor();
+                drawBarSmoothly(matrixStack, progressPercent, barWidth, skillSlot, x, y, color);
             }
         }
     }
 
+    private static void drawBarSmoothly(MatrixStack matrixStack, float progressPercent, int barWidth, SkillSlot skillSlot, int x, int y, int color) {
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
+
+        int filledWidth = Math.round(progressPercent * barWidth);
+
+        // Get current filled width for this skill slot
+        Integer currentfilledWidth = currentFilledWidths.get(skillSlot);
+        if (currentfilledWidth == null) {
+            currentfilledWidth = 0;
+        }
+
+        // Update currentFilledWidth towards filledWidth
+        if (currentfilledWidth < filledWidth) {
+            currentfilledWidth++;
+        } else if (currentfilledWidth > filledWidth) {
+            currentfilledWidth--;
+        }
+
+        // Store updated width
+        currentFilledWidths.put(skillSlot, currentfilledWidth);
+
+        drawBar(BAR, matrixStack, x, y, currentfilledWidth, barWidth, color);
+    }
 
     private static void drawBar(Identifier texture, MatrixStack matrixStack, int x, int y, int progress, int totalWidth, int color) {
         float alpha = ((color >> 24) & 0xFF) / 255.0F;
+
+        for (int i = 0; i < totalWidth; i++) {
+            float[] modColors = calculateModulatedColors(color, i, totalWidth);
+            RenderSystem.setShaderColor(modColors[0], modColors[1], modColors[2], alpha);
+            RenderSystem.setShaderTexture(0, texture);
+            DrawableHelper.drawTexture(matrixStack, x + i, y, i, 0, 1, 5, totalWidth, 10);
+            if (i < progress) {
+                RenderSystem.setShaderTexture(0, texture);
+                DrawableHelper.drawTexture(matrixStack, x + i, y, i, 5, 1, 5, totalWidth, 10);
+            }
+        }
+
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F); // Reset color to white
+    }
+
+    private static float[] calculateModulatedColors(int color, int pixelIndex, int totalWidth) {
         float red = ((color >> 16) & 0xFF) / 255.0F;
         float green = ((color >> 8) & 0xFF) / 255.0F;
         float blue = (color & 0xFF) / 255.0F;
 
-        RenderSystem.setShaderColor(red, green, blue, alpha);
-        RenderSystem.setShaderTexture(0, texture);
-        DrawableHelper.drawTexture(matrixStack, x, y, 0, 0, progress, 5, totalWidth, 5);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F); // Reset color to white
+        // Convert the RGB color to HSV
+        float[] hsv = Color.RGBtoHSB((int) (red * 255), (int) (green * 255), (int) (blue * 255), null);
+
+        // Linearly interpolate the hue based on the position of the pixel
+        float hue = hsv[0] + 0.075f * ((float)pixelIndex / (totalWidth - 1) - 0.5f);
+
+        // Convert the HSV color back to RGB
+        int rgb = Color.HSBtoRGB(hue, hsv[1], hsv[2]);
+        float modRed = ((rgb >> 16) & 0xFF) / 255.0F;
+        float modGreen = ((rgb >> 8) & 0xFF) / 255.0F;
+        float modBlue = (rgb & 0xFF) / 255.0F;
+
+        return new float[]{modRed, modGreen, modBlue};
     }
 }
