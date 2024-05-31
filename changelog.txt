@@ -1,5 +1,5 @@
-0.8.6-1.19.4 Changelog
+0.8.7-1.19.4 Changelog
 =========================
-- Fixed active skill keybindings only working in single player.
-- Fixed bug that would accumulate skill ups done when the player had no class, allowing to level up skills without spending shards.
-- Fixed bug that mapped perk slots to the wrong holders when ascending perks.
+- Added helper functions to SkillCooldownHelper
+- Better Skill Bar graphics
+- Added config (for now has only one option)

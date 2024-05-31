@@ -63,5 +63,6 @@
   "skill.cardinalclasses.test_passive_yellow": "Test Yellow",
   "skill.cardinalclasses.test_passive_yellow.desc": "Test passive skill description (yellow)",
   "skill.cardinalclasses.test_passive_yellow_2.desc": "Test passive skill 2 description (yellow)",
-  "skill.cardinalclasses.test_passive_yellow_3.desc": "Test passive skill 3 description (yellow)"
+  "skill.cardinalclasses.test_passive_yellow_3.desc": "Test passive skill 3 description (yellow)",
+  "text.config.cardinalclasses.option.hideSkillBarsWhenNotInUse": "Hide skill bars When not in use"
 }

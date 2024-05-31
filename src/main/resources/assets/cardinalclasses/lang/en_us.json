@@ -74,5 +74,8 @@
   "skill.cardinalclasses.test_active_egg": "Test Active Skill",
   "skill.cardinalclasses.test_active_fire": "Test Fireball Skill",
   "skill.cardinalclasses.test_active_snow": "Test Snowball Skill",
-  "skill.cardinalclasses.test_active_arrow": "Test Arrow Skill"
+  "skill.cardinalclasses.test_active_arrow": "Test Arrow Skill",
+
+  "text.config.cardinalclasses.option.hideSkillBarsWhenNotInUse" : "Hide skill bars When not in use"
+
 }

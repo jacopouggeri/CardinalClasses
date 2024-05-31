@@ -6,6 +6,7 @@ import net.jayugg.cardinalclasses.advancement.ModCriteria;
 import net.jayugg.cardinalclasses.block.ModBlockEntities;
 import net.jayugg.cardinalclasses.block.ModBlocks;
 import net.jayugg.cardinalclasses.command.ModCommands;
+import net.jayugg.cardinalclasses.config.ModConfigWrapper;
 import net.jayugg.cardinalclasses.effect.ModBrewing;
 import net.jayugg.cardinalclasses.event.PlayerLoginHandler;
 import net.jayugg.cardinalclasses.base.ModAbilities;
@@ -24,6 +25,7 @@ import java.util.Optional;
 public class CardinalClasses implements ModInitializer {
 	public static final String MOD_ID = "cardinalclasses";
     public static final Logger LOGGER;
+	public static final ModConfigWrapper CONFIG = ModConfigWrapper.createAndLoad();
 
 	static {
 		Optional<ModContainer> modContainer = FabricLoader.getInstance().getModContainer(MOD_ID);

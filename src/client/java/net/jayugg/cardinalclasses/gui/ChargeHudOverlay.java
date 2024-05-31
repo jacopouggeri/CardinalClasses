@@ -2,6 +2,7 @@ package net.jayugg.cardinalclasses.gui;
 
 import com.google.common.collect.BiMap;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.jayugg.cardinalclasses.CardinalClasses;
 import net.jayugg.cardinalclasses.core.ActiveSkill;
 import net.jayugg.cardinalclasses.core.PlayerClass;
 import net.jayugg.cardinalclasses.core.SkillCooldownHelper;
@@ -25,7 +26,6 @@ import java.util.Map;
 
 public class ChargeHudOverlay {
     public static final Identifier BAR = new Identifier("cardinalclasses", "textures/gui/bar.png");
-    private static final boolean ONLY_IN_USE = false;
 
     private static final HashMap<SkillSlot, Integer> currentFilledWidths = new HashMap<>();
 
@@ -77,7 +77,7 @@ public class ChargeHudOverlay {
                 int maxCharges = cooldownHelper.getMaxCharges(skillLevel);
                 int chargeTime = cooldownHelper.getChargeTime(skillLevel);
                 // Remove the skill from the list if it's been too long since it was last used
-                if (ONLY_IN_USE && (player.world.getTime() - lastUsed) > (long) chargeTime * maxCharges + 200) {
+                if (CardinalClasses.CONFIG.hideSkillBarsWhenNotInUse() && (player.world.getTime() - lastUsed) > (long) chargeTime * maxCharges + 200) {
                    continue;
                 }
 
