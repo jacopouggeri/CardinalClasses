@@ -20,7 +20,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ChargeHudOverlay {
-    public static final Identifier STAR = new Identifier("cardinalclasses", "textures/gui/star.png");
+    public static final Identifier STAR_FRONT = new Identifier("cardinalclasses", "textures/gui/star_front.png");
+    public static final Identifier STAR_BACK = new Identifier("cardinalclasses", "textures/gui/star_back.png");
 
     public static void onHudRender(MatrixStack matrixStack) {
         int baseX;
@@ -41,8 +42,8 @@ public class ChargeHudOverlay {
         baseY = height;
 
         RenderSystem.setShader(GameRenderer::getPositionTexProgram);
-        RenderSystem.setShaderTexture(0, STAR);
-        DrawableHelper.drawTexture(matrixStack, baseX - 21, baseY - 80 - 21, 0, 0, 42, 42, 42, 42);
+        RenderSystem.setShaderTexture(0, STAR_BACK);
+        DrawableHelper.drawTexture(matrixStack, baseX - 45, baseY - 80 - 45, 0, 0, 89, 89, 89, 89);
 
         BiMap<SkillSlot, ActiveSkill> activeSkills = playerClass.getActiveSkills();
 
@@ -68,8 +69,11 @@ public class ChargeHudOverlay {
             }
         }
 
-        SkillBarRenderer.renderSkillBars(matrixStack, baseX, baseY - 80, 15, 6, percentages, colors);
-        SkillBarRenderer.renderDirectionLetters(matrixStack, baseX, baseY - 80, 15, client.textRenderer, percentages);
+        SkillBarRenderer.renderSkillBars(matrixStack, baseX, baseY - 80, 21f, 7f, percentages, colors);
+        //SkillBarRenderer.renderDirectionLetters(matrixStack, baseX, baseY - 80, 15, client.textRenderer, percentages);
+        RenderSystem.setShaderTexture(0, STAR_FRONT);
+        DrawableHelper.drawTexture(matrixStack, baseX - 45, baseY - 80 - 45, 0, 0, 89, 89, 89, 89);
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
     }
 
 }
